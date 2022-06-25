@@ -50,7 +50,10 @@ const Row: FC<IRowProps> = (props) => {
   return (
     <div onClick={handleClick} css={ListItemStyle} style={style}>
       {pokemons[index] && (
-        <PokemonCardHor id={pokemons[index].id} name={pokemons[index].name} />
+        <PokemonCardHor
+          name={pokemons[index].name}
+          image={pokemons[index].artwork}
+        />
       )}
     </div>
   );

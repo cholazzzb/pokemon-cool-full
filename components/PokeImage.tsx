@@ -7,12 +7,12 @@ import { getSecondaryColorFromType } from "../utils/colorTheme";
 
 interface ImageProps {
   type: string;
-  id: number;
   size: number;
+  image: string;
 }
 
 const PokeImage: FC<ImageProps> = (props) => {
-  const { type, id, size } = props;
+  const { type, size, image } = props;
   const bgColor = getSecondaryColorFromType(type);
 
   const ImageBackgroundStyle = css`
@@ -36,7 +36,7 @@ const PokeImage: FC<ImageProps> = (props) => {
       <div css={ImageStyle}>
         <Image
           data-testid="pokemon-image"
-          src={`/sprites/${id}.png`}
+          src={image}
           alt="pokemon"
           layout="fill"
         />

@@ -21,12 +21,12 @@ const AttributeStyle = css`
 `;
 
 interface IPokemonCardHorProps {
-  id: string;
   name: string;
+  image: string;
 }
 
 const PokemonCardHor: FC<IPokemonCardHorProps> = (props) => {
-  const { id, name } = props;
+  const { name, image } = props;
 
   const { loading, error, data } = useQueryPokeType(name);
 
@@ -62,8 +62,8 @@ const PokemonCardHor: FC<IPokemonCardHorProps> = (props) => {
       </div>
       <PokeImage
         type={data.pokemon.types[0].type.name}
-        id={parseInt(id)}
         size={75}
+        image={image}
       />
     </div>
   );

@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  images: {
+    domains: ['raw.githubusercontent.com'],
+    formats: ['image/png', 'image/svg'],
+  },
   webpack(config, options) {
     const { isServer } = options;
     config.module.rules.push({

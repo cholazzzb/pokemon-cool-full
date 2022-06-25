@@ -7,6 +7,7 @@ const GET_POKEMONS = gql`
       results {
         id
         name
+        artwork
       }
     }
   }
