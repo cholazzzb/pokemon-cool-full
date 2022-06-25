@@ -32,7 +32,7 @@ const Detailpage: FC<DetailPageProps> = (props) => {
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error</div>;
 
-  const { types, ...others } = data.pokemon;
+  const { types, sprites, ...others } = data.pokemon;
 
   const primColor = getPrimaryColorFromType(types[0].type.name);
   const DetailpageStyle = css`
@@ -53,6 +53,7 @@ const Detailpage: FC<DetailPageProps> = (props) => {
         setCurrentId={setCurrentId}
         currentName={currentName}
         types={types}
+        sprites={sprites}
       />
       <TabContainer
         currentTab={currentTab}

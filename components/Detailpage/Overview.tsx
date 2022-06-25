@@ -50,10 +50,11 @@ interface OverviewProps {
   setCurrentId: Dispatch<SetStateAction<number>>;
   currentName: string;
   types: any;
+  sprites: any;
 }
 
 const Overview: FC<OverviewProps> = (props) => {
-  const { id, setCurrentId, currentName, types } = props;
+  const { id, setCurrentId, currentName, types, sprites } = props;
   const seconColor = getSecondaryColorFromType(types[0].type.name);
 
   return (
@@ -75,7 +76,7 @@ const Overview: FC<OverviewProps> = (props) => {
           <p css={IdStyle}>#{id}</p>
         </div>
         <div css={ImageStyle}>
-          <PokeImage type={types[0].type.name} id={id} size={200} />
+          <PokeImage type={types[0].type.name} image={sprites.front_default} size={200} />
         </div>
         <NavigateOverview currentId={id} setCurrentId={setCurrentId} />
       </div>

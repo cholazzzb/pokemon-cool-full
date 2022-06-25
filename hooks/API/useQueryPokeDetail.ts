@@ -31,6 +31,9 @@ const GET_POKEDETAIL = gql`
           name
         }
       }
+      sprites {
+        front_default
+      }
     }
   }
 `;
