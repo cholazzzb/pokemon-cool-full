@@ -61,7 +61,7 @@ const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
           justify-content: center;
         `}
       >
-        <PokeImage type={data.pokemon.types[0].type.name} id={id} size={75} />
+        <PokeImage type={data.pokemon.types[0].type.name} image="" size={75} />
       </div>
     </div>
   );
