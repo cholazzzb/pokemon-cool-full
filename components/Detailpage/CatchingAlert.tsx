@@ -55,7 +55,12 @@ const CatchingAlert: FC<ICatchintAlertProps> = (props) => {
               animation: ${CatchAnimation} 1s ease infinite;
             `}
           >
-            <Image src="/pokeballSelected.svg" width={30} height={30} />
+            <Image
+              alt="pokeball"
+              src="/pokeballSelected.svg"
+              width={30}
+              height={30}
+            />
           </span>
         </span>
       </div>

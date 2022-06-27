@@ -3,16 +3,17 @@
 import { css, jsx } from '@emotion/react';
 
 import Image from 'next/image';
-import { Dispatch, FC, SetStateAction, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { LISTPAGE, OWNEDPAGE } from '@constants/route';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
-import Badge from './Badge';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from 'context/OwnedPokemonContext';
+} from '@context/OwnedPokemonContext';
 import { getTotalPokemon } from '@utils/session';
+
+import Badge from './Badge';
 
 const NavigatorContainerStyle = css`
   z-index: 0;
@@ -44,13 +45,14 @@ const IconStyle = css`
 
 interface INavigatorProps {
   currentPage: string;
-  setCurrentPage: Dispatch<SetStateAction<string>>;
+  goToListPage: () => void;
+  goToOwnedPage: () => void;
 }
 
 const Navigator: FC<INavigatorProps> = (props) => {
-  const { currentPage, setCurrentPage } = props;
+  const { currentPage, goToListPage, goToOwnedPage } = props;
 
-  const { ownedPokemon, savePokemon, releasePokemon } = useContext(
+  const { ownedPokemon } = useContext(
     OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 
@@ -86,22 +88,17 @@ const Navigator: FC<INavigatorProps> = (props) => {
   return (
     <div css={NavigatorContainerStyle}>
       <div css={IconContainerStyle}>
-        <div
-          css={ButtonContainerStyle(LISTPAGE)}
-          onClick={() => setCurrentPage(LISTPAGE)}
-        >
+        <div css={ButtonContainerStyle(LISTPAGE)} onClick={goToListPage}>
           <span css={IconStyle}>
             <FontAwesomeIcon icon={faBook} />
           </span>
           Pokemon List
         </div>
         {/* <Search /> */}
-        <div
-          css={ButtonContainerStyle(OWNEDPAGE)}
-          onClick={() => setCurrentPage(OWNEDPAGE)}
-        >
+        <div css={ButtonContainerStyle(OWNEDPAGE)} onClick={goToOwnedPage}>
           <span css={IconStyle}>
             <Image
+              alt="pokeball"
               src={
                 currentPage === OWNEDPAGE
                   ? '/pokeballSelected.svg'

@@ -75,7 +75,7 @@ const Ownedpage = () => {
           <OwnedPokemonList setActivePokeIdx={setActivePokeIdx} />
         </Fragment>
       ) : (
-        <div css={EmptyStyle}>You don't have any pokemon yet</div>
+        <div css={EmptyStyle}>You don&apos;t have any pokemon yet</div>
       )}
       {ownedPokemon?.length > 0 && typeof activePokeIdx === 'number' && (
         <CollectionList

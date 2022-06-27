@@ -1,22 +1,22 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from "@emotion/react";
+import { jsx } from '@emotion/react';
 
-import type { NextPage } from "next";
-import Head from "next/head";
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
-import { FC, useState, Dispatch, SetStateAction } from "react";
+import { FC, useState, Dispatch, SetStateAction } from 'react';
 
-import Layout from "@components/Layout";
-import Body from "@components/Body";
-import Listpage from "@components/Listpage/Listpage";
-import Detailpage from "@components/Detailpage/Detailpage";
-import Ownedpage from "@components/Ownedpage/Ownedpage";
-import Navigator from "@components/Navigator";
-import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from "@constants/route";
-import useLoadOwnedPoke from "hooks/useLoadOwnedPoke";
-import { OwnedPokemonContext } from "context/OwnedPokemonContext";
-import useQueryPokemons from "@hooks/API/useQueryPokemons";
+import Layout from '@components/Layout';
+import Body from '@components/Body';
+import Listpage from '@components/Listpage/Listpage';
+import Detailpage from '@components/Detailpage/Detailpage';
+import Ownedpage from '@components/Ownedpage/Ownedpage';
+import Navigator from '@components/Navigator';
+import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from '@constants/route';
+import useLoadOwnedPoke from 'hooks/useLoadOwnedPoke';
+import { OwnedPokemonContext } from 'context/OwnedPokemonContext';
+import useQueryPokemons from '@hooks/API/useQueryPokemons';
 
 interface IContentProps {
   pokemons: any[];
@@ -59,7 +59,14 @@ const Content: FC<IContentProps> = (props) => {
 };
 
 const Home: NextPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>("LISTPAGE");
+  const [currentPage, setCurrentPage] = useState<string>('LISTPAGE');
+  const goToListPage = () => {
+    setCurrentPage(LISTPAGE);
+  };
+
+  const goToOwnedPage = () => {
+    setCurrentPage(OWNEDPAGE);
+  };
   const [currentId, setCurrentId] = useState<number>(1);
 
   const OwnedPokemonContextValue = useLoadOwnedPoke();
@@ -78,7 +85,11 @@ const Home: NextPage = () => {
       </Head>
 
       <Layout>
-        <Navigator currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Navigator
+          currentPage={currentPage}
+          goToListPage={goToListPage}
+          goToOwnedPage={goToOwnedPage}
+        />
         <Body>
           <Content
             pokemons={data.pokemons.results}
