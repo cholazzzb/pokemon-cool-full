@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "yarn install-husky",
-    "install-husky": "[ -z \"$HUSKY\" ] && husky install ./.husky || echo \"ignore husky\"",
+    "postinstall": "[ -z \"$HUSKY\" ] && husky install .husky || echo \"ignore husky\"",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
