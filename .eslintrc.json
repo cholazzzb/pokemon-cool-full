@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "eqeqeq": ["error", "always"],
+    "react-hooks/exhaustive-deps": "off",
+    "react/display-name": "off",
+    "no-underscore-dangle": "off"
+  }
+}

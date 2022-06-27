@@ -10,7 +10,9 @@ describe('renders correctly', () => {
 
   it('children', () => {
     const { queryByTestId } = render(
-      <Header caption="normal" children={<div>children</div>} />,
+      <Header caption="normal">
+        <div>children</div>
+      </Header>,
     );
     expect(queryByTestId('header-children-label')).toBeTruthy();
   });
