@@ -1,8 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import { FC } from "react";
+import { FC } from 'react';
 
 interface TabBaseStatsProps {
   stats: any;

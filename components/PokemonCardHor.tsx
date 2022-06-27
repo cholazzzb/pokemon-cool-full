@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { FC } from "react";
+import { css, jsx } from '@emotion/react';
+import { FC } from 'react';
 
-import PokeImage from "./PokeImage";
-import TypeChip from "./TypeChip";
-import { getPrimaryColorFromType } from "../utils/colorTheme";
-import useQueryPokeType from "@hooks/API/useQueryPokeType";
+import PokeImage from './PokeImage';
+import TypeChip from './TypeChip';
+import { getPrimaryColorFromType } from '../utils/colorTheme';
+import useQueryPokeType from '@hooks/API/useQueryPokeType';
 
 const NameStyle = css`
   font-size: 15px;

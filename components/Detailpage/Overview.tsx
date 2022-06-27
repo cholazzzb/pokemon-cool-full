@@ -1,13 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import { Dispatch, FC, SetStateAction } from "react";
-import PokeImage from "@components/PokeImage";
-import TypeChip from "@components/TypeChip";
-import NavigateOverview from "./NavigateOverview";
-import CatchPokemon from "./CatchPokemon";
-import { getSecondaryColorFromType } from "@utils/colorTheme";
+import { Dispatch, FC, SetStateAction } from 'react';
+import PokeImage from '@components/PokeImage';
+import TypeChip from '@components/TypeChip';
+import NavigateOverview from './NavigateOverview';
+import CatchPokemon from './CatchPokemon';
+import { getSecondaryColorFromType } from '@utils/colorTheme';
 
 const InformationStyle = css`
   display: flex;
@@ -76,7 +76,11 @@ const Overview: FC<OverviewProps> = (props) => {
           <p css={IdStyle}>#{id}</p>
         </div>
         <div css={ImageStyle}>
-          <PokeImage type={types[0].type.name} image={sprites.front_default} size={200} />
+          <PokeImage
+            type={types[0].type.name}
+            image={sprites.front_default}
+            size={200}
+          />
         </div>
         <NavigateOverview currentId={id} setCurrentId={setCurrentId} />
       </div>

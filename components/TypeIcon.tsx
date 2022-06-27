@@ -1,8 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import { FC } from "react";
+import { FC } from 'react';
 import {
   faBolt,
   faBomb,
@@ -22,8 +22,8 @@ import {
   faSnowflake,
   faTint,
   faUmbrellaBeach,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ITypeIcon {
   type: string;

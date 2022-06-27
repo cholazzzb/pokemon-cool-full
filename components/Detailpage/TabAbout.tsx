@@ -1,10 +1,10 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { FC } from "react";
+import { css, jsx } from '@emotion/react';
+import { FC } from 'react';
 
 const TabBodyStyle = css`
-  overflow:auto;
+  overflow: auto;
   padding: 10px;
 `;
 
@@ -26,12 +26,12 @@ const DataStyle = css`
 interface TabAboutProps {
   height: string;
   weight: string;
-  abilities: any
+  abilities: any;
 }
 
 const TabAbout: FC<TabAboutProps> = (props) => {
-  const {  height, weight, abilities } = props;
- 
+  const { height, weight, abilities } = props;
+
   return (
     <div css={TabBodyStyle}>
       <div css={TextContainerStyle}>
@@ -46,8 +46,10 @@ const TabAbout: FC<TabAboutProps> = (props) => {
         <p css={LabelStyle}> Abilities</p>
         {abilities.map(
           (ability: { [key: string]: { [key: string]: string } }) => (
-            <p key={ability.ability.name} css={DataStyle}>{ability.ability.name}, </p>
-          )
+            <p key={ability.ability.name} css={DataStyle}>
+              {ability.ability.name},{' '}
+            </p>
+          ),
         )}
       </div>
     </div>

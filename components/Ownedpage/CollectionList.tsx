@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 import {
   Dispatch,
   FC,
@@ -9,19 +9,19 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import Card from "@components/Card";
-import Image from "next/image";
+} from 'react';
+import Card from '@components/Card';
+import Image from 'next/image';
 
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from "@context/OwnedPokemonContext";
+} from '@context/OwnedPokemonContext';
 
-import AutoSizer from "react-virtualized-auto-sizer";
-import { FixedSizeList as List } from "react-window";
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeList as List } from 'react-window';
 
 const ListItemStyle = css`
   display: flex;
@@ -116,7 +116,7 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
   };
 
   const { ownedPokemon, savePokemon, releasePokemon } = useContext(
-    OwnedPokemonContext
+    OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 
   const pokemonId = ownedPokemon[activePokeIdx].id;
@@ -139,7 +139,7 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
     >
       <Card
         headText={pokemonName}
-        bodyText={pokemonAttributes.length + " pokemons"}
+        bodyText={pokemonAttributes.length + ' pokemons'}
       />
 
       <AutoSizer>

@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { Dispatch, FC, SetStateAction } from "react";
-import PokemonCardHor from "@components/PokemonCardHor";
-import { DETAILPAGE } from "@constants/route";
+import { css, jsx } from '@emotion/react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import PokemonCardHor from '@components/PokemonCardHor';
+import { DETAILPAGE } from '@constants/route';
 
-import AutoSizer from "react-virtualized-auto-sizer";
-import { FixedSizeList as List } from "react-window";
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeList as List } from 'react-window';
 
 const ListStyle = css`
   scrollbar-width: thin;

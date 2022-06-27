@@ -1,18 +1,18 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import Image from "next/image";
-import { Dispatch, FC, SetStateAction, useContext } from "react";
-import { LISTPAGE, OWNEDPAGE } from "@constants/route";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook } from "@fortawesome/free-solid-svg-icons";
-import Badge from "./Badge";
+import Image from 'next/image';
+import { Dispatch, FC, SetStateAction, useContext } from 'react';
+import { LISTPAGE, OWNEDPAGE } from '@constants/route';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import Badge from './Badge';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from "context/OwnedPokemonContext";
-import { getTotalPokemon } from "@utils/session";
+} from 'context/OwnedPokemonContext';
+import { getTotalPokemon } from '@utils/session';
 
 const NavigatorContainerStyle = css`
   z-index: 0;
@@ -27,12 +27,12 @@ const NavigatorContainerStyle = css`
 `;
 
 const IconContainerStyle = css`
-  display:flex;
+  display: flex;
   background-color: gray;
   width: 100%;
   margin: 10px;
   border-radius: 10px;
-`
+`;
 
 const IconStyle = css`
   display: flex;
@@ -51,17 +51,17 @@ const Navigator: FC<INavigatorProps> = (props) => {
   const { currentPage, setCurrentPage } = props;
 
   const { ownedPokemon, savePokemon, releasePokemon } = useContext(
-    OwnedPokemonContext
+    OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 
   const ButtonContainerStyle = (page: string) => {
     let color, bgColor;
     if (currentPage === page) {
-      color = "black";
-      bgColor= "white"
+      color = 'black';
+      bgColor = 'white';
     } else {
-      color = "white";
-      bgColor="gray"
+      color = 'white';
+      bgColor = 'gray';
     }
 
     const style = css`
@@ -74,7 +74,7 @@ const Navigator: FC<INavigatorProps> = (props) => {
       color: ${color};
       font-size: 15px;
       border-radius: 10px;
-      background-color:${bgColor};
+      background-color: ${bgColor};
       &:hover {
         background-color: #d9dadc;
       }
@@ -104,8 +104,8 @@ const Navigator: FC<INavigatorProps> = (props) => {
             <Image
               src={
                 currentPage === OWNEDPAGE
-                  ? "/pokeballSelected.svg"
-                  : "/pokeball.png"
+                  ? '/pokeballSelected.svg'
+                  : '/pokeball.png'
               }
               width={20}
               height={20}

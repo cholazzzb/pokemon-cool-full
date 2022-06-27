@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, Dispatch, SetStateAction } from "react";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FC, Dispatch, SetStateAction } from 'react';
 
 const NavigateOverviewStyle = css`
   position: absolute;
@@ -17,7 +17,7 @@ const NavigateOverviewStyle = css`
 `;
 
 const IconStyle = css`
-  display:flex;
+  display: flex;
   width: 25px;
   height: 25px;
   padding: 20px;

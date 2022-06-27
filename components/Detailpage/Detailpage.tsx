@@ -1,17 +1,17 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-import Header from "@components/Header";
-import Tab from "./Tab";
-import TabContainer from "./TabContainer";
-import Overview from "./Overview";
+import Header from '@components/Header';
+import Tab from './Tab';
+import TabContainer from './TabContainer';
+import Overview from './Overview';
 
-import { getPrimaryColorFromType } from "@utils/colorTheme";
+import { getPrimaryColorFromType } from '@utils/colorTheme';
 
-import useQueryPokeDetail from "hooks/API/useQueryPokeDetail";
+import useQueryPokeDetail from 'hooks/API/useQueryPokeDetail';
 
 interface DetailPageProps {
   id: number;
@@ -23,7 +23,7 @@ interface DetailPageProps {
 const Detailpage: FC<DetailPageProps> = (props) => {
   const { id, setCurrentId, currentName, setCurrentPage } = props;
   const onBack = () => {
-    setCurrentPage("LISTPAGE");
+    setCurrentPage('LISTPAGE');
   };
 
   const [currentTab, setCurrentTab] = useState(0);

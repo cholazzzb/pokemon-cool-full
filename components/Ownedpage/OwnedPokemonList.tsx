@@ -1,16 +1,16 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { css, jsx } from "@emotion/react";
-import { Dispatch, FC, SetStateAction, useContext } from "react";
-import PokemonCardVer from "../PokemonCardVer";
-import Card from "@components/Card";
+import { css, jsx } from '@emotion/react';
+import { Dispatch, FC, SetStateAction, useContext } from 'react';
+import PokemonCardVer from '../PokemonCardVer';
+import Card from '@components/Card';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from "@context/OwnedPokemonContext";
-import AutoSizer from "react-virtualized-auto-sizer";
-import { FixedSizeList as List } from "react-window";
+} from '@context/OwnedPokemonContext';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeList as List } from 'react-window';
 
 interface IRowProps {
   data: any;
@@ -23,8 +23,8 @@ const Row: FC<IRowProps> = (props) => {
   return (
     <div onClick={() => setActivePokeIdx(index)} style={style}>
       <PokemonCardVer
-          id= {ownedPokemon[index].id}
-          name= {ownedPokemon[index].name}
+        id={ownedPokemon[index].id}
+        name={ownedPokemon[index].name}
       />
     </div>
   );
@@ -53,15 +53,12 @@ interface IOwnedPokemonListProps {
 const OwnedPokemonList: FC<IOwnedPokemonListProps> = (props) => {
   const { setActivePokeIdx } = props;
   const { ownedPokemon, savePokemon, releasePokemon } = useContext(
-    OwnedPokemonContext
+    OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 
   return (
-    <div style={{ height: "50%", padding:"10px"}}>
-      <Card
-        headText="Your Owned Pokemon"
-        bodyText="Click to see details"
-      />
+    <div style={{ height: '50%', padding: '10px' }}>
+      <Card headText="Your Owned Pokemon" bodyText="Click to see details" />
 
       <AutoSizer>
         {({ height, width }) => (

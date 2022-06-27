@@ -1,31 +1,31 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import { Fragment, useContext, useState } from "react";
-import OwnedPokemonList from "./OwnedPokemonList";
-import CollectionList from "./CollectionList";
+import { Fragment, useContext, useState } from 'react';
+import OwnedPokemonList from './OwnedPokemonList';
+import CollectionList from './CollectionList';
 
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from "@context/OwnedPokemonContext";
+} from '@context/OwnedPokemonContext';
 
 const PieChartDataDummy = [
   {
-    name: "bulbasaur",
-    imgURL: "",
-    attributes: [{ name: "BOBI" }, { name: "BOBA" }],
+    name: 'bulbasaur',
+    imgURL: '',
+    attributes: [{ name: 'BOBI' }, { name: 'BOBA' }],
   },
   {
-    name: "chimcar",
-    imgURL: "",
-    attributes: [{ name: "BOBI" }],
+    name: 'chimcar',
+    imgURL: '',
+    attributes: [{ name: 'BOBI' }],
   },
   {
-    name: "geodude",
-    imgURL: "",
-    attributes: [{ name: "BOBI" }],
+    name: 'geodude',
+    imgURL: '',
+    attributes: [{ name: 'BOBI' }],
   },
 ];
 
@@ -63,7 +63,7 @@ const BodyStyle = css`
 
 const Ownedpage = () => {
   const { ownedPokemon, savePokemon, releasePokemon } = useContext(
-    OwnedPokemonContext
+    OwnedPokemonContext,
   ) as OwnedPokemonContextType;
   const [activePokeIdx, setActivePokeIdx] = useState<number | null>(null);
 
@@ -77,7 +77,7 @@ const Ownedpage = () => {
       ) : (
         <div css={EmptyStyle}>You don't have any pokemon yet</div>
       )}
-      {ownedPokemon?.length > 0 && typeof activePokeIdx === "number" && (
+      {ownedPokemon?.length > 0 && typeof activePokeIdx === 'number' && (
         <CollectionList
           activePokeIdx={activePokeIdx}
           setActivePokeIdx={setActivePokeIdx}

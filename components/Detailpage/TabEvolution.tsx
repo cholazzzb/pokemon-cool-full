@@ -1,5 +1,5 @@
-import { useQuery, gql } from "@apollo/client";
-import { FC } from "react";
+import { useQuery, gql } from '@apollo/client';
+import { FC } from 'react';
 
 const GET_POKEMON_MOVES = gql`
   query Pokemon($name: String!) {

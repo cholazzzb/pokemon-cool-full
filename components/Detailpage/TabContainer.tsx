@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { Dispatch, FC, SetStateAction } from "react";
+import { css, jsx } from '@emotion/react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
 const TabContainerStyle = css`
   height: 100%;
@@ -33,7 +33,7 @@ const TabBodyStyle = css`
   overflow: auto;
 `;
 
-const tabs: string[] = ["About", "Base Stats", "Moves"];
+const tabs: string[] = ['About', 'Base Stats', 'Moves'];
 
 interface TabContainerProps {
   children: any;

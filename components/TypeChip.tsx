@@ -1,9 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { FC } from "react";
-import TypeIcon from "./TypeIcon";
-import { getSecondaryColorFromType } from "../utils/colorTheme";
+import { css, jsx } from '@emotion/react';
+import { FC } from 'react';
+import TypeIcon from './TypeIcon';
+import { getSecondaryColorFromType } from '../utils/colorTheme';
 
 interface IChipProps {
   type: string;

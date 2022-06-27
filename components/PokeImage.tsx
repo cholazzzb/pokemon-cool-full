@@ -1,9 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import Image from "next/image";
-import { FC } from "react";
-import { getSecondaryColorFromType } from "../utils/colorTheme";
+import { css, jsx } from '@emotion/react';
+import Image from 'next/image';
+import { FC } from 'react';
+import { getSecondaryColorFromType } from '../utils/colorTheme';
 
 interface ImageProps {
   type: string;

@@ -1,13 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx, keyframes } from "@emotion/react";
+import { css, jsx, keyframes } from '@emotion/react';
 
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import SuccessAlert from "./SuccessAlert";
-import FailedAlert from "./FailedAlert";
-import Image from "next/image";
-import CatchingAlert from "./CatchingAlert";
+import SuccessAlert from './SuccessAlert';
+import FailedAlert from './FailedAlert';
+import Image from 'next/image';
+import CatchingAlert from './CatchingAlert';
 
 const CatchPokemonStyle = css`
   position:absolute;
@@ -49,12 +49,12 @@ const CatchPokemon: FC<ICatchPokemonProps> = (props) => {
   const [catchStatus, setCatchStatus] = useState<null | string>(null);
 
   const catchPokemon = () => {
-    setCatchStatus("CATCHING");
+    setCatchStatus('CATCHING');
   };
 
   let Alert;
   switch (catchStatus) {
-    case "SUCCESS":
+    case 'SUCCESS':
       Alert = (
         <SuccessAlert
           id={id}
@@ -65,11 +65,11 @@ const CatchPokemon: FC<ICatchPokemonProps> = (props) => {
       );
       break;
 
-    case "FAILED":
+    case 'FAILED':
       Alert = <FailedAlert iconColor={iconColor} catchPokemon={catchPokemon} />;
       break;
 
-    case "CATCHING":
+    case 'CATCHING':
       Alert = <CatchingAlert setCatchStatus={setCatchStatus} />;
       break;
 

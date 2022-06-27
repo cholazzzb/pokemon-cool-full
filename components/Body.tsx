@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { FC } from "react";
+import { css, jsx } from '@emotion/react';
+import { FC } from 'react';
 
 const BodyStyle = css`
   width: 100%;

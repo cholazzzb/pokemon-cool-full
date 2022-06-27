@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
-import { FC } from "react";
+import { css, jsx } from '@emotion/react';
+import { FC } from 'react';
 
 const PieContainerStyle = css`
   height: 150px;
@@ -84,7 +84,11 @@ const PieChart: FC<IPieChartProps> = (props) => {
     <div css={PieContainerStyle}>
       <div css={PieBackgroundStyle}></div>
       {props.data.map((pokemon) => (
-        <PieSlice key={pokemon.attributes.name} size={pokemon.attributes.length} fullSize={4} />
+        <PieSlice
+          key={pokemon.attributes.name}
+          size={pokemon.attributes.length}
+          fullSize={4}
+        />
       ))}
       <div css={InnerCircleStyle}>
         <div css={ContentStyle}></div>

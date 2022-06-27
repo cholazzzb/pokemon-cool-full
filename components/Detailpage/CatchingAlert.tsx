@@ -1,9 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx, keyframes } from "@emotion/react";
-import { Dispatch, FC, SetStateAction, useEffect } from "react";
-import Image from "next/image";
-import Alert from "@components/Alert";
+import { css, jsx, keyframes } from '@emotion/react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
+import Image from 'next/image';
+import Alert from '@components/Alert';
 
 const CatchAnimation = keyframes`
   from, 20%, 53%, 80%, to {
@@ -32,7 +32,7 @@ const CatchingAlert: FC<ICatchintAlertProps> = (props) => {
   useEffect(() => {
     setTimeout(() => {
       const successRate = Math.random();
-      successRate > 0.5 ? setCatchStatus("SUCCESS") : setCatchStatus("FAILED");
+      successRate > 0.5 ? setCatchStatus('SUCCESS') : setCatchStatus('FAILED');
     }, 2000);
   }, []);
 

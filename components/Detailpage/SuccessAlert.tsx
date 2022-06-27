@@ -1,8 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css, jsx } from '@emotion/react';
 
-import Alert from "@components/Alert";
+import Alert from '@components/Alert';
 import {
   ChangeEvent,
   Dispatch,
@@ -12,10 +12,13 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { OwnedPokemonContext, OwnedPokemonContextType } from "context/OwnedPokemonContext";
+} from 'react';
+import {
+  OwnedPokemonContext,
+  OwnedPokemonContextType,
+} from 'context/OwnedPokemonContext';
 
-import pokemonCaughtSound from "public/pokemonCaughtSound.mp3"
+import pokemonCaughtSound from 'public/pokemonCaughtSound.mp3';
 
 const FormStyle = css`
   display: flex;
@@ -36,11 +39,10 @@ interface ISuccessAlertProps {
 }
 
 const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
-
-useEffect(() => {
-  const audio = new Audio(pokemonCaughtSound)
-  audio.play()
-}, [])
+  useEffect(() => {
+    const audio = new Audio(pokemonCaughtSound);
+    audio.play();
+  }, []);
 
   const { id, pokemonName, color, setCatchStatus } = props;
 
@@ -48,7 +50,7 @@ useEffect(() => {
     setCatchStatus(null);
   };
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>('');
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -60,11 +62,11 @@ useEffect(() => {
   };
 
   const { ownedPokemon, savePokemon, releasePokemon } = useContext(
-    OwnedPokemonContext
+    OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 
   const submitForm = () => {
-    savePokemon(id, pokemonName, name)
+    savePokemon(id, pokemonName, name);
     onClose();
   };
 

@@ -1,24 +1,24 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import Header from "../Header";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import Header from '../Header';
 
-describe("renders correctly", () => {
-  it("caption", () => {
+describe('renders correctly', () => {
+  it('caption', () => {
     const { queryByTestId } = render(<Header caption="normal" />);
-    expect(queryByTestId("header-label")).toBeTruthy();
+    expect(queryByTestId('header-label')).toBeTruthy();
   });
 
-  it("children", () => {
+  it('children', () => {
     const { queryByTestId } = render(
-      <Header caption="normal" children={<div>children</div>} />
+      <Header caption="normal" children={<div>children</div>} />,
     );
-    expect(queryByTestId("header-children-label")).toBeTruthy();
+    expect(queryByTestId('header-children-label')).toBeTruthy();
   });
 
-  it("backIcon", () => {
+  it('backIcon', () => {
     const { queryByTestId } = render(
-      <Header caption="normal" onBack={() => {}} />
+      <Header caption="normal" onBack={() => {}} />,
     );
-    expect(queryByTestId("header-backicon")).toBeTruthy();
+    expect(queryByTestId('header-backicon')).toBeTruthy();
   });
 });
