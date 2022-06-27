@@ -1,10 +1,14 @@
 module.exports = {
   collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
+    "./**",
+    "**/*.{test.ts,test.tsx}",
+    "!**/*.spec.ts",
+    "!**/*.config.ts",
+    "!**/*.js",
+    "!**/*.json",
     "!**/*.d.ts",
     "!**/node_modules/**",
     "!**/.next/**",
-    "!**/*.config.js",
   ],
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)
@@ -24,7 +28,7 @@ module.exports = {
     "^@hooks/(.*)$": "<rootDir>/hooks/$1",
     "^@context/(.*)$": "<rootDir>/context/$1"
   },
-  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/", "<rootDir>/e2e"],
   testEnvironment: "jsdom",
   transform: {
     /* Use babel-jest to transpile tests with the next/babel preset
