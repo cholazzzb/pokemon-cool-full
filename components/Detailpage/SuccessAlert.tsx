@@ -61,7 +61,7 @@ const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
     setOnSaving(true);
   };
 
-  const { ownedPokemon, savePokemon, releasePokemon } = useContext(
+  const { savePokemon } = useContext(
     OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 

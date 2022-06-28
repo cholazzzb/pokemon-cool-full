@@ -20,7 +20,7 @@ interface IPokemonCardVerProps {
 }
 
 const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
-  const { id, name } = props;
+  const { name } = props;
 
   const { loading, error, data } = useQueryPokeType(name);
 

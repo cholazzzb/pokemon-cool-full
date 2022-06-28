@@ -52,7 +52,7 @@ interface IOwnedPokemonListProps {
 }
 const OwnedPokemonList: FC<IOwnedPokemonListProps> = (props) => {
   const { setActivePokeIdx } = props;
-  const { ownedPokemon, savePokemon, releasePokemon } = useContext(
+  const { ownedPokemon } = useContext(
     OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 

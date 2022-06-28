@@ -115,7 +115,7 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
     setReleasing(!releasing);
   };
 
-  const { ownedPokemon, savePokemon, releasePokemon } = useContext(
+  const { ownedPokemon, releasePokemon } = useContext(
     OwnedPokemonContext,
   ) as OwnedPokemonContextType;
 

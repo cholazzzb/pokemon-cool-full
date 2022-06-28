@@ -11,24 +11,6 @@ import {
   OwnedPokemonContextType,
 } from '@context/OwnedPokemonContext';
 
-const PieChartDataDummy = [
-  {
-    name: 'bulbasaur',
-    imgURL: '',
-    attributes: [{ name: 'BOBI' }, { name: 'BOBA' }],
-  },
-  {
-    name: 'chimcar',
-    imgURL: '',
-    attributes: [{ name: 'BOBI' }],
-  },
-  {
-    name: 'geodude',
-    imgURL: '',
-    attributes: [{ name: 'BOBI' }],
-  },
-];
-
 const EmptyStyle = css`
   display: flex;
   width: 100%;
@@ -62,7 +44,7 @@ const BodyStyle = css`
 `;
 
 const Ownedpage = () => {
-  const { ownedPokemon, savePokemon, releasePokemon } = useContext(
+  const { ownedPokemon } = useContext(
     OwnedPokemonContext,
   ) as OwnedPokemonContextType;
   const [activePokeIdx, setActivePokeIdx] = useState<number | null>(null);

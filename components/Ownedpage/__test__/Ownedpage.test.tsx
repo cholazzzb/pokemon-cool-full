@@ -4,9 +4,6 @@ import Ownedpage from '../Ownedpage';
 import OwnedPokemon from '@utils/OwnedPokemon';
 import { saveNewPokemon } from '@utils/session';
 
-const mockSetCurrentPage = jest.fn();
-const mockSetCurrentName = jest.fn();
-
 describe('Ownedpage', () => {
   beforeEach(() => {
     window.sessionStorage.clear();

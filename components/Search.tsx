@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { useState } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -28,7 +27,6 @@ const IconStyle = css`
 `;
 
 const Search = () => {
-  const [open, setOpen] = useState(false);
   return (
     <div css={SearchContainerStyle}>
       <span css={IconStyle}>

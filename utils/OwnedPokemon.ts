@@ -31,18 +31,14 @@ class OwnedPokemon {
     return false;
   }
 
-  addPokemon(
-    id: number,
-    pokemonName: string,
-    name: string,
-  ): boolean {
+  addPokemon(id: number, pokemonName: string, name: string): boolean {
     if (this.checkIfNameAlreadyExist(name)) {
       return false;
     }
     if (this._data) {
       if (this.checkIfPokemonAlreadyExist(pokemonName)) {
         let pokemonIdx: any = this._data.findIndex(
-          (pokemon) => pokemon.name === pokemonName
+          (pokemon) => pokemon.name === pokemonName,
         );
         this._data[pokemonIdx].attributes.push({
           name: name,
@@ -79,8 +75,10 @@ class OwnedPokemon {
             pokemonIdx = pokeIdx;
             nameIdx = attriIdx;
             return true;
+          } else {
+            return false;
           }
-        })
+        }),
       );
       if (this._data[pokemonIdx].attributes.length > 1) {
         this._data[pokemonIdx].attributes.splice(nameIdx, 1);
