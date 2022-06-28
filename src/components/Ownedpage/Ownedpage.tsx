@@ -9,7 +9,7 @@ import CollectionList from './CollectionList';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from '@context/OwnedPokemonContext';
+} from '@/context/OwnedPokemonContext';
 
 const EmptyStyle = css`
   display: flex;

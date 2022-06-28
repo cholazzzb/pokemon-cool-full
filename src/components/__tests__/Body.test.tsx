@@ -1,4 +1,4 @@
-import Body from 'src/components/Body';
+import Body from '@/components/Body';
 import { render, screen } from '@testing-library/react';
 
 it("should render body's children", () => {

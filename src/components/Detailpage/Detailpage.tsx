@@ -4,12 +4,12 @@ import { css, jsx } from '@emotion/react';
 
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-import Header from 'src/components/Header';
+import Header from '@/components/Header';
 import Tab from './Tab';
 import TabContainer from './TabContainer';
 import Overview from './Overview';
 
-import { getPrimaryColorFromType } from '@utils/colorTheme';
+import { getPrimaryColorFromType } from '@/utils/colorTheme';
 
 import useQueryPokeDetail from 'hooks/API/useQueryPokeDetail';
 

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Ownedpage from '../Ownedpage';
-import OwnedPokemon from '@utils/OwnedPokemon';
-import { saveNewPokemon } from '@utils/session';
+import OwnedPokemon from '@/utils/OwnedPokemon';
+import { saveNewPokemon } from '@/utils/session';
 
 describe('Ownedpage', () => {
   beforeEach(() => {

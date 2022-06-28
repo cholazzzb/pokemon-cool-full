@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql } from '@apollo/client';
 
 const GET_POKEDETAIL = gql`
   query Pokemon($name: String!) {
@@ -38,10 +38,10 @@ const GET_POKEDETAIL = gql`
   }
 `;
 
-const useQueryPokeDetail = (name:string) => {
+const useQueryPokeDetail = (name: string) => {
   const { loading, error, data } = useQuery(GET_POKEDETAIL, {
     variables: {
-      name
+      name,
     },
   });
   return { loading, error, data };

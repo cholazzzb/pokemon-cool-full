@@ -1,6 +1,6 @@
-import OwnedPokemon from "@utils/OwnedPokemon";
-import { getOwnedPokemonData, saveNewPokemon } from "@utils/session";
-import { useEffect, useState } from "react";
+import OwnedPokemon from '@/utils/OwnedPokemon';
+import { getOwnedPokemonData, saveNewPokemon } from '@/utils/session';
+import { useEffect, useState } from 'react';
 
 const useLoadOwnedPoke = () => {
   const [ownedPokemon, setOwnedPokemon] = useState<any[]>([]);
@@ -16,11 +16,7 @@ const useLoadOwnedPoke = () => {
     }
   };
 
-  const savePokemon = (
-    id: number,
-    pokemonName: string,
-    name: string,
-  ) => {
+  const savePokemon = (id: number, pokemonName: string, name: string) => {
     let ownedPokemonMem = new OwnedPokemon(ownedPokemon);
     ownedPokemonMem.addPokemon(id, pokemonName, name);
     saveNewPokemon(window, ownedPokemonMem.data);

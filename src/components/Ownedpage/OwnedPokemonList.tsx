@@ -4,11 +4,11 @@
 import { css, jsx } from '@emotion/react';
 import { Dispatch, FC, SetStateAction, useContext } from 'react';
 import PokemonCardVer from '../PokemonCardVer';
-import Card from 'src/components/Card';
+import Card from '@/components/Card';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from '@context/OwnedPokemonContext';
+} from '@/context/OwnedPokemonContext';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 

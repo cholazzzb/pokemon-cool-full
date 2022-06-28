@@ -2,8 +2,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import { Dispatch, FC, SetStateAction } from 'react';
-import PokemonCardHor from 'src/components/PokemonCardHor';
-import { DETAILPAGE } from '@constants/route';
+import PokemonCardHor from '@/components/PokemonCardHor';
+import { DETAILPAGE } from '@/constants/route';
 
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';

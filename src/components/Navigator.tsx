@@ -4,14 +4,14 @@ import { css, jsx } from '@emotion/react';
 
 import Image from 'next/image';
 import { FC, useContext } from 'react';
-import { LISTPAGE, OWNEDPAGE } from '@constants/route';
+import { LISTPAGE, OWNEDPAGE } from '@/constants/route';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from '@context/OwnedPokemonContext';
-import { getTotalPokemon } from '@utils/session';
+} from '@/context/OwnedPokemonContext';
+import { getTotalPokemon } from '@/utils/session';
 
 import Badge from './Badge';
 

@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql } from '@apollo/client';
 
 const GET_POKEMON_TYPE = gql`
   query Pokemon($name: String!) {

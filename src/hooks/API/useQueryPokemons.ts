@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql } from '@apollo/client';
 
 const GET_POKEMONS = gql`
   query pokemons($limit: Int, $offset: Int) {

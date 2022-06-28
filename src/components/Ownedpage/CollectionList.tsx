@@ -10,7 +10,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import Card from 'src/components/Card';
+import Card from '@/components/Card';
 import Image from 'next/image';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,
-} from '@context/OwnedPokemonContext';
+} from '@/context/OwnedPokemonContext';
 
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';

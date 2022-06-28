@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/react';
 
 import { FC, Dispatch, SetStateAction } from 'react';
 
-import Header from 'src/components/Header';
+import Header from '@/components/Header';
 import PokemonList from './PokemonList';
 
 const ListPageStyle = css`

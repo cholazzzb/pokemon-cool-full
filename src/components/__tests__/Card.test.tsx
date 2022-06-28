@@ -1,4 +1,4 @@
-import Card from 'src/components/Card';
+import Card from '@/components/Card';
 import { render, screen } from '@testing-library/react';
 
 it('render correctly', () => {
