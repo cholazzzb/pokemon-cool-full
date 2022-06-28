@@ -10,7 +10,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import Card from '@components/Card';
+import Card from 'src/components/Card';
 import Image from 'next/image';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';

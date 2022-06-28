@@ -7,12 +7,12 @@ import Head from 'next/head';
 
 import { FC, useState, Dispatch, SetStateAction } from 'react';
 
-import Layout from '@components/Layout';
-import Body from '@components/Body';
-import Listpage from '@components/Listpage/Listpage';
-import Detailpage from '@components/Detailpage/Detailpage';
-import Ownedpage from '@components/Ownedpage/Ownedpage';
-import Navigator from '@components/Navigator';
+import Layout from 'src/components/Layout';
+import Body from 'src/components/Body';
+import Listpage from 'src/components/Listpage/Listpage';
+import Detailpage from 'src/components/Detailpage/Detailpage';
+import Ownedpage from 'src/components/Ownedpage/Ownedpage';
+import Navigator from 'src/components/Navigator';
 import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from '@constants/route';
 import useLoadOwnedPoke from 'hooks/useLoadOwnedPoke';
 import { OwnedPokemonContext } from 'context/OwnedPokemonContext';

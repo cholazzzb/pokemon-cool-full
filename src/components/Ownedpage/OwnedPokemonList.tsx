@@ -4,7 +4,7 @@
 import { css, jsx } from '@emotion/react';
 import { Dispatch, FC, SetStateAction, useContext } from 'react';
 import PokemonCardVer from '../PokemonCardVer';
-import Card from '@components/Card';
+import Card from 'src/components/Card';
 import {
   OwnedPokemonContext,
   OwnedPokemonContextType,

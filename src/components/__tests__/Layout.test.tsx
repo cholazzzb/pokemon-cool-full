@@ -1,4 +1,4 @@
-import Layout from '@components/Layout';
+import Layout from 'src/components/Layout';
 import { render, screen } from '@testing-library/react';
 
 it('render correctly', () => {

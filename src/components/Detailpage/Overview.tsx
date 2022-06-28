@@ -3,8 +3,8 @@
 import { css, jsx } from '@emotion/react';
 
 import { Dispatch, FC, SetStateAction } from 'react';
-import PokeImage from '@components/PokeImage';
-import TypeChip from '@components/TypeChip';
+import PokeImage from 'src/components/PokeImage';
+import TypeChip from 'src/components/TypeChip';
 import NavigateOverview from './NavigateOverview';
 import CatchPokemon from './CatchPokemon';
 import { getSecondaryColorFromType } from '@utils/colorTheme';

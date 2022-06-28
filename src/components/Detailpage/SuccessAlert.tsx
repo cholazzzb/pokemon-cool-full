@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import Alert from '@components/Alert';
+import Alert from 'src/components/Alert';
 import {
   ChangeEvent,
   Dispatch,

@@ -1,4 +1,4 @@
-import Badge from '@components/Badge';
+import Badge from 'src/components/Badge';
 import { render, screen } from '@testing-library/react';
 
 describe('render correctly', () => {

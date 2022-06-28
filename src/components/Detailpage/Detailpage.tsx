@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/react';
 
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-import Header from '@components/Header';
+import Header from 'src/components/Header';
 import Tab from './Tab';
 import TabContainer from './TabContainer';
 import Overview from './Overview';

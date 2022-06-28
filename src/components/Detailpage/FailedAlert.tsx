@@ -3,7 +3,7 @@
 import { css, jsx } from '@emotion/react';
 
 import { FC } from 'react';
-import Alert from '@components/Alert';
+import Alert from 'src/components/Alert';
 
 const AlertContainerStyle = css`
   display: flex;

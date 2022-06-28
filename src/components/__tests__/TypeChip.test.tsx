@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TypeChip from '../../components/TypeChip';
+import TypeChip from '../TypeChip';
 
 it('renders correctly', () => {
   const { queryByTestId } = render(<TypeChip type="normal" />);
