@@ -5,7 +5,7 @@ import { jsx } from '@emotion/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import { FC, useState, Dispatch, SetStateAction } from 'react';
+import { FC, useState, Dispatch, SetStateAction, Fragment } from 'react';
 
 import Layout from '@/components/Layout';
 import Body from '@/components/Body';
@@ -73,7 +73,7 @@ const Home: NextPage = () => {
   if (error) return <div>Error</div>;
 
   return (
-    <>
+    <Fragment>
       <Head>
         <title>Pokemon Cool</title>
         <meta name="description" content="" />
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
           />
         </Body>
       </Layout>
-    </>
+    </Fragment>
   );
 };
 

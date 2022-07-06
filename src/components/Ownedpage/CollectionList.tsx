@@ -124,7 +124,12 @@ const CollectionList: FC<CollectionListProps> = (props) => {
     >
       <Card
         headText={activePokeName}
-        bodyText={ownedPokemons.pokemonName.total + ' pokemons'}
+        bodyText={
+          Object.values(ownedPokemons).reduce(
+            (acc, pokemons) => acc + pokemons.total,
+            0,
+          ) + ' pokemons'
+        }
       />
 
       <AutoSizer>
@@ -132,7 +137,7 @@ const CollectionList: FC<CollectionListProps> = (props) => {
           <List
             height={height}
             width={width}
-            itemCount={ownedPokemons.pokemonName.total}
+            itemCount={ownedPokemons[activePokeName].total}
             itemSize={100}
             itemData={{
               setSelectedPokeName: setSelectedPokeName,
