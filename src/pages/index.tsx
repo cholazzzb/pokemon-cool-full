@@ -14,8 +14,6 @@ import Detailpage from '@/components/Detailpage/Detailpage';
 import Ownedpage from '@/components/Ownedpage/Ownedpage';
 import Navigator from '@/components/Navigator';
 import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from '@/constants/route';
-import useLoadOwnedPoke from 'hooks/useLoadOwnedPoke';
-import { OwnedPokemonContext } from 'context/OwnedPokemonContext';
 import useQueryPokemons from '@/hooks/API/useQueryPokemons';
 
 interface IContentProps {
@@ -69,15 +67,13 @@ const Home: NextPage = () => {
   };
   const [currentId, setCurrentId] = useState<number>(1);
 
-  const OwnedPokemonContextValue = useLoadOwnedPoke();
-
   const { loading, error, data } = useQueryPokemons();
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error</div>;
 
   return (
-    <OwnedPokemonContext.Provider value={OwnedPokemonContextValue}>
+    <>
       <Head>
         <title>Pokemon Cool</title>
         <meta name="description" content="" />
@@ -100,7 +96,7 @@ const Home: NextPage = () => {
           />
         </Body>
       </Layout>
-    </OwnedPokemonContext.Provider>
+    </>
   );
 };
 

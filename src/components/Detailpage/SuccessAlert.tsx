@@ -9,16 +9,13 @@ import {
   FC,
   SetStateAction,
   SyntheticEvent,
-  useContext,
   useEffect,
   useState,
 } from 'react';
-import {
-  OwnedPokemonContext,
-  OwnedPokemonContextType,
-} from 'context/OwnedPokemonContext';
 
 import pokemonCaughtSound from 'public/pokemonCaughtSound.mp3';
+import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
+import { addPokemon } from '@/domains/OwnedPokemon/ownedPokemonUtil';
 
 const FormStyle = css`
   display: flex;
@@ -55,18 +52,23 @@ const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
     setName(e.target.value);
   };
 
+  const [_, setWarningMessage] = useState('');
+
   const [onSaving, setOnSaving] = useState<boolean>(false);
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setOnSaving(true);
   };
 
-  const { savePokemon } = useContext(
-    OwnedPokemonContext,
-  ) as OwnedPokemonContextType;
+  const { ownedPokemons, setOwnedPokemons } = useOwnedPokemonStore();
 
   const submitForm = () => {
-    savePokemon(id, pokemonName, name);
+    const { error, result } = addPokemon(ownedPokemons, id, pokemonName, name);
+    if (error) {
+      setWarningMessage(error);
+    } else {
+      setOwnedPokemons(result);
+    }
     onClose();
   };
 

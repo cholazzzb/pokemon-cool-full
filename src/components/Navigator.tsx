@@ -3,15 +3,11 @@
 import { css, jsx } from '@emotion/react';
 
 import Image from 'next/image';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
+import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
 import { LISTPAGE, OWNEDPAGE } from '@/constants/route';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
-import {
-  OwnedPokemonContext,
-  OwnedPokemonContextType,
-} from '@/context/OwnedPokemonContext';
-import { getTotalPokemon } from '@/utils/session';
 
 import Badge from './Badge';
 
@@ -52,9 +48,7 @@ interface INavigatorProps {
 const Navigator: FC<INavigatorProps> = (props) => {
   const { currentPage, goToListPage, goToOwnedPage } = props;
 
-  const { ownedPokemon } = useContext(
-    OwnedPokemonContext,
-  ) as OwnedPokemonContextType;
+  const { ownedPokemons } = useOwnedPokemonStore();
 
   const ButtonContainerStyle = (page: string) => {
     let color, bgColor;
@@ -109,7 +103,12 @@ const Navigator: FC<INavigatorProps> = (props) => {
             />
           </span>
           Owned
-          <Badge totalOwnedPokemon={getTotalPokemon(ownedPokemon)} />
+          <Badge
+            totalOwnedPokemon={Object.values(ownedPokemons).reduce(
+              (acc, pokemons) => acc + pokemons.total,
+              0,
+            )}
+          />
         </div>
       </div>
     </div>

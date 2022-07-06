@@ -2,14 +2,11 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useState } from 'react';
 import OwnedPokemonList from './OwnedPokemonList';
 import CollectionList from './CollectionList';
 
-import {
-  OwnedPokemonContext,
-  OwnedPokemonContextType,
-} from '@/context/OwnedPokemonContext';
+import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
 
 const EmptyStyle = css`
   display: flex;
@@ -44,25 +41,32 @@ const BodyStyle = css`
 `;
 
 const Ownedpage = () => {
-  const { ownedPokemon } = useContext(
-    OwnedPokemonContext,
-  ) as OwnedPokemonContextType;
-  const [activePokeIdx, setActivePokeIdx] = useState<number | null>(null);
+  const { ownedPokemons } = useOwnedPokemonStore();
+  const [activePokeName, setActivePokeName] = useState('');
 
   return (
     <div css={BodyStyle}>
-      {ownedPokemon?.length > 0 ? (
+      {Object.values(ownedPokemons).reduce(
+        (acc, pokemons) => acc + pokemons.total,
+        0,
+      ) > 0 ? (
         <Fragment>
           {/* <PieChart data={PieChartDataDummy} /> */}
-          <OwnedPokemonList setActivePokeIdx={setActivePokeIdx} />
+          <OwnedPokemonList
+            selectPokemon={(selectedPokemon) => {
+              setActivePokeName(selectedPokemon);
+            }}
+          />
         </Fragment>
       ) : (
         <div css={EmptyStyle}>You don&apos;t have any pokemon yet</div>
       )}
-      {ownedPokemon?.length > 0 && typeof activePokeIdx === 'number' && (
+      {Object.keys(ownedPokemons).length > 0 && activePokeName.length > 0 && (
         <CollectionList
-          activePokeIdx={activePokeIdx}
-          setActivePokeIdx={setActivePokeIdx}
+          activePokeName={activePokeName}
+          updateActivePokeName={(activePokeName) =>
+            setActivePokeName(activePokeName)
+          }
         />
       )}
     </div>

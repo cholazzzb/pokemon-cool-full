@@ -2,29 +2,31 @@
 /** @jsx jsx */
 
 import { css, jsx } from '@emotion/react';
-import { Dispatch, FC, SetStateAction, useContext } from 'react';
+import { FC } from 'react';
 import PokemonCardVer from '../PokemonCardVer';
 import Card from '@/components/Card';
-import {
-  OwnedPokemonContext,
-  OwnedPokemonContextType,
-} from '@/context/OwnedPokemonContext';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
+import { PokemonName } from '@/domains/OwnedPokemon/ownedPokemonEntity';
+import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
 
-interface IRowProps {
-  data: any;
+type RowProps = {
+  data: {
+    selectPokemon: (selectedPokemon: string) => void;
+  };
   index: number;
   style: any;
-}
-const Row: FC<IRowProps> = (props) => {
+};
+const Row: FC<RowProps> = (props) => {
   const { data, index, style } = props;
-  const { ownedPokemon, setActivePokeIdx } = data;
+  const { selectPokemon } = data;
+  const { ownedPokemons } = useOwnedPokemonStore();
+  const ownedPokemonsArr = Object.keys(ownedPokemons);
   return (
-    <div onClick={() => setActivePokeIdx(index)} style={style}>
+    <div onClick={() => selectPokemon(ownedPokemonsArr[index])} style={style}>
       <PokemonCardVer
-        id={ownedPokemon[index].id}
-        name={ownedPokemon[index].name}
+        id={ownedPokemons[ownedPokemonsArr[index]].id}
+        name={ownedPokemonsArr[index]}
       />
     </div>
   );
@@ -47,14 +49,11 @@ const ListStyle = css`
   }
 `;
 
-interface IOwnedPokemonListProps {
-  setActivePokeIdx: Dispatch<SetStateAction<number | null>>;
-}
-const OwnedPokemonList: FC<IOwnedPokemonListProps> = (props) => {
-  const { setActivePokeIdx } = props;
-  const { ownedPokemon } = useContext(
-    OwnedPokemonContext,
-  ) as OwnedPokemonContextType;
+type OwnedPokemonListProps = {
+  selectPokemon: (selectedPokemon: PokemonName) => void;
+};
+const OwnedPokemonList: FC<OwnedPokemonListProps> = ({ selectPokemon }) => {
+  const { ownedPokemons } = useOwnedPokemonStore();
 
   return (
     <div style={{ height: '50%', padding: '10px' }}>
@@ -66,12 +65,11 @@ const OwnedPokemonList: FC<IOwnedPokemonListProps> = (props) => {
             css={ListStyle}
             height={height}
             width={width}
-            itemCount={ownedPokemon.length}
+            itemCount={Object.values(ownedPokemons).length}
             itemSize={200}
             layout="horizontal"
             itemData={{
-              ownedPokemon: ownedPokemon,
-              setActivePokeIdx: setActivePokeIdx,
+              selectPokemon: selectPokemon,
             }}
           >
             {Row}

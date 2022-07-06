@@ -1,17 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Ownedpage from '../Ownedpage';
-import OwnedPokemon from '@/utils/OwnedPokemon';
-import { saveNewPokemon } from '@/utils/session';
 
 describe('Ownedpage', () => {
-  beforeEach(() => {
-    window.sessionStorage.clear();
-    let myPokemon = new OwnedPokemon([
-      { id: 1, name: 'bulbasaur', attributes: [{ name: 'BOBI' }] },
-    ]);
-    saveNewPokemon(window, myPokemon);
-  });
   it('renders correctly', () => {
     render(<Ownedpage />);
 

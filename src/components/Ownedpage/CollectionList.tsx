@@ -2,26 +2,17 @@
 /** @jsx jsx */
 
 import { css, jsx } from '@emotion/react';
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { FC, useEffect, useState } from 'react';
 import Card from '@/components/Card';
 import Image from 'next/image';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  OwnedPokemonContext,
-  OwnedPokemonContextType,
-} from '@/context/OwnedPokemonContext';
 
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
+import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
+import { releasePokemon } from '@/domains/OwnedPokemon/ownedPokemonUtil';
 
 const ListItemStyle = css`
   display: flex;
@@ -33,15 +24,18 @@ const ListItemStyle = css`
   border-color: #f2f2f5;
 `;
 
-interface IRowProps {
+type RowProps = {
   data: any;
   index: number;
   style: any;
-}
+};
 
-const Row: FC<IRowProps> = (props) => {
+const Row: FC<RowProps> = (props) => {
   const { data, index, style } = props;
-  const { id, attributes, setSelectedPokeName, triggerRelease } = data;
+  const { setSelectedPokeName, triggerRelease } = data;
+
+  const { ownedPokemons } = useOwnedPokemonStore();
+  const pokemonName = Object.keys(ownedPokemons)[index];
 
   const execute = (pokeName: string) => {
     setSelectedPokeName(pokeName);
@@ -79,19 +73,16 @@ const Row: FC<IRowProps> = (props) => {
       <div css={PokeImageStyle}>
         <Image
           data-testid="pokemon-image"
-          src={`/sprites/${id}.png`}
+          src={`/sprites/${ownedPokemons[pokemonName].id}.png`}
           alt="pokemon"
           layout="fill"
         />
       </div>
       <div css={MainStyle}>
-        <div>{attributes[index].name}</div>
+        <div>{pokemonName}</div>
       </div>
       <div css={ReleaseStyle}>
-        <span
-          css={ReleaseIconStyle}
-          onClick={() => execute(attributes[index].name)}
-        >
+        <span css={ReleaseIconStyle} onClick={() => execute(pokemonName)}>
           <FontAwesomeIcon icon={faTrash} />
         </span>
         Release
@@ -100,13 +91,13 @@ const Row: FC<IRowProps> = (props) => {
   );
 };
 
-interface ICollectionListStyle {
-  activePokeIdx: number;
-  setActivePokeIdx: Dispatch<SetStateAction<number | null>>;
-}
+type CollectionListProps = {
+  activePokeName: string;
+  updateActivePokeName: (activePokeName: string) => void;
+};
 
-const CollectionList: FC<ICollectionListStyle> = (props) => {
-  const { activePokeIdx, setActivePokeIdx } = props;
+const CollectionList: FC<CollectionListProps> = (props) => {
+  const { activePokeName, updateActivePokeName } = props;
 
   const [selectedPokeName, setSelectedPokeName] = useState<string | null>(null);
   const [releasing, setReleasing] = useState<boolean>(false);
@@ -115,18 +106,12 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
     setReleasing(!releasing);
   };
 
-  const { ownedPokemon, releasePokemon } = useContext(
-    OwnedPokemonContext,
-  ) as OwnedPokemonContextType;
-
-  const pokemonId = ownedPokemon[activePokeIdx].id;
-  const pokemonName = ownedPokemon[activePokeIdx].name;
-  const pokemonAttributes = ownedPokemon[activePokeIdx].attributes;
+  const { ownedPokemons } = useOwnedPokemonStore();
 
   useEffect(() => {
     if (selectedPokeName) {
-      releasePokemon(selectedPokeName);
-      setActivePokeIdx(null);
+      releasePokemon(ownedPokemons, activePokeName, selectedPokeName);
+      updateActivePokeName('');
     }
   }, [releasing]);
 
@@ -138,8 +123,8 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
       `}
     >
       <Card
-        headText={pokemonName}
-        bodyText={pokemonAttributes.length + ' pokemons'}
+        headText={activePokeName}
+        bodyText={ownedPokemons.pokemonName.total + ' pokemons'}
       />
 
       <AutoSizer>
@@ -147,11 +132,9 @@ const CollectionList: FC<ICollectionListStyle> = (props) => {
           <List
             height={height}
             width={width}
-            itemCount={pokemonAttributes.length}
+            itemCount={ownedPokemons.pokemonName.total}
             itemSize={100}
             itemData={{
-              id: pokemonId,
-              attributes: pokemonAttributes,
               setSelectedPokeName: setSelectedPokeName,
               triggerRelease: triggerRelease,
             }}

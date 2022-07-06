@@ -20,7 +20,7 @@ interface IPokemonCardVerProps {
 }
 
 const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
-  const { name } = props;
+  const { id, name } = props;
 
   const { loading, error, data } = useQueryPokeType(name);
 
@@ -61,7 +61,11 @@ const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
           justify-content: center;
         `}
       >
-        <PokeImage type={data.pokemon.types[0].type.name} image="" size={75} />
+        <PokeImage
+          type={data.pokemon.types[0].type.name}
+          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+          size={75}
+        />
       </div>
     </div>
   );

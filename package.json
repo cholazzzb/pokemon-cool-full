@@ -11,7 +11,8 @@
     "format": "prettier --write ./*ts",
     "type-check": "tsc --pretty --noEmit",
     "test": "jest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e-debug": "PWDEBUG=1 playwright test"
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
@@ -29,7 +30,8 @@
     "react-dom": "17.0.2",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "zustand": "^3.6.5"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
