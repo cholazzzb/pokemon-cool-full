@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
 
 export const Ten = Template.bind({});
 Ten.args = {
-  totalOwnedPokemon: 10,
+  children: 10,
 };

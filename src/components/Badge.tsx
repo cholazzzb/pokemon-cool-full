@@ -17,13 +17,8 @@ const BadgeStyle = css`
   color: white;
 `;
 
-interface IBadgeProps {
-  totalOwnedPokemon: number;
-}
-
-const Badge: FC<IBadgeProps> = (props) => {
-  const { totalOwnedPokemon } = props;
-  return <div css={BadgeStyle}>{totalOwnedPokemon}</div>;
+const Badge: FC = ({ children }) => {
+  return <div css={BadgeStyle}>{children}</div>;
 };
 
 export default Badge;

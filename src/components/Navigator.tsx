@@ -103,12 +103,12 @@ const Navigator: FC<INavigatorProps> = (props) => {
             />
           </span>
           Owned
-          <Badge
-            totalOwnedPokemon={Object.values(ownedPokemons).reduce(
+          <Badge>
+            {Object.values(ownedPokemons).reduce(
               (acc, pokemons) => acc + pokemons.total,
               0,
             )}
-          />
+          </Badge>
         </div>
       </div>
     </div>

@@ -22,36 +22,40 @@ import {
   faSnowflake,
   faTint,
   faUmbrellaBeach,
+  IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 
-interface ITypeIcon {
-  type: string;
-}
+const icons: Map<PokemonType, IconDefinition> = new Map([
+  ['normal', faCircle],
+  ['fire', faFire],
+  ['fighting', faFistRaised],
+  ['water', faTint],
+  ['flying', faFeather],
+  ['grass', faLeaf],
+  ['poison', faSkullCrossbones],
+  ['electric', faBolt],
+  ['ground', faUmbrellaBeach],
+  ['psychic', faHeart],
+  ['rock', faBomb],
+  ['ice', faSnowflake],
+  ['bug', faBug],
+  ['dragon', faDragon],
+  ['ghost', faGhost],
+  ['dark', faMoon],
+  ['steel', faDiceD6],
+  ['fairy', faKiss],
+]);
 
-const TypeIcon: FC<ITypeIcon> = (props) => {
+type TypeIconProps = {
+  type: PokemonType;
+};
+
+const TypeIcon: FC<TypeIconProps> = (props) => {
   const { type } = props;
 
-  const icons: { [key: string]: any } = {
-    normal: faCircle,
-    fire: faFire,
-    fighting: faFistRaised,
-    water: faTint,
-    flying: faFeather,
-    grass: faLeaf,
-    poison: faSkullCrossbones,
-    electric: faBolt,
-    ground: faUmbrellaBeach,
-    psychic: faHeart,
-    rock: faBomb,
-    ice: faSnowflake,
-    bug: faBug,
-    dragon: faDragon,
-    ghost: faGhost,
-    dark: faMoon,
-    steel: faDiceD6,
-    fairy: faKiss,
-  };
+  const icon = icons.get(type);
 
   return (
     <span
@@ -64,7 +68,7 @@ const TypeIcon: FC<ITypeIcon> = (props) => {
         align-items: center;
       `}
     >
-      <FontAwesomeIcon icon={icons[type]} />
+      {icon && <FontAwesomeIcon icon={icon} />}
     </span>
   );
 };
