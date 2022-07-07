@@ -7,8 +7,8 @@ import PokemonCardVer from '../PokemonCardVer';
 import Card from '@/components/Card';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
-import { PokemonName } from '@/domains/OwnedPokemon/ownedPokemonEntity';
-import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
+import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 
 type RowProps = {
   data: {

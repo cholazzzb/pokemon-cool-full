@@ -14,8 +14,8 @@ import {
 } from 'react';
 
 import pokemonCaughtSound from 'public/pokemonCaughtSound.mp3';
-import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
-import { addPokemon } from '@/domains/OwnedPokemon/ownedPokemonUtil';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
 
 const FormStyle = css`
   display: flex;

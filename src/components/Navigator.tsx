@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/react';
 
 import Image from 'next/image';
 import { FC } from 'react';
-import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { LISTPAGE, OWNEDPAGE } from '@/constants/route';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';

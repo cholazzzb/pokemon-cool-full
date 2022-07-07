@@ -11,8 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
-import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
-import { releasePokemon } from '@/domains/OwnedPokemon/ownedPokemonUtil';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+import { releasePokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
 
 const ListItemStyle = css`
   display: flex;

@@ -6,7 +6,7 @@ import { Fragment, useState } from 'react';
 import OwnedPokemonList from './OwnedPokemonList';
 import CollectionList from './CollectionList';
 
-import { useOwnedPokemonStore } from '@/domains/OwnedPokemon/ownedPokemonStore';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 
 const EmptyStyle = css`
   display: flex;
