@@ -4,13 +4,13 @@ import { css, jsx } from '@emotion/react';
 import { FC } from 'react';
 import TypeIcon from './TypeIcon';
 import { getSecondaryColorFromType } from '@/utils/colorTheme';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 
-interface IChipProps {
-  type: string;
-}
+type TypeChipProps = {
+  type: PokemonType;
+};
 
-const TypeChip: FC<IChipProps> = (props) => {
-  const { type } = props;
+const TypeChip: FC<TypeChipProps> = ({ type }) => {
   const bgColor = getSecondaryColorFromType(type);
 
   const ChipStyle = css`
