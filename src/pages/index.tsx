@@ -11,7 +11,7 @@ import Layout from '@/components/Layout';
 import Body from '@/components/Body';
 import Listpage from '@/components/Listpage/Listpage';
 import Detailpage from '@/components/Detailpage/Detailpage';
-import Ownedpage from '@/components/Ownedpage/Ownedpage';
+import Ownedpage from '@/app/container/pages/Ownedpage/Ownedpage';
 import Navigator from '@/components/Navigator';
 import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from '@/constants/route';
 import useQueryPokemons from '@/hooks/API/useQueryPokemons';

@@ -3,7 +3,7 @@
 
 import { css, jsx } from '@emotion/react';
 import { FC } from 'react';
-import PokemonCardVer from '../PokemonCardVer';
+import PokemonCardVer from '@/components/PokemonCardVer';
 import Card from '@/components/Card';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
