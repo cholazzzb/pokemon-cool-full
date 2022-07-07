@@ -10,7 +10,7 @@ import { FC, useState, Dispatch, SetStateAction, Fragment } from 'react';
 import Layout from '@/components/Layout';
 import Body from '@/components/Body';
 import Listpage from '@/app/container/pages/Listpage/Listpage';
-import Detailpage from '@/components/Detailpage/Detailpage';
+import Detailpage from '@/app/container/pages/Detailpage/Detailpage';
 import Ownedpage from '@/app/container/pages/Ownedpage/Ownedpage';
 import Navigator from '@/components/Navigator';
 import { DETAILPAGE, LISTPAGE, OWNEDPAGE } from '@/constants/route';
