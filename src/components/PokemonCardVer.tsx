@@ -63,7 +63,7 @@ const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
       >
         <PokeImage
           type={data.pokemon.types[0].type.name}
-          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           size={75}
         />
       </div>
