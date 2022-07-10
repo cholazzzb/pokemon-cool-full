@@ -67,6 +67,7 @@ const TypeIcon: FC<TypeIconProps> = (props) => {
         justify-content: center;
         align-items: center;
       `}
+      data-testid="typeicon"
     >
       {icon && <FontAwesomeIcon icon={icon} />}
     </span>
