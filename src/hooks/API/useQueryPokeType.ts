@@ -1,5 +1,22 @@
 import { useQuery, gql } from '@apollo/client';
 
+type PokemonTypeData = {
+  pokemon: {
+    types: Array<{
+      slot: string;
+      type: {
+        id: number;
+        url: string;
+        name: string;
+      };
+    }>;
+  };
+};
+
+type PokemonTypeVar = {
+  name: string;
+};
+
 const GET_POKEMON_TYPE = gql`
   query Pokemon($name: String!) {
     pokemon(name: $name) {
@@ -15,13 +32,11 @@ const GET_POKEMON_TYPE = gql`
   }
 `;
 
-const useQueryPokeType = (name: string) => {
-  const { loading, error, data } = useQuery(GET_POKEMON_TYPE, {
+const useQueryPokeType = (name: string) =>
+  useQuery<PokemonTypeData, PokemonTypeVar>(GET_POKEMON_TYPE, {
     variables: {
       name,
     },
   });
-  return { loading, error, data };
-};
 
 export default useQueryPokeType;

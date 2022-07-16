@@ -32,6 +32,7 @@ const PokemonCardHor: FC<IPokemonCardHorProps> = (props) => {
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error</div>;
+  if (!data) return <div>No Data</div>;
 
   const type = data.pokemon.types[0].type.name;
   const bgColor = getPrimaryColorFromType(type);

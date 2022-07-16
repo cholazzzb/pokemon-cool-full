@@ -31,6 +31,7 @@ const Detailpage: FC<DetailPageProps> = (props) => {
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error</div>;
+  if (!data) return <div>No Data</div>;
 
   const { types, sprites, ...others } = data.pokemon;
 
