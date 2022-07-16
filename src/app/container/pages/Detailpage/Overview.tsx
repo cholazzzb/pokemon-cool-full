@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import getConfig from 'next/config';
 
 import { Dispatch, FC, SetStateAction } from 'react';
 import PokeImage from '@/components/PokeImage';
@@ -54,8 +55,10 @@ interface OverviewProps {
 }
 
 const Overview: FC<OverviewProps> = (props) => {
-  const { id, setCurrentId, currentName, types, sprites } = props;
+  const { id, setCurrentId, currentName, types } = props;
   const seconColor = getSecondaryColorFromType(types[0].type.name);
+
+  const { publicRuntimeConfig } = getConfig();
 
   return (
     <div css={OverviewStyle}>
@@ -78,7 +81,10 @@ const Overview: FC<OverviewProps> = (props) => {
         <div css={ImageStyle}>
           <PokeImage
             type={types[0].type.name}
-            image={sprites.front_default}
+            image={publicRuntimeConfig.pokemonImageUrl.replace(
+              '{id}',
+              id.toString(),
+            )}
             size={200}
           />
         </div>

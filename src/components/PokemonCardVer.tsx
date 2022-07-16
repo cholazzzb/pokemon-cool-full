@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import getConfig from 'next/config';
+
 import { FC } from 'react';
 import TypeChip from './TypeChip';
 import PokeImage from './PokeImage';
@@ -23,6 +25,7 @@ const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
   const { id, name } = props;
 
   const { loading, error, data } = useQueryPokeType(name);
+  const { publicRuntimeConfig } = getConfig();
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error</div>;
@@ -64,7 +67,10 @@ const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
       >
         <PokeImage
           type={data.pokemon.types[0].type.name}
-          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
+          image={publicRuntimeConfig.pokemonImageUrl.replace(
+            '{id}',
+            id.toString(),
+          )}
           size={75}
         />
       </div>

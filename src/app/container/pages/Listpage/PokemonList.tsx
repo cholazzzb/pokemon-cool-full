@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import getConfig from 'next/config';
+
 import { Dispatch, FC, SetStateAction } from 'react';
 import PokemonCardHor from '@/components/PokemonCardHor';
 import { DETAILPAGE } from '@/constants/route';
@@ -41,6 +43,7 @@ interface IRowProps {
 const Row: FC<IRowProps> = (props) => {
   const { data, index, style } = props;
   const { pokemons, setCurrentPage, setCurrentId } = data;
+  const { publicRuntimeConfig } = getConfig();
 
   const handleClick = () => {
     setCurrentPage(DETAILPAGE);
@@ -52,7 +55,10 @@ const Row: FC<IRowProps> = (props) => {
       {pokemons[index] && (
         <PokemonCardHor
           name={pokemons[index].name}
-          image={pokemons[index].artwork}
+          image={publicRuntimeConfig.pokemonImageUrl.replace(
+            '{id}',
+            (index + 1).toString(),
+          )}
         />
       )}
     </div>
