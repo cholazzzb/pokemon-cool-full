@@ -20,7 +20,7 @@ const store = createStore<OwnedPokemonState>(
     }),
     {
       name: 'ownedPokemons',
-      getStorage: () => sessionStorage,
+      getStorage: () => localStorage,
     },
   ),
 );

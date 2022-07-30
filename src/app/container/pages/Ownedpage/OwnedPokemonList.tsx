@@ -2,22 +2,51 @@
 /** @jsx jsx */
 
 import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
-import PokemonCardVer from '@/components/PokemonCardVer';
-import Card from '@/components/Card';
+import styled from '@emotion/styled';
+import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
+
+import PokemonCardVer from '@/components/PokemonCardVer';
+import Card from '@/components/Card';
 import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  width: 100%;
+`;
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const paddingX = 5;
+
+const AutoSizerContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: 0px ${paddingX}px;
+`;
+
+const EmptyContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 4px 0px;
+`;
 
 type RowProps = {
   data: {
     selectPokemon: (selectedPokemon: string) => void;
   };
   index: number;
-  style: any;
+  style: CSSProperties;
 };
-const Row: FC<RowProps> = (props) => {
+const Row: FunctionComponent<RowProps> = (props) => {
   const { data, index, style } = props;
   const { selectPokemon } = data;
   const { ownedPokemons } = useOwnedPokemonStore();
@@ -52,31 +81,43 @@ const ListStyle = css`
 type OwnedPokemonListProps = {
   selectPokemon: (selectedPokemon: PokemonName) => void;
 };
-const OwnedPokemonList: FC<OwnedPokemonListProps> = ({ selectPokemon }) => {
+const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
+  selectPokemon,
+}) => {
   const { ownedPokemons } = useOwnedPokemonStore();
 
-  return (
-    <div style={{ height: '50%', padding: '10px' }}>
-      <Card headText="Your Owned Pokemon" bodyText="Click to see details" />
+  const numOfOwnedPokemons = Object.values(ownedPokemons).reduce(
+    (acc, pokemons) => acc + pokemons.total,
+    0,
+  );
 
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            css={ListStyle}
-            height={height}
-            width={width}
-            itemCount={Object.values(ownedPokemons).length}
-            itemSize={200}
-            layout="horizontal"
-            itemData={{
-              selectPokemon: selectPokemon,
-            }}
-          >
-            {Row}
-          </List>
-        )}
-      </AutoSizer>
-    </div>
+  return numOfOwnedPokemons > 0 ? (
+    <Container>
+      <Center>
+        <Card headText="Your Owned Pokemon" bodyText="Click to see details" />
+      </Center>
+      <AutoSizerContainer>
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              css={ListStyle}
+              height={height}
+              width={width - 2 * paddingX}
+              itemCount={Object.values(ownedPokemons).length}
+              itemSize={200}
+              layout="horizontal"
+              itemData={{
+                selectPokemon: selectPokemon,
+              }}
+            >
+              {Row}
+            </List>
+          )}
+        </AutoSizer>
+      </AutoSizerContainer>
+    </Container>
+  ) : (
+    <EmptyContainer>You don&apos;t have any pokemon yet</EmptyContainer>
   );
 };
 
