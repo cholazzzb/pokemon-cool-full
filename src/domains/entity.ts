@@ -18,7 +18,7 @@ export type BaseList = {
 };
 
 export const BaseNameSchema = t.Record({
-  id: t.Number,
+  id: t.Union(t.Number, t.Null),
   url: t.String,
   name: t.String,
 });
