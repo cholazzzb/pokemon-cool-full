@@ -13,7 +13,7 @@ module.exports = {
   },
   images: {
     domains: ['raw.githubusercontent.com'],
-    formats: ['image/png', 'image/svg'],
+    formats: ['image/avif', 'image/webp'],
   },
   webpack(config, options) {
     const { isServer } = options;
