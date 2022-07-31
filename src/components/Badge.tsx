@@ -3,21 +3,25 @@
 import { css, jsx } from '@emotion/react';
 import { FC } from 'react';
 
-const BadgeStyle = css`
-  position: absolute;
-  right: 0%;
-  bottom: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 9999px;
-  background-color: green;
-  color: white;
-`;
+type BadgeProps = {
+  top?: number;
+  right?: number;
+};
 
-const Badge: FC = ({ children }) => {
+const Badge: FC<BadgeProps> = ({ top = 0, right = 0, children }) => {
+  const BadgeStyle = css`
+    position: absolute;
+    top: ${top}px;
+    right: ${right}px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 9999px;
+    background-color: green;
+    color: white;
+  `;
   return <div css={BadgeStyle}>{children}</div>;
 };
 

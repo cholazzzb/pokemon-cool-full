@@ -8,10 +8,11 @@ import { Fragment, useState } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-import { OWNEDPAGE } from '@/constants/route';
 import Layout from '@/components/Layout';
-import Navigator from '@/components/Navigator';
+import Navigator, { NavItems } from '@/components/Navigator';
 import Dialog from '@/components/Dialog';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 
 const OwnedPokemonList = dynamic(
   () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),
@@ -49,6 +50,34 @@ const Body = styled.div`
 const Owned: NextPage = () => {
   const [activePokeName, setActivePokeName] = useState('');
   const [showDetailed, setShowDetailed] = useState(false);
+  const { ownedPokemons } = useOwnedPokemonStore();
+
+  const navItems: NavItems = [
+    {
+      href: '/',
+      icon: faBook,
+      text: 'Pokemon List',
+      color: 'white',
+      bgColor: 'gray',
+    },
+    {
+      href: '/owned',
+      iconImage: '/pokeball.png',
+      text: 'Owned',
+      color: 'black',
+      bgColor: 'white',
+      badge: {
+        topPos: -10,
+        rightPos: -10,
+        text: String(
+          Object.values(ownedPokemons).reduce(
+            (acc, pokemons) => acc + pokemons.total,
+            0,
+          ),
+        ),
+      },
+    },
+  ];
 
   return (
     <Fragment>
@@ -59,15 +88,6 @@ const Owned: NextPage = () => {
       </Head>
 
       <Layout>
-        <Navigator
-          currentPage={OWNEDPAGE}
-          goToListPage={() => {
-            window.location.href = '/';
-          }}
-          goToOwnedPage={() => {
-            window.location.href = '/owned';
-          }}
-        />
         <Body>
           <OwnedPokemonList
             selectPokemon={(selectedPokemon) => {
@@ -89,6 +109,7 @@ const Owned: NextPage = () => {
             </Dialog>
           )}
         </Body>
+        <Navigator navItems={navItems} />
       </Layout>
     </Fragment>
   );

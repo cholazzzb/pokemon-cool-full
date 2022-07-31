@@ -1,12 +1,11 @@
 import { useQuery, gql } from '@apollo/client';
 
-type PokemonsData = {
+export type PokemonsData = {
   pokemons: {
     count: number;
     results: Array<{
       id: string;
       name: string;
-      artwork: string;
     }>;
   };
 };

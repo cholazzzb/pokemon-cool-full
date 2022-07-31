@@ -2,13 +2,13 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import getConfig from 'next/config';
-
-import { Dispatch, FC, SetStateAction } from 'react';
-import PokemonCardHor from '@/components/PokemonCardHor';
-import { DETAILPAGE } from '@/constants/route';
-
+import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
+import Link from 'next/link';
+
+import PokemonCardHor from '@/components/PokemonCardHor';
+import { PokemonsData } from '@/hooks/API/useQueryPokemons';
 
 const ListStyle = css`
   scrollbar-width: thin;
@@ -34,66 +34,59 @@ const ListItemStyle = css`
   justify-content: center;
 `;
 
-interface IRowProps {
-  data: any;
+type RowProps = {
+  data: {
+    pokemons: PokemonsData['pokemons']['results'];
+  };
   index: number;
-  style: any;
-}
+  style: CSSProperties;
+};
 
-const Row: FC<IRowProps> = (props) => {
+const Row: FunctionComponent<RowProps> = (props) => {
   const { data, index, style } = props;
-  const { pokemons, setCurrentPage, setCurrentId } = data;
+  const { pokemons } = data;
   const { publicRuntimeConfig } = getConfig();
 
-  const handleClick = () => {
-    setCurrentPage(DETAILPAGE);
-    setCurrentId(pokemons[index].id);
-  };
-
   return (
-    <div onClick={handleClick} css={ListItemStyle} style={style}>
-      {pokemons[index] && (
-        <PokemonCardHor
-          name={pokemons[index].name}
-          image={publicRuntimeConfig.pokemonImageUrl.replace(
-            '{id}',
-            (index + 1).toString(),
+    <div css={ListItemStyle} style={style}>
+      <Link href={`/detailed/${index + 1}`}>
+        <a style={{ textDecoration: 'none' }}>
+          {pokemons[index] && (
+            <PokemonCardHor
+              name={pokemons[index].name}
+              image={publicRuntimeConfig.pokemonImageUrl.replace(
+                '{id}',
+                (index + 1).toString(),
+              )}
+            />
           )}
-        />
-      )}
+        </a>
+      </Link>
     </div>
   );
 };
 
-interface IPokemonList {
-  pokemons: any[];
-  setCurrentPage: Dispatch<SetStateAction<string>>;
-  setCurrentId: Dispatch<SetStateAction<number>>;
-}
-
-const PokemonList: FC<IPokemonList> = (props) => {
-  const { pokemons, setCurrentPage, setCurrentId } = props;
-
-  return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <List
-          css={ListStyle}
-          height={height}
-          width={width}
-          itemCount={pokemons.length}
-          itemSize={200}
-          itemData={{
-            pokemons: pokemons,
-            setCurrentPage: setCurrentPage,
-            setCurrentId: setCurrentId,
-          }}
-        >
-          {Row}
-        </List>
-      )}
-    </AutoSizer>
-  );
+type PokemonList = {
+  pokemons: PokemonsData['pokemons']['results'];
 };
+
+const PokemonList: FunctionComponent<PokemonList> = ({ pokemons }) => (
+  <AutoSizer>
+    {({ height, width }) => (
+      <List
+        css={ListStyle}
+        height={height}
+        width={width}
+        itemCount={pokemons.length}
+        itemSize={200}
+        itemData={{
+          pokemons: pokemons,
+        }}
+      >
+        {Row}
+      </List>
+    )}
+  </AutoSizer>
+);
 
 export default PokemonList;
