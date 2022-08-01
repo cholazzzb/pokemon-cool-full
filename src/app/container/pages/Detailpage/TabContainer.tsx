@@ -1,9 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { Dispatch, FC, SetStateAction } from 'react';
+import styled from '@emotion/styled';
+import { FunctionComponent } from 'react';
 
-const TabContainerStyle = css`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   border-top-left-radius: 20px;
@@ -11,12 +14,12 @@ const TabContainerStyle = css`
   background-color: #f7f7f7;
   color: black;
   padding-top: 20px;
-  padding-bottom: 300px;
 `;
 
-const TabHeaderStyle = css`
+const TabHeader = styled.div`
   display: flex;
   padding: 30px;
+  cursor: pointer;
 `;
 
 const TabStyle = css`
@@ -25,48 +28,48 @@ const TabStyle = css`
   width: 33%;
   font-size: 12px;
   padding: 10px;
-  overflow: auto;
 `;
 
-const TabBodyStyle = css`
+const TabBody = styled.div`
   height: 100%;
-  overflow: auto;
 `;
 
-const tabs: string[] = ['About', 'Base Stats', 'Moves'];
+const tabs: Array<string> = ['About', 'Base Stats', 'Moves'];
 
-interface TabContainerProps {
-  children: any;
+type TabContainerProps = {
   primColor: string;
   currentTab: number;
-  setCurrentTab: Dispatch<SetStateAction<number>>;
-}
+  setCurrentTab: (selectedTab: number) => void;
+};
 
-const TabContainer: FC<TabContainerProps> = (props) => {
+const TabContainer: FunctionComponent<TabContainerProps> = ({
+  children,
+  primColor,
+  currentTab,
+  setCurrentTab,
+}) => {
   const ActiveTabStyle = css`
     border-style: solid;
     border-color: #aeb5d2;
     border-width: 0px 0px 2px 0px;
     border-radius: 20px;
-    background-color: ${props.primColor};
+    background-color: ${primColor};
   `;
   return (
-    <div css={TabContainerStyle}>
-      <div css={TabHeaderStyle}>
+    <Container>
+      <TabHeader>
         {tabs.map((tab, idx) => (
           <div
-            css={
-              idx === props.currentTab ? [ActiveTabStyle, TabStyle] : TabStyle
-            }
+            css={idx === currentTab ? [ActiveTabStyle, TabStyle] : TabStyle}
             key={tab}
-            onClick={() => props.setCurrentTab(idx)}
+            onClick={() => setCurrentTab(idx)}
           >
             {tab}
           </div>
         ))}
-      </div>
-      <div css={TabBodyStyle}>{props.children}</div>
-    </div>
+      </TabHeader>
+      <TabBody>{children}</TabBody>
+    </Container>
   );
 };
 

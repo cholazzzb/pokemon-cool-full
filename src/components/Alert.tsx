@@ -1,12 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import { FC, Fragment, useState } from 'react';
-import Header from './Header';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { jsx } from '@emotion/react';
+import styled from '@emotion/styled';
+import { Fragment, FunctionComponent, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const OverlayStyle = css`
+import Header from './Header';
+
+const Overlay = styled.div`
   z-index: 50;
   position: fixed;
   top: 0px;
@@ -16,63 +18,57 @@ const OverlayStyle = css`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const CloseIconStyle = css`
+const CloseIcon = styled.span`
   display: flex;
   width: 25px;
   height: 25px;
   color: black;
 `;
 
-const AlertBodyStyle = css`
+const AlertBody = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
 `;
 
-interface IAlertProps {
-  headText: string;
-  children: any;
-}
+const Container = styled.div`
+  color: black;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0%;
+  height: 60%;
+  width: 100%;
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+`;
 
-const Alert: FC<IAlertProps> = (props) => {
-  const { headText } = props;
+type AlertProps = {
+  headText: string;
+};
+
+const Alert: FunctionComponent<AlertProps> = ({ headText, children }) => {
   const [show, setShow] = useState<boolean>(true);
 
   const onClose = () => {
     setShow(false);
   };
 
-  const AlertStyle = css`
-    color: black;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    bottom: 0%;
-    height: 60%;
-    width: 100%;
-    background-color: white;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-  `;
-
   if (!show) return <Fragment></Fragment>;
 
   return (
-    <div css={OverlayStyle}>
-      <div css={AlertStyle}>
+    <Overlay>
+      <Container>
         <Header caption={headText}>
-          <span
-            data-testid="alert-close-button"
-            css={CloseIconStyle}
-            onClick={onClose}
-          >
+          <CloseIcon data-testid="alert-close-button" onClick={onClose}>
             <FontAwesomeIcon icon={faTimes} />
-          </span>
+          </CloseIcon>
         </Header>
-        <div css={AlertBodyStyle}>{props.children}</div>
-      </div>
-    </div>
+        <AlertBody>{children}</AlertBody>
+      </Container>
+    </Overlay>
   );
 };
 

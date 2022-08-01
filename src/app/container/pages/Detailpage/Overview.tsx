@@ -2,21 +2,24 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import getConfig from 'next/config';
+import { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
 
-import { Dispatch, FC, SetStateAction } from 'react';
 import PokeImage from '@/components/PokeImage';
 import TypeChip from '@/components/TypeChip';
+import { BaseName } from '@/domains/entity';
+import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { getSecondaryColorFromType } from '@/utils/colorTheme';
 import NavigateOverview from './NavigateOverview';
 import CatchPokemon from './CatchPokemon';
-import { getSecondaryColorFromType } from '@/utils/colorTheme';
 
-const InformationStyle = css`
+const Information = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const NameStyle = css`
+const TextName = styled.p`
   font-size: 30px;
   font-weight: 700;
   line-height: 1px;
@@ -24,61 +27,71 @@ const NameStyle = css`
   padding: 0px 20px 10px 20px;
 `;
 
-const TypesStyle = css`
+const TypesContainer = styled.div`
   display: flex;
   padding: 0px 20px 10px 20px;
 `;
 
-const ImageStyle = css`
+const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 200px;
 `;
 
-const IdStyle = css`
+const TextId = styled.p`
   height: 100%;
   width: 100%;
   display: flex;
   align-items: flex-end;
 `;
 
-const OverviewStyle = css`
+const Container = styled.div`
   color: white;
 `;
 
-interface OverviewProps {
+type OverviewProps = {
   id: number;
-  setCurrentId: Dispatch<SetStateAction<number>>;
   currentName: string;
-  types: any;
-  sprites: any;
-}
+  types: Array<{ type: BaseName }>;
+};
 
-const Overview: FC<OverviewProps> = (props) => {
-  const { id, setCurrentId, currentName, types } = props;
+const Overview: FunctionComponent<OverviewProps> = ({
+  id,
+  currentName,
+  types,
+}) => {
   const seconColor = getSecondaryColorFromType(types[0].type.name);
 
   const { publicRuntimeConfig } = getConfig();
 
   return (
-    <div css={OverviewStyle}>
+    <Container>
       <div
         css={css`
           position: relative;
         `}
       >
-        <div css={InformationStyle}>
+        <Information>
           <div>
-            <p css={NameStyle}>{currentName}</p>
-            <div css={TypesStyle}>
-              {types.map((type: any) => (
-                <TypeChip key={type.type.name} type={type.type.name} />
-              ))}
-            </div>
+            <TextName>{currentName}</TextName>
+            <TypesContainer>
+              {types.map((type) => {
+                const pokemonType = asPokemonType(type.type.name);
+                if (pokemonType === null) {
+                  return <></>;
+                }
+                return (
+                  <TypeChip
+                    key={`information-pokemonn-type-${pokemonType}`}
+                    type={pokemonType}
+                  />
+                );
+              })}
+            </TypesContainer>
           </div>
-          <p css={IdStyle}>#{id}</p>
-        </div>
-        <div css={ImageStyle}>
+          <TextId>#{id}</TextId>
+        </Information>
+        <ImageContainer>
           <PokeImage
             type={types[0].type.name}
             image={publicRuntimeConfig.pokemonImageUrl.replace(
@@ -87,11 +100,11 @@ const Overview: FC<OverviewProps> = (props) => {
             )}
             size={200}
           />
-        </div>
-        <NavigateOverview currentId={id} setCurrentId={setCurrentId} />
+        </ImageContainer>
+        <NavigateOverview currentId={id} />
       </div>
       <CatchPokemon id={id} iconColor={seconColor} pokemonName={currentName} />
-    </div>
+    </Container>
   );
 };
 

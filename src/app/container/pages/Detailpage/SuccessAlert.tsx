@@ -13,7 +13,6 @@ import {
   useState,
 } from 'react';
 
-import pokemonCaughtSound from 'public/pokemonCaughtSound.mp3';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
 
@@ -37,7 +36,7 @@ interface ISuccessAlertProps {
 
 const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
   useEffect(() => {
-    const audio = new Audio(pokemonCaughtSound);
+    const audio = new Audio('/pokemonCaughtSound.mp3');
     audio.play();
   }, []);
 

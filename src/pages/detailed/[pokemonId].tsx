@@ -14,18 +14,18 @@ import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
 import Tab from '@/app/container/pages/Detailpage/Tab';
 import Layout from '@/components/Layout';
 import Header from '@/components/Header';
-import Body from '@/components/Body';
 import { convertURLQueryToString } from '@/utils/url';
 import { getPrimaryColorFromType } from '@/utils/colorTheme';
 import {
   getPokemonDetailByName,
   getPokemonName,
+  PokemonDetailByNameType,
 } from '@/domains/pokemons/pokemonsService';
 
 type DetailPageProps = {
   pokemonId: string;
   pokemonName: string;
-  pokemonDetail: any;
+  pokemonDetail: PokemonDetailByNameType;
 };
 
 const DetailPage: FunctionComponent<DetailPageProps> = ({
@@ -34,17 +34,15 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
   pokemonDetail,
 }) => {
   const [currentTab, setCurrentTab] = useState(0);
-  const { types, sprites, ...others } = pokemonDetail.pokemon;
+  const { types, ...others } = pokemonDetail.pokemon;
 
   const primColor = getPrimaryColorFromType(types[0].type.name);
   const DetailpageStyle = css`
-    position: relative;
     background-color: ${primColor};
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    overflow: auto;
   `;
   return (
     <Fragment>
@@ -55,25 +53,21 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
       </Head>
 
       <Layout>
-        <Body>
-          <div css={DetailpageStyle}>
-            <Header onBack={() => (window.location.href = '/')} />
-            <Overview
-              id={Number(pokemonId)}
-              setCurrentId={() => {}}
-              currentName={pokemonName}
-              types={types}
-              sprites={sprites}
-            />
-            <TabContainer
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-              primColor={primColor}
-            >
-              <Tab currentTab={currentTab} {...others} />
-            </TabContainer>
-          </div>
-        </Body>
+        <div css={DetailpageStyle}>
+          <Header onBack={() => (window.location.href = '/')} />
+          <Overview
+            id={Number(pokemonId)}
+            currentName={pokemonName}
+            types={types}
+          />
+          <TabContainer
+            currentTab={currentTab}
+            setCurrentTab={(selectedTab: number) => setCurrentTab(selectedTab)}
+            primColor={primColor}
+          >
+            <Tab currentTab={currentTab} {...others} />
+          </TabContainer>
+        </div>
       </Layout>
     </Fragment>
   );
@@ -83,7 +77,7 @@ export default DetailPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [];
-  for (let pokemonId = 1; pokemonId <= 2; pokemonId++) {
+  for (let pokemonId = 1; pokemonId <= 898; pokemonId++) {
     paths.push({
       params: { pokemonId: `${pokemonId}` },
     });

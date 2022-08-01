@@ -1,46 +1,50 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import styled from '@emotion/styled';
 
-import { FC } from 'react';
+import { FunctionComponent } from 'react';
 
-interface TabBaseStatsProps {
-  stats: any;
-}
+type TabBaseStatsProps = {
+  stats: Array<{
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }>;
+};
 
-const StatusStyle = css`
+const Status = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
   text-transform: capitalize;
 `;
-const StatusKeyStyle = css`
+const StatusKey = styled.div`
   color: gray;
   display: flex;
   width: 25%;
 `;
-const StatusValueStyle = css`
+const StatusValue = styled.div`
   display: flex;
   padding: 0px 10px;
 `;
 
-const BarContainerStyle = css`
+const BarContainer = styled.div`
   background-color: gray;
   width: 100%;
   height: 5px;
   border-radius: 4px;
 `;
 
-const TabBaseStats: FC<TabBaseStatsProps> = (props) => {
-  const { stats } = props;
-
+const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({ stats }) => {
   return (
     <div>
       {stats.map((status: { stat: { name: string }; base_stat: number }) => (
-        <div key={status.stat.name} css={StatusStyle}>
-          <div css={StatusKeyStyle}>{status.stat.name}</div>
-          <div css={StatusValueStyle}>{status.base_stat}</div>
-          <div css={BarContainerStyle}>
+        <Status key={status.stat.name}>
+          <StatusKey>{status.stat.name}</StatusKey>
+          <StatusValue>{status.base_stat}</StatusValue>
+          <BarContainer>
             <div
               css={css`
                 background-color: #89cea5;
@@ -48,8 +52,8 @@ const TabBaseStats: FC<TabBaseStatsProps> = (props) => {
                 height: 5px;
               `}
             ></div>
-          </div>
-        </div>
+          </BarContainer>
+        </Status>
       ))}
     </div>
   );

@@ -1,7 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
+import { FunctionComponent } from 'react';
+
+import { BaseName } from '@/domains/entity';
 
 const TabBodyStyle = css`
   overflow: auto;
@@ -23,15 +25,17 @@ const DataStyle = css`
   text-transform: capitalize;
 `;
 
-interface TabAboutProps {
-  height: string;
-  weight: string;
-  abilities: any;
-}
+type TabAboutProps = {
+  height: number;
+  weight: number;
+  abilities: Array<{ ability: Omit<BaseName, 'id'> }>;
+};
 
-const TabAbout: FC<TabAboutProps> = (props) => {
-  const { height, weight, abilities } = props;
-
+const TabAbout: FunctionComponent<TabAboutProps> = ({
+  height,
+  weight,
+  abilities,
+}) => {
   return (
     <div css={TabBodyStyle}>
       <div css={TextContainerStyle}>
@@ -47,7 +51,7 @@ const TabAbout: FC<TabAboutProps> = (props) => {
         {abilities.map(
           (ability: { [key: string]: { [key: string]: string } }) => (
             <p key={ability.ability.name} css={DataStyle}>
-              {ability.ability.name},{' '}
+              {`${ability.ability.name}, `}
             </p>
           ),
         )}

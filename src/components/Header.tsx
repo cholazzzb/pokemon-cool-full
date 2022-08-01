@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
+import { FunctionComponent } from 'react';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -46,14 +46,16 @@ const ChildrenStyle = css`
   align-items:center;
 `;
 
-interface IHeaderProps {
+type HeaderProps = {
   caption?: string;
-  children?: any;
   onBack?: () => void;
-}
+};
 
-const Header: FC<IHeaderProps> = (props) => {
-  const { caption, children, onBack } = props;
+const Header: FunctionComponent<HeaderProps> = ({
+  caption,
+  children,
+  onBack,
+}) => {
   return (
     <div css={HeaderStyle}>
       <div css={BackStyle}>

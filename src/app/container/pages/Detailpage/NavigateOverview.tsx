@@ -1,56 +1,58 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { jsx } from '@emotion/react';
+import styled from '@emotion/styled';
+import { FunctionComponent } from 'react';
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FC, Dispatch, SetStateAction } from 'react';
+import Link from 'next/link';
 
-const NavigateOverviewStyle = css`
+const Container = styled.div`
   position: absolute;
   top: 60%;
   display: flex;
+  flex-direction: row-reverse;
   width: 100%;
   justify-content: space-between;
 `;
 
-const IconStyle = css`
+const Icon = styled.span`
   display: flex;
   width: 25px;
   height: 25px;
   padding: 20px;
+  color: white;
 `;
 
-interface INavigateOverviewProps {
+type NavigateOverviewProps = {
   currentId: number;
-  setCurrentId: Dispatch<SetStateAction<number>>;
-}
+};
 
-const NavigateOverview: FC<INavigateOverviewProps> = (props) => {
-  const { currentId, setCurrentId } = props;
-  const prevPokemon = () => {
-    setCurrentId(currentId - 1);
-  };
-
-  const nextPokemon = () => {
-    setCurrentId(currentId + 1);
-  };
-
+const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
+  currentId,
+}) => {
   return (
-    <div css={NavigateOverviewStyle}>
-      {currentId > 1 ? (
-        <span onClick={prevPokemon} css={IconStyle}>
-          <FontAwesomeIcon icon={faChevronCircleLeft} />
-        </span>
-      ) : (
-        <span></span>
+    <Container>
+      <Link href={`/detailed/${currentId + 1}`}>
+        <a style={{ textDecoration: 'none' }}>
+          <Icon>
+            <FontAwesomeIcon icon={faChevronCircleRight} />
+          </Icon>
+        </a>
+      </Link>
+      {currentId > 1 && (
+        <Link href={`/detailed/${currentId - 1}`}>
+          <a style={{ textDecoration: 'none' }}>
+            <Icon>
+              <FontAwesomeIcon icon={faChevronCircleLeft} />
+            </Icon>
+          </a>
+        </Link>
       )}
-      <span onClick={nextPokemon} css={IconStyle}>
-        <FontAwesomeIcon icon={faChevronCircleRight} />
-      </span>
-    </div>
+    </Container>
   );
 };
 
