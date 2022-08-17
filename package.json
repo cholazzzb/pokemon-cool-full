@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0 --ext ts --ext tsx --ext js",
-    "format": "prettier --write ./src/**/*",
+    "format": "prettier --write '**/*.{ts,tsx}'",
     "type-check": "tsc --pretty --noEmit",
     "test": "jest",
     "test:e2e": "playwright test",
