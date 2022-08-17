@@ -1,3 +1,5 @@
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 module.exports = {
   serverRuntimeConfig: {
@@ -16,6 +18,7 @@ module.exports = {
     formats: ['image/avif', 'image/webp'],
   },
   webpack(config, options) {
+    config.resolve.alias['@'] = path.join(__dirname, 'src')
     const { isServer } = options;
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
