@@ -48,13 +48,15 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
       </div>
       <div css={TextContainerStyle}>
         <p css={LabelStyle}> Abilities</p>
-        {abilities.map(
-          (ability: { [key: string]: { [key: string]: string } }) => (
-            <p key={ability.ability.name} css={DataStyle}>
-              {`${ability.ability.name}, `}
-            </p>
-          ),
-        )}
+        <p css={DataStyle}>
+          {abilities
+            .map(
+              (ability: { [key: string]: { [key: string]: string } }) =>
+                `${ability.ability.name}`,
+            )
+            .join(', ')}
+          .
+        </p>
       </div>
     </div>
   );
