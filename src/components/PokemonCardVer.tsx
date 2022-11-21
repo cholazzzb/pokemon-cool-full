@@ -1,19 +1,33 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import styled from '@emotion/styled';
 import getConfig from 'next/config';
 
-import { FC } from 'react';
-import TypeChip from './TypeChip';
-import PokeImage from './PokeImage';
+import { usePokeType } from '@/domains/pokemon/pokemonHook';
 import { getPrimaryColorFromType } from '@/utils/colorTheme';
-import useQueryPokeType from '@/hooks/API/useQueryPokeType';
+import { FC } from 'react';
+import PokeImage from './PokeImage';
+import TypeChip from './TypeChip';
 
 const NameStyle = css`
   font-size: 15px;
   font-weight: 700;
   line-height: 1px;
   text-transform: capitalize;
+`;
+
+const PokemonCardVerLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  height: 220px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  margin: 10px 0px;
+  border-radius: 24px;
+  background-size: 200% 100%;
+  animation: shine 1.5s linear infinite;
 `;
 
 interface IPokemonCardVerProps {
@@ -24,10 +38,10 @@ interface IPokemonCardVerProps {
 const PokemonCardVer: FC<IPokemonCardVerProps> = (props) => {
   const { id, name } = props;
 
-  const { loading, error, data } = useQueryPokeType(name);
+  const { loading, error, data } = usePokeType(name);
   const { publicRuntimeConfig } = getConfig();
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return <PokemonCardVerLoading />;
   if (error) return <div>Error</div>;
   if (!data) return <div>No Data</div>;
 

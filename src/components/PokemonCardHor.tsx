@@ -1,12 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
+import styled from '@emotion/styled';
 import { FC } from 'react';
 
+import { usePokeType } from '@/domains/pokemon/pokemonHook';
+import { getPrimaryColorFromType } from '@/utils/colorTheme';
 import PokeImage from './PokeImage';
 import TypeChip from './TypeChip';
-import { getPrimaryColorFromType } from '@/utils/colorTheme';
-import useQueryPokeType from '@/hooks/API/useQueryPokeType';
 
 const NameStyle = css`
   font-size: 15px;
@@ -20,6 +21,17 @@ const AttributeStyle = css`
   flex-direction: column;
 `;
 
+const PokemonCardHorLoading = styled.div`
+  min-width: 200px;
+  max-width: 300px;
+  height: 150px;
+  border-radius: 24px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: shine 1.5s linear infinite;
+`;
+
 interface IPokemonCardHorProps {
   name: string;
   image: string;
@@ -28,9 +40,9 @@ interface IPokemonCardHorProps {
 const PokemonCardHor: FC<IPokemonCardHorProps> = (props) => {
   const { name, image } = props;
 
-  const { loading, error, data } = useQueryPokeType(name);
+  const { loading, error, data } = usePokeType(name);
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return <PokemonCardHorLoading />;
   if (error) return <div>Error</div>;
   if (!data) return <div>No Data</div>;
 
