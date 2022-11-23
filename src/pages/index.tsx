@@ -3,26 +3,25 @@
 
 import { jsx } from '@emotion/react';
 
-import type { NextPage } from 'next';
+import PokemonList from '@/app/container/pages/Listpage/PokemonList';
+import Body from '@/components/Body';
+import Header from '@/components/Header';
+import Layout from '@/components/Layout';
+import Navigator, { NavItems } from '@/components/Navigator';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+import {
+  AllPokemonsNameType,
+  getAllPokemonsName,
+} from '@/domains/pokemons/pokemonsService';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { Fragment } from 'react';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
 
-import Layout from '@/components/Layout';
-import Body from '@/components/Body';
-import Navigator, { NavItems } from '@/components/Navigator';
-import useQueryPokemons from '@/hooks/API/useQueryPokemons';
-import Header from '@/components/Header';
-import PokemonList from '@/app/container/pages/Listpage/PokemonList';
-import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+type HomeProps = AllPokemonsNameType;
 
-const Home: NextPage = () => {
-  const { loading, error, data } = useQueryPokemons();
+const Home: NextPage<HomeProps> = (props) => {
   const { ownedPokemons } = useOwnedPokemonStore();
-
-  if (loading) return <div>Loading</div>;
-  if (error) return <div>Error</div>;
-  if (!data) return <div>No Data</div>;
 
   const navItems: NavItems = [
     {
@@ -62,7 +61,7 @@ const Home: NextPage = () => {
       <Layout>
         <Header caption="Pokemon List" />
         <Body>
-          <PokemonList pokemons={data.pokemons.results} />
+          <PokemonList pokemons={props.pokemons.results} />
         </Body>
         <Navigator navItems={navItems} />
       </Layout>
@@ -71,3 +70,20 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps = async (): Promise<
+  GetStaticPropsResult<HomeProps>
+> => {
+  try {
+    const allPokemons = await getAllPokemonsName();
+    if (allPokemons === null) {
+      throw new Error('getPokemonName Error');
+    }
+    return { props: allPokemons };
+  } catch (error) {
+    console.error({ error });
+    return {
+      notFound: true,
+    };
+  }
+};

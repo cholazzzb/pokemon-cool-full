@@ -2,13 +2,13 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import getConfig from 'next/config';
+import Link from 'next/link';
 import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
-import Link from 'next/link';
 
 import PokemonCardHor from '@/components/PokemonCardHor';
-import { PokemonsData } from '@/hooks/API/useQueryPokemons';
+import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
 
 const ListStyle = css`
   scrollbar-width: thin;
@@ -36,7 +36,7 @@ const ListItemStyle = css`
 
 type RowProps = {
   data: {
-    pokemons: PokemonsData['pokemons']['results'];
+    pokemons: AllPokemonsNameType['pokemons']['results'];
   };
   index: number;
   style: CSSProperties;
@@ -67,7 +67,7 @@ const Row: FunctionComponent<RowProps> = (props) => {
 };
 
 type PokemonList = {
-  pokemons: PokemonsData['pokemons']['results'];
+  pokemons: AllPokemonsNameType['pokemons']['results'];
 };
 
 const PokemonList: FunctionComponent<PokemonList> = ({ pokemons }) => (
