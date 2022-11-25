@@ -1,11 +1,19 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
   DefaultOptions,
+  InMemoryCache,
 } from '@apollo/client';
+import type { AppProps } from 'next/app';
+import '../styles/globals.css';
+
+const cache = new InMemoryCache({
+  typePolicies: {
+    BaseName: {
+      keyFields: ['name'],
+    },
+  },
+});
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -20,8 +28,8 @@ const defaultOptions: DefaultOptions = {
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokeapi.vercel.app/api/graphql',
-  cache: new InMemoryCache(),
-  defaultOptions: defaultOptions,
+  cache,
+  defaultOptions,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

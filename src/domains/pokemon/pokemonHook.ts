@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { Pokemon } from './pokemonEntity';
 
 type PokemonTypeData = {
@@ -29,6 +29,7 @@ export const usePokeType = (name: string) =>
     variables: {
       name,
     },
+    fetchPolicy: 'cache-first',
   });
 
 type PokemonDetailData = {
