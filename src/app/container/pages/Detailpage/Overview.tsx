@@ -1,53 +1,14 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 import getConfig from 'next/config';
 import { FunctionComponent } from 'react';
-import styled from '@emotion/styled';
 
 import PokeImage from '@/components/PokeImage';
 import TypeChip from '@/components/TypeChip';
 import { BaseName } from '@/domains/entity';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { getSecondaryColorFromType } from '@/utils/colorTheme';
-import NavigateOverview from './NavigateOverview';
+import { mainTheme } from 'src/presentational/theme';
 import CatchPokemon from './CatchPokemon';
-
-const Information = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const TextName = styled.p`
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1px;
-  text-transform: capitalize;
-  padding: 0px 20px 10px 20px;
-`;
-
-const TypesContainer = styled.div`
-  display: flex;
-  padding: 0px 20px 10px 20px;
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 200px;
-`;
-
-const TextId = styled.p`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-`;
-
-const Container = styled.div`
-  color: white;
-`;
+import NavigateOverview from './NavigateOverview';
 
 type OverviewProps = {
   id: number;
@@ -66,30 +27,24 @@ const Overview: FunctionComponent<OverviewProps> = ({
 
   return (
     <Container>
-      <div
-        css={css`
-          position: relative;
-        `}
-      >
+      <RelativePosition>
         <Information>
-          <div>
-            <TextName>{currentName}</TextName>
-            <TypesContainer>
-              {types.map((type) => {
-                const pokemonType = asPokemonType(type.type.name);
-                if (pokemonType === null) {
-                  return <></>;
-                }
-                return (
-                  <TypeChip
-                    key={`information-pokemonn-type-${pokemonType}`}
-                    type={pokemonType}
-                  />
-                );
-              })}
-            </TypesContainer>
-          </div>
+          <TextName>{currentName}</TextName>
           <TextId>#{id}</TextId>
+          <TypesContainer>
+            {types.map((type) => {
+              const pokemonType = asPokemonType(type.type.name);
+              if (pokemonType === null) {
+                return <></>;
+              }
+              return (
+                <TypeChip
+                  key={`information-pokemonn-type-${pokemonType}`}
+                  type={pokemonType}
+                />
+              );
+            })}
+          </TypesContainer>
         </Information>
         <ImageContainer>
           <PokeImage
@@ -102,10 +57,53 @@ const Overview: FunctionComponent<OverviewProps> = ({
           />
         </ImageContainer>
         <NavigateOverview currentId={id} />
-      </div>
+      </RelativePosition>
       <CatchPokemon id={id} iconColor={seconColor} pokemonName={currentName} />
     </Container>
   );
 };
 
 export default Overview;
+
+const Information = mainTheme.styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '20px',
+});
+
+const TextName = mainTheme.styled('p', {
+  width: '100%',
+  fontSize: '30px',
+  fontWeight: '700',
+  lineHeight: '30px',
+  textTransform: 'capitalize',
+  padding: '0px 20px 10px 20px',
+});
+
+const TypesContainer = mainTheme.styled('div', {
+  display: 'flex',
+  width: '100%',
+  padding: '0px 20px 10px 20px',
+});
+
+const ImageContainer = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  height: '200px',
+});
+
+const TextId = mainTheme.styled('p', {
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+});
+
+const Container = mainTheme.styled('div', {
+  color: 'white',
+});
+
+const RelativePosition = mainTheme.styled('div', {
+  position: 'relative',
+});
