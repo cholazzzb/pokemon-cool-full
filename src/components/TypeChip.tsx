@@ -1,39 +1,37 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
-import TypeIcon from './TypeIcon';
-import { getSecondaryColorFromType } from '@/utils/colorTheme';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { getSecondaryColorFromType } from '@/utils/colorTheme';
+import { FunctionComponent } from 'react';
+import { mainTheme } from 'src/presentational/theme';
+import TypeIcon from './TypeIcon';
 
 type TypeChipProps = {
   type: PokemonType;
 };
 
-const TypeChip: FC<TypeChipProps> = ({ type }) => {
+const TypeChip: FunctionComponent<TypeChipProps> = ({ type }) => {
   const bgColor = getSecondaryColorFromType(type);
 
-  const ChipStyle = css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    padding: 8px;
-    border-radius: 12px;
-    background-color: ${bgColor};
-    color: white;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 12px;
-    text-transform: capitalize;
-  `;
+  const Chip = mainTheme.styled('div', {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '60px',
+    padding: '8px',
+    borderRadius: '12px',
+    backgroundColor: `${bgColor}`,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: '10px',
+    fontWeight: 700,
+    lineHeight: '12px',
+    textTransform: 'capitalize',
+  });
 
   return (
-    <div data-testid="typechip-label" css={ChipStyle}>
+    <Chip data-testid="typechip-label">
       <TypeIcon type={type} />
-      {type}
-    </div>
+      <p>{type}</p>
+    </Chip>
   );
 };
 
