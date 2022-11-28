@@ -1,9 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import styled from '@emotion/styled';
-
+import { BaseName } from '@/domains/entity';
 import { FunctionComponent } from 'react';
+import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
+
+import { mainTheme } from 'src/presentational/theme';
 
 type TabBaseStatsProps = {
   stats: Array<{
@@ -12,51 +11,76 @@ type TabBaseStatsProps = {
       name: string;
     };
   }>;
+  types: Array<{
+    type: BaseName;
+  }>;
 };
 
-const Status = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  text-transform: capitalize;
-`;
-const StatusKey = styled.div`
-  color: gray;
-  display: flex;
-  width: 25%;
-`;
-const StatusValue = styled.div`
-  display: flex;
-  padding: 0px 10px;
-`;
+const BaseStatsLabels = [
+  'HP',
+  'ATK',
+  'DEF',
+  'SP.ATK',
+  'Sp.DEF',
+  'SPD',
+  'TOTAL',
+];
 
-const BarContainer = styled.div`
-  background-color: gray;
-  width: 100%;
-  height: 5px;
-  border-radius: 4px;
-`;
-
-const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({ stats }) => {
+const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
+  stats,
+  types,
+}) => {
   return (
     <div>
-      {stats.map((status: { stat: { name: string }; base_stat: number }) => (
-        <Status key={status.stat.name}>
-          <StatusKey>{status.stat.name}</StatusKey>
-          <StatusValue>{status.base_stat}</StatusValue>
-          <BarContainer>
-            <div
-              css={css`
-                background-color: #89cea5;
-                width: ${status.base_stat / 1.5}%;
-                height: 5px;
-              `}
-            ></div>
-          </BarContainer>
-        </Status>
-      ))}
+      {stats.map(
+        (status: { stat: { name: string }; base_stat: number }, idx) => {
+          const primaryColorType = getPrimaryColorFromType(types[0].type.name);
+
+          return (
+            <Status key={status.stat.name}>
+              <StatusKey>{BaseStatsLabels[idx]}</StatusKey>
+              <StatusValue>{status.base_stat}</StatusValue>
+              <BarContainer
+                color={primaryColorType}
+                fill={Math.round((status.base_stat * 100) / 255)}
+              />
+            </Status>
+          );
+        },
+      )}
     </div>
   );
 };
 
 export default TabBaseStats;
+
+type BarContainerProps = {
+  color: string;
+  fill: number;
+};
+const BarContainer = (props: BarContainerProps) => {
+  const Bar = mainTheme.styled('div', {
+    background: `linear-gradient(90deg, ${props.color} ${props.fill}%, #ffffff 0%)`,
+    backgroundColor: 'yellow',
+    width: '100%',
+    height: '10px',
+    borderRadius: '4px',
+  });
+
+  return <Bar />;
+};
+
+const Status = mainTheme.styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  padding: '10px',
+});
+const StatusKey = mainTheme.styled('div', {
+  color: 'gray',
+  display: 'flex',
+  width: '70px',
+});
+const StatusValue = mainTheme.styled('div', {
+  display: 'flex',
+  padding: '0px 10px',
+});

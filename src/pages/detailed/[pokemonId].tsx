@@ -97,7 +97,7 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
             setCurrentTab={(selectedTab: number) => setCurrentTab(selectedTab)}
             primColor={primColor}
           >
-            <Tab currentTab={currentTab} {...others} />
+            <Tab currentTab={currentTab} {...others} types={types} />
           </TabContainer>
         </div>
         <Navigator navItems={navItems} />

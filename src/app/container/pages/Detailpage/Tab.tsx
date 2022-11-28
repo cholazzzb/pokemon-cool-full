@@ -20,6 +20,9 @@ type TabProps = {
   moves: Array<{
     move: Omit<BaseName, 'id'>;
   }>;
+  types: Array<{
+    type: BaseName;
+  }>;
 };
 
 const Tab: FunctionComponent<TabProps> = ({
@@ -29,12 +32,13 @@ const Tab: FunctionComponent<TabProps> = ({
   abilities,
   stats,
   moves,
+  types,
 }) => {
   switch (currentTab) {
     case 0:
       return <TabAbout height={height} weight={weight} abilities={abilities} />;
     case 1:
-      return <TabBaseStats stats={stats} />;
+      return <TabBaseStats stats={stats} types={types} />;
     case 2:
       return <TabMoves moves={moves} />;
     default:
