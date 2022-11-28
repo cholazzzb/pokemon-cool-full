@@ -16,12 +16,25 @@ import {
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
+import SearchBarWrapper from 'src/presentational/pokemon-list/SearchBarWrapper';
 
 type HomeProps = AllPokemonsNameType;
 
 const Home: NextPage<HomeProps> = (props) => {
   const { ownedPokemons } = useOwnedPokemonStore();
+
+  const [searchValue, setSearchValue] = useState('');
+  const onChangeSearch = (searchValue: string) => {
+    setSearchValue(searchValue);
+  };
+
+  const filteredPokemons =
+    searchValue.length === 0
+      ? props.pokemons.results
+      : props.pokemons.results.filter((pokemon) =>
+          pokemon.name.match(new RegExp(searchValue)),
+        );
 
   const navItems: NavItems = [
     {
@@ -61,8 +74,9 @@ const Home: NextPage<HomeProps> = (props) => {
       <Layout>
         <Header caption="Pokemon List" />
         <Body>
-          <PokemonList pokemons={props.pokemons.results} />
+          <PokemonList pokemons={filteredPokemons} />
         </Body>
+        <SearchBarWrapper onChangeSearch={onChangeSearch} />
         <Navigator navItems={navItems} />
       </Layout>
     </Fragment>

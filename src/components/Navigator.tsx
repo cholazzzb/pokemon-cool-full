@@ -2,13 +2,13 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
 import styled from '@emotion/styled';
+import { faBook, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { Fragment, FunctionComponent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
-import Badge from './Badge';
 import Link from 'next/link';
+import Badge from './Badge';
 
 const NavigatorContainer = styled.div`
   display: flex;
@@ -25,6 +25,7 @@ const NavigatorInner = styled.div`
   width: 100%;
   margin: 10px;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const IconInner = styled.span`

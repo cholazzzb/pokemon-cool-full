@@ -3,21 +3,12 @@
 
 import { jsx } from '@emotion/react';
 import styled from '@emotion/styled';
-import { FunctionComponent } from 'react';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FunctionComponent } from 'react';
 
+import { Overlay } from 'src/presentational/components/Overlay';
 import Header from './Header';
-
-const Overlay = styled.div`
-  z-index: 50;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
 
 const CloseIcon = styled.span`
   display: flex;

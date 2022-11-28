@@ -1,9 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import { FunctionComponent } from 'react';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FunctionComponent } from 'react';
 
 const HeaderStyle = css`
   color: white;
@@ -36,6 +36,7 @@ const CaptionStyle = css`
   padding: 10px;
   max-height: 30px;
   width: 70%;
+  text-transform: capitalize;
 `;
 
 const ChildrenStyle = css`

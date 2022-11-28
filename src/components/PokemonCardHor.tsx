@@ -17,12 +17,13 @@ const PokemonCardHorLoading = mainTheme.styled('div', {
 });
 
 interface IPokemonCardHorProps {
+  id: number;
   name: string;
   image: string;
 }
 
 const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
-  const { name, image } = props;
+  const { id, name, image } = props;
 
   const { loading, error, data } = usePokeType(name);
 
@@ -52,7 +53,7 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
   return (
     <Card>
       <Attribute>
-        <NameText>{name}</NameText>
+        <NameText>{`#${id} ${name}`}</NameText>
         {data &&
           data.pokemon.types.map((type: any, idx: number) => (
             <TypeChip key={idx} type={type.type.name} />

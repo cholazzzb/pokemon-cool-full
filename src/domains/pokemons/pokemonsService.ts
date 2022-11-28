@@ -39,6 +39,7 @@ const AllPokemonsNameSchema = t.Record({
     count: t.Number,
     results: t.Array(
       t.Record({
+        id: t.Number,
         name: t.String,
       }),
     ),
@@ -49,10 +50,11 @@ export type AllPokemonsNameType = t.Static<typeof AllPokemonsNameSchema>;
 
 export const getAllPokemonsName = async () =>
   await fetcher<AllPokemonsNameType, Query['pokemons']['var']>(
-    `  query pokemons($limit: Int, $offset: Int) {
+    `query pokemons($limit: Int, $offset: Int) {
       pokemons(limit: $limit, offset: $offset) {
         count
         results {
+          id
           name
         }
       }
