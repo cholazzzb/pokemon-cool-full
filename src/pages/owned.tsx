@@ -4,15 +4,15 @@
 import { jsx } from '@emotion/react';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
-import { Fragment, useState } from 'react';
-import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import { Fragment, useState } from 'react';
 
+import Dialog from '@/components/Dialog';
 import Layout from '@/components/Layout';
 import Navigator, { NavItems } from '@/components/Navigator';
-import Dialog from '@/components/Dialog';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 const OwnedPokemonList = dynamic(
   () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),
@@ -102,9 +102,7 @@ const Owned: NextPage = () => {
             >
               <CollectionList
                 activePokeName={activePokeName}
-                updateActivePokeName={(activePokeName) =>
-                  setActivePokeName(activePokeName)
-                }
+                onClickRelease={() => setShowDetailed(false)}
               />
             </Dialog>
           )}

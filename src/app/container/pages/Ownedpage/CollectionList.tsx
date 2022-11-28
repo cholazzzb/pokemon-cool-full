@@ -1,57 +1,18 @@
-import { FC, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import Image from 'next/image';
-import getConfig from 'next/config';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List } from 'react-window';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import getConfig from 'next/config';
+import Image from 'next/image';
+import { FC } from 'react';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeList as List } from 'react-window';
 
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
-import { releasePokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
-
-const PokeImage = styled.div`
-  position: relative;
-  width: 100px;
-  height: 100px;
-`;
-
-const Main = styled.div`
-  width: 60%;
-`;
-const Release = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-`;
-
-const ReleaseIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
-  margin-bottom: 10px;
-`;
-
-const ListItem = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100px;
-  align-items: center;
-  border-style: solid;
-  border-width: 2px 0px;
-  border-color: #f2f2f5;
-`;
+import { mainTheme } from 'src/presentational/theme';
 
 type RowData = {
   pokemonName: string;
   names: Array<string>;
-  setSelectedPokeName: (pokeName: string) => void;
-  triggerRelease: () => void;
+  onClickRelease: () => void;
 };
 
 type RowProps = {
@@ -62,14 +23,19 @@ type RowProps = {
 
 const Row: FC<RowProps> = (props) => {
   const { data, index, style } = props;
-  const { pokemonName, names, setSelectedPokeName, triggerRelease } = data;
+  const { pokemonName, names, onClickRelease } = data;
   const { publicRuntimeConfig } = getConfig();
 
-  const { ownedPokemons } = useOwnedPokemonStore();
+  const { ownedPokemons, releasePokemonByName } = useOwnedPokemonStore(
+    (state) => ({
+      ownedPokemons: state.ownedPokemons,
+      releasePokemonByName: state.releasePokemonByName,
+    }),
+  );
 
-  const execute = (pokeName: string) => {
-    setSelectedPokeName(pokeName);
-    triggerRelease();
+  const releasePokemon = () => {
+    onClickRelease();
+    releasePokemonByName(pokemonName, names[index]);
   };
 
   return (
@@ -90,8 +56,8 @@ const Row: FC<RowProps> = (props) => {
         <Main>
           <div>{names[index]}</div>
         </Main>
-        <Release>
-          <ReleaseIcon onClick={() => execute(pokemonName)}>
+        <Release onClick={releasePokemon}>
+          <ReleaseIcon>
             <FontAwesomeIcon icon={faTrash} />
           </ReleaseIcon>
           Release
@@ -101,35 +67,20 @@ const Row: FC<RowProps> = (props) => {
   );
 };
 
-const AutoSizerContainer = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-`;
+const AutoSizerContainer = mainTheme.styled('div', {
+  display: 'flex',
+  height: '100%',
+  width: '100%',
+});
 
 type CollectionListProps = {
   activePokeName: string;
-  updateActivePokeName: (activePokeName: string) => void;
+  onClickRelease: () => void;
 };
 
 const CollectionList: FC<CollectionListProps> = (props) => {
-  const { activePokeName, updateActivePokeName } = props;
-
-  const [selectedPokeName, setSelectedPokeName] = useState<string | null>(null);
-  const [releasing, setReleasing] = useState<boolean>(false);
-
-  const triggerRelease = () => {
-    setReleasing(!releasing);
-  };
-
+  const { activePokeName, onClickRelease } = props;
   const { ownedPokemons } = useOwnedPokemonStore();
-
-  useEffect(() => {
-    if (selectedPokeName) {
-      releasePokemon(ownedPokemons, activePokeName, selectedPokeName);
-      updateActivePokeName('');
-    }
-  }, [releasing]);
 
   return (
     <AutoSizerContainer>
@@ -143,8 +94,7 @@ const CollectionList: FC<CollectionListProps> = (props) => {
             itemData={{
               pokemonName: activePokeName,
               names: Object.keys(ownedPokemons[activePokeName].name),
-              setSelectedPokeName: setSelectedPokeName,
-              triggerRelease: triggerRelease,
+              onClickRelease,
             }}
           >
             {Row}
@@ -156,3 +106,48 @@ const CollectionList: FC<CollectionListProps> = (props) => {
 };
 
 export default CollectionList;
+
+const PokeImage = mainTheme.styled('div', {
+  position: 'relative',
+  width: '100px',
+  height: '100px',
+});
+
+const Main = mainTheme.styled('div', {
+  flexGrow: 1,
+});
+
+const Release = mainTheme.styled('div', {
+  display: 'flex',
+  cursor: 'pointer',
+  backgroundColor: '$red100',
+  color: 'white',
+  alignItems: 'center',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: '100px',
+  width: '100px',
+  '&:hover': {
+    backgroundColor: '$red90',
+  },
+});
+
+const ReleaseIcon = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '10px',
+  width: '20px',
+  height: '20px',
+  marginBottom: '10px',
+});
+
+const ListItem = mainTheme.styled('div', {
+  display: 'flex',
+  width: '100%',
+  height: '100px',
+  alignItems: 'center',
+  borderStyle: 'solid',
+  borderWidth: '2px 0px',
+  borderColor: '#f2f2f5',
+});

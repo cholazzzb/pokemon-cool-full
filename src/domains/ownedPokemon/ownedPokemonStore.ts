@@ -1,11 +1,13 @@
 import createHooks from 'zustand';
-import createStore from 'zustand/vanilla';
 import { persist } from 'zustand/middleware';
-import { OwnedPokemons } from './ownedPokemonEntity';
+import createStore from 'zustand/vanilla';
+import { Name, OwnedPokemons, PokemonName } from './ownedPokemonEntity';
+import { releasePokemon } from './ownedPokemonUtil';
 
 export type OwnedPokemonState = {
   ownedPokemons: OwnedPokemons;
   setOwnedPokemons: (ownedPokemons: OwnedPokemons) => void;
+  releasePokemonByName: (pokemon: string, pokemonName: string) => void;
 };
 
 const store = createStore<OwnedPokemonState>(
@@ -17,6 +19,23 @@ const store = createStore<OwnedPokemonState>(
           ...state,
           ownedPokemons,
         })),
+      releasePokemonByName: (pokemonName: PokemonName, name: Name) => {
+        set((state) => {
+          const ownedPokemons = { ...state.ownedPokemons };
+
+          const releaseRespond = releasePokemon(
+            ownedPokemons,
+            pokemonName,
+            name,
+          );
+
+          if (releaseRespond.error) {
+            return { ownedPokemons };
+          }
+
+          return { ownedPokemons: releaseRespond.result };
+        });
+      },
     }),
     {
       name: 'ownedPokemons',

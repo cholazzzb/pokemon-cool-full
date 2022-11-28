@@ -1,6 +1,6 @@
 export type PokemonId = number;
-export type PokemonName = string;
-export type Name = string;
+export type PokemonName = string; // Ex: Bulbasaur
+export type Name = string; // Ex: Dino
 
 export type OwnedPokemon = {
   id: PokemonId;

@@ -66,5 +66,10 @@ export const releasePokemon = (
 
   ownedPokemons[pokemonName].total -= 1;
   delete ownedPokemons[pokemonName].name[name];
+
+  if (ownedPokemons[pokemonName].total === 0) {
+    delete ownedPokemons[pokemonName];
+  }
+
   return { error: null, result: ownedPokemons };
 };

@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.15",
+    "@stitches/react": "^1.2.8",
     "file-loader": "^6.2.0",
     "graphql": "^15.6.0",
     "next": "12",

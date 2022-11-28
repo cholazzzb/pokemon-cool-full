@@ -7,8 +7,8 @@ import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
-import PokemonCardVer from '@/components/PokemonCardVer';
 import Card from '@/components/Card';
+import PokemonCardVer from '@/components/PokemonCardVer';
 import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 
@@ -35,7 +35,9 @@ const AutoSizerContainer = styled.div`
 const EmptyContainer = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   justify-content: center;
+  align-items: center;
   padding: 4px 0px;
 `;
 
