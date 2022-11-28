@@ -1,5 +1,5 @@
-import TypeChip from '@/components/TypeChip';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import TypeChip from 'src/presentational/components/TypeChip';
 
 export default {
   title: 'Components/TypeChip',

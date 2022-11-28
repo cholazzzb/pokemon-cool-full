@@ -8,11 +8,11 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Fragment, useState } from 'react';
 
-import Dialog from '@/components/Dialog';
-import Layout from '@/components/Layout';
-import Navigator, { NavItems } from '@/components/Navigator';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
+import Dialog from 'src/presentational/components/Dialog';
+import { Layout } from 'src/presentational/components/Layout';
+import Navigator, { NavItems } from 'src/presentational/components/Navigator';
 
 const OwnedPokemonList = dynamic(
   () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),

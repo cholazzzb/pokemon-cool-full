@@ -1,5 +1,5 @@
-import Card from '@/components/Card';
 import { render, screen } from '@testing-library/react';
+import Card from '../Card';
 
 it('render correctly', () => {
   render(<Card headText="head" bodyText="body" />);

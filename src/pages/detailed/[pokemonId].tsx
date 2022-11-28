@@ -10,17 +10,17 @@ import Head from 'next/head';
 import { Fragment, FunctionComponent, useState } from 'react';
 
 import Overview from '@/app/container/pages/Detailpage/Overview';
-import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
 import Tab from '@/app/container/pages/Detailpage/Tab';
-import Layout from '@/components/Layout';
-import Header from '@/components/Header';
-import { convertURLQueryToString } from '@/utils/url';
-import { getPrimaryColorFromType } from '@/utils/colorTheme';
+import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
 import {
   getPokemonDetailByName,
   getPokemonName,
   PokemonDetailByNameType,
 } from '@/domains/pokemons/pokemonsService';
+import { convertURLQueryToString } from '@/utils/url';
+import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
+import Header from 'src/presentational/components/Header';
+import { Layout } from 'src/presentational/components/Layout';
 
 type DetailPageProps = {
   pokemonId: string;

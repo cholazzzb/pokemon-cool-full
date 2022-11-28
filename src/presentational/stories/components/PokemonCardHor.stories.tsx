@@ -1,5 +1,5 @@
-import PokemonCardHor from '@/components/PokemonCardHor';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import PokemonCardHor from 'src/presentational/components/PokemonCardHor';
 
 export default {
   title: 'Components/PokemonCardHor',

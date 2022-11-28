@@ -1,5 +1,5 @@
-import Badge from '@/components/Badge';
 import { render, screen } from '@testing-library/react';
+import Badge from '../Badge';
 
 describe('render correctly', () => {
   it('can see badge text', () => {

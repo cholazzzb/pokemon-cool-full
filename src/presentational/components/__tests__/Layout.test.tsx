@@ -1,5 +1,5 @@
-import Layout from '@/components/Layout';
 import { render, screen } from '@testing-library/react';
+import { Layout } from '../Layout';
 
 it('render correctly', () => {
   render(<Layout>children</Layout>);

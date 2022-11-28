@@ -7,9 +7,9 @@ import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
-import PokemonCardHor from '@/components/PokemonCardHor';
 import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
 import { Center } from 'src/presentational/components/Layout';
+import PokemonCardHor from 'src/presentational/components/PokemonCardHor';
 import { mainTheme } from 'src/presentational/theme';
 
 const ListStyle = css`

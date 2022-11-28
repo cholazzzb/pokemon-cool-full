@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import Alert from '@/components/Alert';
 import {
   ChangeEvent,
   Dispatch,
@@ -15,6 +14,7 @@ import {
 
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
+import Alert from 'src/presentational/components/Alert';
 
 const FormStyle = css`
   display: flex;

@@ -1,21 +1,20 @@
-import Dialog from '@/components/Dialog';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import Alert from 'src/presentational/components/Alert';
 
 export default {
-  title: 'Components/Dialog',
-  component: Dialog,
+  title: 'Components/Alert',
+  component: Alert,
   argTypes: {},
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof Dialog>;
+} as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Dialog> = (args) => <Dialog {...args} />;
+const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
 
 export const Example1 = Template.bind({});
 Example1.args = {
-  headerText: 'Header Text',
-  onClose: () => {},
+  headText: 'HeadText',
   children: <>This is children</>,
 };

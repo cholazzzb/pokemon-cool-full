@@ -1,11 +1,11 @@
 import getConfig from 'next/config';
 import { FunctionComponent } from 'react';
 
-import PokeImage from '@/components/PokeImage';
-import TypeChip from '@/components/TypeChip';
 import { BaseName } from '@/domains/entity';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import { getSecondaryColorFromType } from '@/utils/colorTheme';
+import { getSecondaryColorFromType } from 'src/presentational/colorTheme';
+import PokeImage from 'src/presentational/components/PokeImage';
+import TypeChip from 'src/presentational/components/TypeChip';
 import { mainTheme } from 'src/presentational/theme';
 import CatchPokemon from './CatchPokemon';
 import NavigateOverview from './NavigateOverview';

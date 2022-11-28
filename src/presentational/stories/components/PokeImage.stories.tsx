@@ -1,5 +1,5 @@
-import PokeImage from '@/components/PokeImage';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import PokeImage from 'src/presentational/components/PokeImage';
 
 export default {
   title: 'Components/PokeImage',

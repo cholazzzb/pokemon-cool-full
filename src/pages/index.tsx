@@ -4,10 +4,6 @@
 import { jsx } from '@emotion/react';
 
 import PokemonList from '@/app/container/pages/Listpage/PokemonList';
-import Body from '@/components/Body';
-import Header from '@/components/Header';
-import Layout from '@/components/Layout';
-import Navigator, { NavItems } from '@/components/Navigator';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import {
   AllPokemonsNameType,
@@ -17,6 +13,10 @@ import { faBook } from '@fortawesome/free-solid-svg-icons';
 import type { GetStaticPropsResult, NextPage } from 'next';
 import Head from 'next/head';
 import { Fragment, useState } from 'react';
+import Body from 'src/presentational/components/Body';
+import Header from 'src/presentational/components/Header';
+import { Layout } from 'src/presentational/components/Layout';
+import Navigator, { NavItems } from 'src/presentational/components/Navigator';
 import SearchBarWrapper from 'src/presentational/pokemon-list/SearchBarWrapper';
 
 type HomeProps = AllPokemonsNameType;

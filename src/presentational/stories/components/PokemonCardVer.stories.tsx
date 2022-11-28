@@ -1,5 +1,5 @@
-import PokemonCardVer from '@/components/PokemonCardVer';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import PokemonCardVer from 'src/presentational/components/PokemonCardVer';
 
 export default {
   title: 'Components/PokemonCardVer',

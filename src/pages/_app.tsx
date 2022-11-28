@@ -5,7 +5,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
+import '../presentational/styles/globals.css';
 
 const cache = new InMemoryCache({
   typePolicies: {

@@ -1,5 +1,5 @@
-import TypeIcon from '@/components/TypeIcon';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import TypeIcon from 'src/presentational/components/TypeIcon';
 
 export default {
   title: 'Components/TypeIcon',

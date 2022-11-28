@@ -7,10 +7,10 @@ import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
-import Card from '@/components/Card';
-import PokemonCardVer from '@/components/PokemonCardVer';
 import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
+import Card from 'src/presentational/components/Card';
+import PokemonCardVer from 'src/presentational/components/PokemonCardVer';
 
 const Container = styled.div`
   display: flex;
