@@ -12,15 +12,17 @@ import { Fragment, FunctionComponent, useState } from 'react';
 import Overview from '@/app/container/pages/Detailpage/Overview';
 import Tab from '@/app/container/pages/Detailpage/Tab';
 import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
+import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import {
   getPokemonDetailByName,
   getPokemonName,
   PokemonDetailByNameType,
 } from '@/domains/pokemons/pokemonsService';
 import { convertURLQueryToString } from '@/utils/url';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
-import Header from 'src/presentational/components/Header';
 import { Layout } from 'src/presentational/components/Layout';
+import Navigator, { NavItems } from 'src/presentational/components/Navigator';
 
 type DetailPageProps = {
   pokemonId: string;
@@ -35,6 +37,7 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
 }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { types, ...others } = pokemonDetail.pokemon;
+  const { ownedPokemons } = useOwnedPokemonStore();
 
   const primColor = getPrimaryColorFromType(types[0].type.name);
   const DetailpageStyle = css`
@@ -44,6 +47,36 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
     width: 100%;
     height: 100%;
   `;
+
+  const navItems: NavItems = [
+    {
+      href: '/',
+      icon: faBook,
+      iconColor: 'black',
+      text: 'Pokemon List',
+      textColor: 'white',
+      bgColor: 'gray',
+    },
+    {
+      href: '/owned',
+      iconImage: '/pokeball.png',
+      text: 'Owned',
+      iconColor: 'white',
+      textColor: 'white',
+      bgColor: 'gray',
+      badge: {
+        topPos: -10,
+        rightPos: -10,
+        text: String(
+          Object.values(ownedPokemons).reduce(
+            (acc, pokemons) => acc + pokemons.total,
+            0,
+          ),
+        ),
+      },
+    },
+  ];
+
   return (
     <Fragment>
       <Head>
@@ -54,7 +87,6 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
 
       <Layout>
         <div css={DetailpageStyle}>
-          <Header onBack={() => (window.location.href = '/')} />
           <Overview
             id={Number(pokemonId)}
             currentName={pokemonName}
@@ -68,6 +100,7 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
             <Tab currentTab={currentTab} {...others} />
           </TabContainer>
         </div>
+        <Navigator navItems={navItems} />
       </Layout>
     </Fragment>
   );

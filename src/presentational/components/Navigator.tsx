@@ -35,19 +35,13 @@ const IconInner = styled.span`
   justify-content: center;
 `;
 
-const Text = styled.p`
-  display: flex;
-  justify-content: center;
-  font-size: 15px;
-  margin: 0px;
-`;
-
 export type NavItems = Array<{
   href: string;
   icon?: IconDefinition;
   iconImage?: string;
+  iconColor: string;
   text?: string;
-  color: string;
+  textColor: string;
   bgColor: string;
   badge?: {
     topPos?: number;
@@ -65,6 +59,13 @@ const Navigator: FunctionComponent<NavigatorProps> = ({ navItems }) => {
     <NavigatorContainer>
       <NavigatorInner>
         {navItems?.map((item) => {
+          const Text = styled.p`
+            display: flex;
+            justify-content: center;
+            font-size: 15px;
+            margin: 0px;
+            color: ${item.textColor};
+          `;
           const LinkTag = styled.a`
             text-decoration: none;
             display: flex;
@@ -74,7 +75,7 @@ const Navigator: FunctionComponent<NavigatorProps> = ({ navItems }) => {
             width: 50%;
             maxheight: 100%;
             margin: 3px;
-            color: ${item.color};
+            color: ${item.iconColor};
             border-radius: 10px;
             background-color: ${item.bgColor};
             &:hover {

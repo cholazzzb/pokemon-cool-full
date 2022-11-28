@@ -40,15 +40,17 @@ const Home: NextPage<HomeProps> = (props) => {
     {
       href: '/',
       icon: faBook,
+      iconColor: 'black',
       text: 'Pokemon List',
-      color: 'black',
+      textColor: 'black',
       bgColor: 'white',
     },
     {
       href: '/owned',
       iconImage: '/pokeball.png',
+      iconColor: 'white',
       text: 'Owned',
-      color: 'white',
+      textColor: 'white',
       bgColor: 'gray',
       badge: {
         topPos: -10,
