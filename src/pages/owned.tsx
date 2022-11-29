@@ -56,15 +56,17 @@ const Owned: NextPage = () => {
     {
       href: '/',
       icon: faBook,
+      iconColor: 'white',
       text: 'Pokemon List',
-      color: 'white',
+      textColor: 'white',
       bgColor: 'gray',
     },
     {
       href: '/owned',
       iconImage: '/pokeball.png',
+      iconColor: 'black',
       text: 'Owned',
-      color: 'black',
+      textColor: 'black',
       bgColor: 'white',
       badge: {
         topPos: -10,
