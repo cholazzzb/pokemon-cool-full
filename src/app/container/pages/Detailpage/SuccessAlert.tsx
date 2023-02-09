@@ -14,7 +14,8 @@ import {
 
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
-import Alert from 'src/presentational/components/Alert';
+import Alert from '@/presentational/components/Alert';
+import { getAsset } from '@/utils/asset';
 
 const FormStyle = css`
   display: flex;
@@ -36,7 +37,7 @@ interface ISuccessAlertProps {
 
 const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
   useEffect(() => {
-    const audio = new Audio('/pokemonCaughtSound.mp3');
+    const audio = new Audio(getAsset('audios/pokemonCaughtSound'));
     audio.play();
   }, []);
 

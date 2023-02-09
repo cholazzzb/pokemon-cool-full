@@ -1,28 +1,29 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   GetStaticPaths,
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Fragment, FunctionComponent, useState } from 'react';
 
 import Overview from '@/app/container/pages/Detailpage/Overview';
 import Tab from '@/app/container/pages/Detailpage/Tab';
 import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
-import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import {
+  PokemonDetailByNameType,
   getPokemonDetailByName,
   getPokemonName,
-  PokemonDetailByNameType,
 } from '@/domains/pokemons/pokemonsService';
+import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { Layout, RightPane } from '@/presentational/components/Layout';
+import Navigator from '@/presentational/components/Navigator';
+import { mainTheme } from '@/presentational/theme';
+import { getAsset } from '@/utils/asset';
 import { convertURLQueryToString } from '@/utils/url';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
-import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
-import { Layout } from 'src/presentational/components/Layout';
-import Navigator, { NavItems } from 'src/presentational/components/Navigator';
 
 type DetailPageProps = {
   pokemonId: string;
@@ -37,45 +38,15 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
 }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { types, ...others } = pokemonDetail.pokemon;
-  const { ownedPokemons } = useOwnedPokemonStore();
 
   const primColor = getPrimaryColorFromType(types[0].type.name);
-  const DetailpageStyle = css`
-    background-color: ${primColor};
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-  `;
-
-  const navItems: NavItems = [
-    {
-      href: '/',
-      icon: faBook,
-      iconColor: 'black',
-      text: 'Pokemon List',
-      textColor: 'white',
-      bgColor: 'gray',
-    },
-    {
-      href: '/owned',
-      iconImage: '/pokeball.png',
-      text: 'Owned',
-      iconColor: 'white',
-      textColor: 'white',
-      bgColor: 'gray',
-      badge: {
-        topPos: -10,
-        rightPos: -10,
-        text: String(
-          Object.values(ownedPokemons).reduce(
-            (acc, pokemons) => acc + pokemons.total,
-            0,
-          ),
-        ),
-      },
-    },
-  ];
+  const DetailPageContainer = mainTheme.styled('div', {
+    backgroundColor: primColor,
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
+  });
 
   return (
     <Fragment>
@@ -86,7 +57,8 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
       </Head>
 
       <Layout>
-        <div css={DetailpageStyle}>
+        <RightPane />
+        <DetailPageContainer>
           <Overview
             id={Number(pokemonId)}
             currentName={pokemonName}
@@ -99,8 +71,30 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
           >
             <Tab currentTab={currentTab} {...others} types={types} />
           </TabContainer>
-        </div>
-        <Navigator navItems={navItems} />
+        </DetailPageContainer>
+        <Navigator>
+          <Link href="/">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <FontAwesomeIcon icon={faBook} />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Pokemon List</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+          <Link href="/owned">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <Image
+                  alt="pokeball"
+                  src={getAsset('images/pokeball')}
+                  width={20}
+                  height={20}
+                />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Owned</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+        </Navigator>
       </Layout>
     </Fragment>
   );

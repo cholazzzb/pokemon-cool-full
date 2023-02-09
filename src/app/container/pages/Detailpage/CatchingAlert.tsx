@@ -1,5 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { getAsset } from '@/utils/asset';
 import { css, jsx, keyframes } from '@emotion/react';
 import Image from 'next/image';
 import { Dispatch, FC, SetStateAction, useEffect } from 'react';
@@ -57,7 +58,7 @@ const CatchingAlert: FC<ICatchintAlertProps> = (props) => {
           >
             <Image
               alt="pokeball"
-              src="/pokeballSelected.svg"
+              src={getAsset('icons/pokeballSelected')}
               width={30}
               height={30}
             />

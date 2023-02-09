@@ -2,12 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["src/app/*"],
-      "@/components/*": ["src/components/*"],
-      "@/domains/*": ["src/domains/*"],
-      "@/utils/*": ["src/utils/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/styles/*": ["src/styles/*"]
+      "@/*": ["src/*"],
     },
     "allowJs": true,
     "alwaysStrict": true,

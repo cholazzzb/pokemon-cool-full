@@ -1,29 +1,26 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-
-import { jsx } from '@emotion/react';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { GetStaticPropsResult, NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import { Fragment, useState } from 'react';
 
 import PokemonList from '@/app/container/pages/Listpage/PokemonList';
-import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import {
   AllPokemonsNameType,
   getAllPokemonsName,
 } from '@/domains/pokemons/pokemonsService';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
-import type { GetStaticPropsResult, NextPage } from 'next';
-import Head from 'next/head';
-import { Fragment, useState } from 'react';
+import { getAsset } from '@/utils/asset';
+import Link from 'next/link';
 import Body from 'src/presentational/components/Body';
 import Header from 'src/presentational/components/Header';
-import { Layout } from 'src/presentational/components/Layout';
-import Navigator, { NavItems } from 'src/presentational/components/Navigator';
+import { Layout, RightPane } from 'src/presentational/components/Layout';
+import Navigator from 'src/presentational/components/Navigator';
 import SearchBarWrapper from 'src/presentational/pokemon-list/SearchBarWrapper';
 
 type HomeProps = AllPokemonsNameType;
 
 const Home: NextPage<HomeProps> = (props) => {
-  const { ownedPokemons } = useOwnedPokemonStore();
-
   const [searchValue, setSearchValue] = useState('');
   const onChangeSearch = (searchValue: string) => {
     setSearchValue(searchValue);
@@ -36,35 +33,6 @@ const Home: NextPage<HomeProps> = (props) => {
           pokemon.name.match(new RegExp(searchValue)),
         );
 
-  const navItems: NavItems = [
-    {
-      href: '/',
-      icon: faBook,
-      iconColor: 'black',
-      text: 'Pokemon List',
-      textColor: 'black',
-      bgColor: 'white',
-    },
-    {
-      href: '/owned',
-      iconImage: '/pokeball.png',
-      iconColor: 'white',
-      text: 'Owned',
-      textColor: 'white',
-      bgColor: 'gray',
-      badge: {
-        topPos: -10,
-        rightPos: -10,
-        text: String(
-          Object.values(ownedPokemons).reduce(
-            (acc, pokemons) => acc + pokemons.total,
-            0,
-          ),
-        ),
-      },
-    },
-  ];
-
   return (
     <Fragment>
       <Head>
@@ -74,12 +42,35 @@ const Home: NextPage<HomeProps> = (props) => {
       </Head>
 
       <Layout>
-        <Header caption="Pokemon List" />
+        <RightPane />
         <Body>
+          <Header caption="Pokemon List" />
           <PokemonList pokemons={filteredPokemons} />
         </Body>
-        <SearchBarWrapper onChangeSearch={onChangeSearch} />
-        <Navigator navItems={navItems} />
+        <Navigator>
+          <Link href="/">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <FontAwesomeIcon icon={faBookOpen} color="#ed5564" />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Pokemon List</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+          <Link href="/owned">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <Image
+                  alt="pokeball"
+                  src={getAsset('images/pokeball')}
+                  width={20}
+                  height={20}
+                />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Owned</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+          <SearchBarWrapper onChangeSearch={onChangeSearch} />
+        </Navigator>
       </Layout>
     </Fragment>
   );

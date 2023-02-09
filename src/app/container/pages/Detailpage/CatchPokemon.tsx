@@ -4,10 +4,11 @@ import { css, jsx, keyframes } from '@emotion/react';
 
 import { FC, useState } from 'react';
 
-import SuccessAlert from './SuccessAlert';
-import FailedAlert from './FailedAlert';
+import { getAsset } from '@/utils/asset';
 import Image from 'next/image';
 import CatchingAlert from './CatchingAlert';
+import FailedAlert from './FailedAlert';
+import SuccessAlert from './SuccessAlert';
 
 const CatchPokemonStyle = css`
   position:absolute;
@@ -99,7 +100,7 @@ const CatchPokemon: FC<ICatchPokemonProps> = (props) => {
         >
           <Image
             alt="pokeball"
-            src="/pokeballSelected.svg"
+            src={getAsset('icons/pokeballSelected')}
             width={30}
             height={30}
           />

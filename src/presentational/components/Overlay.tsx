@@ -1,7 +1,7 @@
-import { mainTheme } from '../theme';
+import { mainTheme } from '@/presentational/theme';
 
 export const Overlay = mainTheme.styled('div', {
-  zIndex: 50,
+  zIndex: '$overlay',
   position: 'fixed',
   top: '0px',
   left: '0px',

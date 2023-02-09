@@ -1,119 +1,71 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/react';
-import styled from '@emotion/styled';
-import { faBook, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
-import { Fragment, FunctionComponent } from 'react';
+import { PropsWithChildren } from 'react';
 
-import Link from 'next/link';
-import Badge from './Badge';
+import { mainTheme } from 'src/presentational/theme';
 
-const NavigatorContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 65px;
-  justify-content: center;
-  background-color: #f2f3f5;
-`;
-
-const NavigatorInner = styled.div`
-  position: relative;
-  display: flex;
-  background-color: gray;
-  width: 100%;
-  margin: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-`;
-
-const IconInner = styled.span`
-  display: flex;
-  width: 20px;
-  height: 20px;
-  justify-content: center;
-`;
-
-export type NavItems = Array<{
-  href: string;
-  icon?: IconDefinition;
-  iconImage?: string;
-  iconColor: string;
-  text?: string;
-  textColor: string;
-  bgColor: string;
-  badge?: {
-    topPos?: number;
-    rightPos?: number;
-    text: string;
-  };
-}>;
-
-type NavigatorProps = {
-  navItems?: NavItems;
-};
-
-const Navigator: FunctionComponent<NavigatorProps> = ({ navItems }) => {
-  return (
-    <NavigatorContainer>
-      <NavigatorInner>
-        {navItems?.map((item) => {
-          const Text = styled.p`
-            display: flex;
-            justify-content: center;
-            font-size: 15px;
-            margin: 0px;
-            color: ${item.textColor};
-          `;
-          const LinkTag = styled.a`
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 50%;
-            maxheight: 100%;
-            margin: 3px;
-            color: ${item.iconColor};
-            border-radius: 10px;
-            background-color: ${item.bgColor};
-            &:hover {
-              background-color: #d9dadc;
-            }
-          `;
-          return (
-            <Fragment key={`navitem-${item.text}`}>
-              <Link href={item.href}>
-                <LinkTag>
-                  <IconInner>
-                    {item.icon ? (
-                      <FontAwesomeIcon icon={faBook} />
-                    ) : item.iconImage ? (
-                      <Image
-                        alt={item.iconImage}
-                        src={item.iconImage}
-                        width={20}
-                        height={20}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </IconInner>
-                  <Text>{item.text}</Text>
-                  {item.badge && (
-                    <Badge top={item.badge.topPos} right={item.badge.rightPos}>
-                      {item.badge.text}
-                    </Badge>
-                  )}
-                </LinkTag>
-              </Link>
-            </Fragment>
-          );
-        })}
-      </NavigatorInner>
-    </NavigatorContainer>
-  );
-};
+function Navigator({ children }: PropsWithChildren<{}>) {
+  return <NavigatorContainer>{children}</NavigatorContainer>;
+}
 
 export default Navigator;
+
+const NavigatorContainer = mainTheme.styled('div', {
+  display: 'flex',
+  width: '100%',
+  height: '65px',
+  justifyContent: 'center',
+  borderTop: 'solid 4px',
+  borderColor: '#f2f3f5',
+  backgroundColor: '#f2f3f5',
+  zIndex: '$navigator',
+  '@md': {
+    flexDirection: 'column',
+    justifyContent: 'start',
+    height: '100%',
+  },
+});
+
+const NavigatorItemText = mainTheme.styled('p', {
+  display: 'flex',
+  justifyContent: 'center',
+  fontSize: '15px',
+  margin: '0px',
+  color: 'black',
+  '@md': {
+    marginInlineStart: '10px',
+  },
+});
+Navigator.ItemText = NavigatorItemText;
+
+export const NavigatorItem = mainTheme.styled('div', {
+  textDecoration: 'none',
+  display: 'flex',
+  width: '100%',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '3px',
+  backgroundColor: 'white',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: '#d9dadc',
+  },
+  '@md': {
+    flexDirection: 'row',
+    height: '30px',
+    width: 'initial',
+    justifyContent: 'start',
+    padding: '10px',
+    marginInline: '70px',
+  },
+});
+
+Navigator.Item = NavigatorItem;
+
+const NavigatorItemIcon = mainTheme.styled('span', {
+  display: 'flex',
+  width: '20px',
+  height: '20px',
+  justifyContent: 'center',
+});
+
+Navigator.ItemIcon = NavigatorItemIcon;

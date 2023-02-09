@@ -3,16 +3,19 @@
 
 import { jsx } from '@emotion/react';
 import styled from '@emotion/styled';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Fragment, useState } from 'react';
 
-import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
-import Dialog from 'src/presentational/components/Dialog';
-import { Layout } from 'src/presentational/components/Layout';
-import Navigator, { NavItems } from 'src/presentational/components/Navigator';
+import Dialog from '@/presentational/components/Dialog';
+import { Layout, RightPane } from '@/presentational/components/Layout';
+import Navigator from '@/presentational/components/Navigator';
+import { getAsset } from '@/utils/asset';
 
 const OwnedPokemonList = dynamic(
   () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),
@@ -50,36 +53,6 @@ const Body = styled.div`
 const Owned: NextPage = () => {
   const [activePokeName, setActivePokeName] = useState('');
   const [showDetailed, setShowDetailed] = useState(false);
-  const { ownedPokemons } = useOwnedPokemonStore();
-
-  const navItems: NavItems = [
-    {
-      href: '/',
-      icon: faBook,
-      iconColor: 'white',
-      text: 'Pokemon List',
-      textColor: 'white',
-      bgColor: 'gray',
-    },
-    {
-      href: '/owned',
-      iconImage: '/pokeball.png',
-      iconColor: 'black',
-      text: 'Owned',
-      textColor: 'black',
-      bgColor: 'white',
-      badge: {
-        topPos: -10,
-        rightPos: -10,
-        text: String(
-          Object.values(ownedPokemons).reduce(
-            (acc, pokemons) => acc + pokemons.total,
-            0,
-          ),
-        ),
-      },
-    },
-  ];
 
   return (
     <Fragment>
@@ -90,6 +63,7 @@ const Owned: NextPage = () => {
       </Head>
 
       <Layout>
+        <RightPane />
         <Body>
           <OwnedPokemonList
             selectPokemon={(selectedPokemon) => {
@@ -109,7 +83,30 @@ const Owned: NextPage = () => {
             </Dialog>
           )}
         </Body>
-        <Navigator navItems={navItems} />
+        <Navigator>
+          <Link href="/">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <FontAwesomeIcon icon={faBook} />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Pokemon List</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+
+          <Link href="/owned">
+            <Navigator.Item>
+              <Navigator.ItemIcon>
+                <Image
+                  alt="pokeball"
+                  src={getAsset('icons/pokeballSelected')}
+                  width={20}
+                  height={20}
+                />
+              </Navigator.ItemIcon>
+              <Navigator.ItemText>Owned</Navigator.ItemText>
+            </Navigator.Item>
+          </Link>
+        </Navigator>
       </Layout>
     </Fragment>
   );

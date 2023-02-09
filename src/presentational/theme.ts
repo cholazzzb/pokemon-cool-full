@@ -10,6 +10,12 @@ export const mainTheme = createStitches({
       red100: 'rgba(233,105,87, 1)',
       red90: 'rgba(233,105,87, 0.9)',
     },
+    zIndices: {
+      overlay: 50,
+      searchBar: 2,
+      searchButton: 2,
+      navigator: 2,
+    },
   },
   media: {
     sm: '(min-width: 640px)',

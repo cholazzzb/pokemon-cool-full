@@ -2,7 +2,7 @@
     "arrowParens": "always",
     "bracketSpacing": true,
     "insertPragma": false,
-    "jsxBracketSameLine": true,
+    "bracketSameLine": false,
     "printWidth": 80,
     "proseWrap": "preserve",
     "requirePragma": false,
