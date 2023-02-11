@@ -1,8 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-
-import { FC } from 'react';
 import {
   faBolt,
   faBomb,
@@ -25,7 +20,10 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FunctionComponent } from 'react';
+
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { mainTheme } from '@/presentational/theme';
 
 const icons: Map<PokemonType, IconDefinition> = new Map([
   ['normal', faCircle],
@@ -52,26 +50,25 @@ type TypeIconProps = {
   type: PokemonType;
 };
 
-const TypeIcon: FC<TypeIconProps> = (props) => {
+const TypeIcon: FunctionComponent<TypeIconProps> = (props) => {
   const { type } = props;
 
   const icon = icons.get(type);
 
   return (
-    <span
-      css={css`
-        display: flex;
-        width: 10px;
-        height: 10px;
-        padding: 2px;
-        justify-content: center;
-        align-items: center;
-      `}
-      data-testid="typeicon"
-    >
+    <TypeIconWrapper data-testid="typeicon">
       {icon && <FontAwesomeIcon icon={icon} />}
-    </span>
+    </TypeIconWrapper>
   );
 };
 
 export default TypeIcon;
+
+const TypeIconWrapper = mainTheme.styled('span', {
+  display: 'flex',
+  width: '10px',
+  height: '10px',
+  padding: '2px',
+  justifyContent: 'center',
+  alignItems: 'center',
+});

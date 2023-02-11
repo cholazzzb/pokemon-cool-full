@@ -1,51 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
-const HeaderStyle = css`
-  color: white;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-`;
-
-const BackStyle = css`
-  display: flex;
-  justify-content: center;
-  width: 15%;
-`;
-
-const IconStyle = css`
-  padding: 10px;
-  width: 15px;
-  height: 15px;
-`;
-
-const CaptionStyle = css`
-  display: flex;
-  justify-content: center;
-  color: black;
-  font-size: 25px;
-  font-weight: 700;
-  padding: 10px;
-  max-height: 30px;
-  width: 70%;
-  text-transform: capitalize;
-`;
-
-const ChildrenStyle = css`
-  display: flex;
-  justify-content: center;
-  width: 15%;
-  height:100%
-  align-items:center;
-`;
+import { mainTheme } from '@/presentational/theme';
 
 type HeaderProps = {
   caption?: string;
@@ -58,22 +15,61 @@ const Header: FunctionComponent<HeaderProps> = ({
   onBack,
 }) => {
   return (
-    <div css={HeaderStyle}>
-      <div css={BackStyle}>
+    <HeaderWrapper>
+      <BackButton>
         {onBack && (
-          <span data-testid="header-backicon" css={IconStyle} onClick={onBack}>
+          <IconWrapper data-testid="header-backicon" onClick={onBack}>
             <FontAwesomeIcon icon={faChevronLeft} />
-          </span>
+          </IconWrapper>
         )}
-      </div>
-      <div data-testid="header-label" css={CaptionStyle}>
-        {caption}
-      </div>
-      <div data-testid="header-children-label" css={ChildrenStyle}>
+      </BackButton>
+      <Caption data-testid="header-label">{caption}</Caption>
+      <ChildrenWrapper data-testid="header-children-label">
         {children}
-      </div>
-    </div>
+      </ChildrenWrapper>
+    </HeaderWrapper>
   );
 };
 
 export default Header;
+
+const HeaderWrapper = mainTheme.styled('div', {
+  color: 'white',
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  boxShadow:
+    'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,rgba(0, 0, 0, 0.04) 0px 10px 10px -5px',
+});
+const BackButton = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '15%',
+});
+
+const IconWrapper = mainTheme.styled('span', {
+  padding: '10px',
+  width: '15px',
+  height: '15px',
+});
+
+const Caption = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  color: 'black',
+  fontSize: '25px',
+  fontWeight: 700,
+  padding: '10px',
+  maxHeight: '30px',
+  width: '70%',
+  textTransform: 'capitalize',
+});
+
+const ChildrenWrapper = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '15%',
+  height: '100%',
+  alignItems: 'center',
+});

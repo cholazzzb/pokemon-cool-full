@@ -1,47 +1,39 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
+import { FunctionComponent } from 'react';
 
-import { FC } from 'react';
-import Alert from 'src/presentational/components/Alert';
+import Alert from '@/presentational/components/Alert';
+import { mainTheme } from '@/presentational/theme';
 
-const AlertContainerStyle = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+const AlertContainer = mainTheme.styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '300px',
+});
 
 interface IFailedAlertProps {
   iconColor: string;
   catchPokemon: () => void;
 }
 
-const FailedAlert: FC<IFailedAlertProps> = (props) => {
+const FailedAlert: FunctionComponent<IFailedAlertProps> = (props) => {
   const { iconColor, catchPokemon } = props;
-  const TryAgainStyle = css`
-    display: flex;
-    justify-content: center;
-    width: 100px;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: ${iconColor};
-  `;
+  const Text = mainTheme.styled('div', {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100px',
+    padding: '10px',
+    borderRadius: '20px',
+    marginTop: '70px',
+    backgroundColor: iconColor,
+  });
 
   return (
     <Alert headText="FAILED">
-      <div css={AlertContainerStyle}>
-        <div
-          css={css`
-            height: 100px;
-          `}
-        >
-          Pokemon not catched
-        </div>
-        <div onClick={catchPokemon} css={TryAgainStyle}>
-          Try Again
-        </div>
-      </div>
+      <AlertContainer>
+        Pokemon not catched
+        <Text onClick={catchPokemon}>Try Again</Text>
+      </AlertContainer>
     </Alert>
   );
 };
