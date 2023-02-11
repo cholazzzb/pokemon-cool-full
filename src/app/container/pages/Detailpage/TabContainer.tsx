@@ -1,38 +1,6 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import styled from '@emotion/styled';
 import { FunctionComponent } from 'react';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background-color: #f7f7f7;
-  color: black;
-  padding-top: 20px;
-`;
-
-const TabHeader = styled.div`
-  display: flex;
-  padding: 30px;
-  cursor: pointer;
-`;
-
-const TabStyle = css`
-  display: flex;
-  justify-content: center;
-  width: 33%;
-  font-size: 12px;
-  padding: 10px;
-`;
-
-const TabBody = styled.div`
-  height: 100%;
-`;
+import { mainTheme } from '@/presentational/theme';
 
 const tabs: Array<string> = ['About', 'Base Stats', 'Moves'];
 
@@ -48,25 +16,22 @@ const TabContainer: FunctionComponent<TabContainerProps> = ({
   currentTab,
   setCurrentTab,
 }) => {
-  const ActiveTabStyle = css`
-    border-style: solid;
-    border-color: #aeb5d2;
-    border-width: 0px 0px 2px 0px;
-    border-radius: 20px;
-    background-color: ${primColor};
-  `;
+  const ActiveTab = createActiveTab(primColor);
+
   return (
     <Container>
       <TabHeader>
-        {tabs.map((tab, idx) => (
-          <div
-            css={idx === currentTab ? [ActiveTabStyle, TabStyle] : TabStyle}
-            key={tab}
-            onClick={() => setCurrentTab(idx)}
-          >
-            {tab}
-          </div>
-        ))}
+        {tabs.map((tab, idx) =>
+          idx === currentTab ? (
+            <ActiveTab key={tab} onClick={() => setCurrentTab(idx)}>
+              {tab}
+            </ActiveTab>
+          ) : (
+            <Tab key={tab} onClick={() => setCurrentTab(idx)}>
+              {tab}
+            </Tab>
+          ),
+        )}
       </TabHeader>
       <TabBody>{children}</TabBody>
     </Container>
@@ -74,3 +39,40 @@ const TabContainer: FunctionComponent<TabContainerProps> = ({
 };
 
 export default TabContainer;
+
+const Container = mainTheme.styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  width: '100%',
+  borderTopLeftRadius: '20px',
+  borderTopRightRadius: '20px',
+  backgroundColor: '#f7f7f7',
+  color: 'black',
+  paddingTop: '20px',
+});
+
+const TabHeader = mainTheme.styled('div', {
+  display: 'flex',
+  padding: '30px',
+  cursor: 'pointer',
+});
+
+const Tab = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '33%',
+  fontSize: '12px',
+  padding: '10px',
+});
+
+const createActiveTab = (primColor: string) =>
+  mainTheme.styled(Tab, {
+    borderStyle: 'solid',
+    borderColor: primColor,
+    borderWidth: '0px 0px 2px 0px',
+  });
+
+const TabBody = mainTheme.styled('div', {
+  height: '100%',
+});

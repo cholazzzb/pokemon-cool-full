@@ -44,7 +44,7 @@ const Home: NextPage<HomeProps> = (props) => {
       <Layout>
         <RightPane />
         <Body>
-          <Header caption="Pokemon List" />
+          <Header caption="List Pokemons" />
           <PokemonList pokemons={filteredPokemons} />
         </Body>
         <Navigator>

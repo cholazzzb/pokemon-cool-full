@@ -1,29 +1,7 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 import { FunctionComponent } from 'react';
 
 import { BaseName } from '@/domains/entity';
-
-const TabBodyStyle = css`
-  overflow: auto;
-  padding: 10px;
-`;
-
-const TextContainerStyle = css`
-  display: flex;
-  align-items: center;
-  height: 30px;
-`;
-
-const LabelStyle = css`
-  color: gray;
-  width: 30%;
-`;
-
-const DataStyle = css`
-  text-transform: capitalize;
-`;
+import { mainTheme } from '@/presentational/theme';
 
 type TabAboutProps = {
   height: number;
@@ -37,18 +15,18 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
   abilities,
 }) => {
   return (
-    <div css={TabBodyStyle}>
-      <div css={TextContainerStyle}>
-        <p css={LabelStyle}>Height</p>
+    <TabBody>
+      <TextContainer>
+        <Label>Height</Label>
         {height}
-      </div>
-      <div css={TextContainerStyle}>
-        <p css={LabelStyle}>Weight</p>
+      </TextContainer>
+      <TextContainer>
+        <Label>Weight</Label>
         {weight}
-      </div>
-      <div css={TextContainerStyle}>
-        <p css={LabelStyle}> Abilities</p>
-        <p css={DataStyle}>
+      </TextContainer>
+      <TextContainer>
+        <Label> Abilities</Label>
+        <Data>
           {abilities
             .map(
               (ability: { [key: string]: { [key: string]: string } }) =>
@@ -56,10 +34,30 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
             )
             .join(', ')}
           .
-        </p>
-      </div>
-    </div>
+        </Data>
+      </TextContainer>
+    </TabBody>
   );
 };
 
 export default TabAbout;
+
+const TabBody = mainTheme.styled('div', {
+  overflow: 'auto',
+  padding: '10px',
+});
+
+const TextContainer = mainTheme.styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  height: '30px',
+});
+
+const Label = mainTheme.styled('p', {
+  color: 'gray',
+  width: '30%',
+});
+
+const Data = mainTheme.styled('p', {
+  textTransform: 'capitalize',
+});
