@@ -5,7 +5,8 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import type { AppProps } from 'next/app';
-import '../presentational/styles/globals.css';
+
+import { globalStyles } from '@/presentational/theme';
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -33,6 +34,8 @@ const client = new ApolloClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  globalStyles();
+
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />

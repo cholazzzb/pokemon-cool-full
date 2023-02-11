@@ -1,72 +1,50 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { getAsset } from '@/utils/asset';
-import { css, jsx, keyframes } from '@emotion/react';
 import Image from 'next/image';
-import { Dispatch, FC, SetStateAction, useEffect } from 'react';
-import Alert from 'src/presentational/components/Alert';
+import { FunctionComponent, useEffect } from 'react';
 
-const CatchAnimation = keyframes`
-  from, 20%, 53%, 80%, to {
-    transform: translate3d(0,0,0);
-    transform: rotate(30deg);
-  };
-  40%, 43% {
-    transform: translate3d(0, -20px, 0);
-    transform: rotate(-30deg);
-  };
-  70% {
-    transform: translate3d(0, -5px, 0);
-  };
-  90% {
-    transform: translate3d(0,-4px,0);
-  }
-`;
+import Alert from '@/presentational/components/Alert';
+import { PokeballAnimation } from '@/presentational/components/Animation';
+import { mainTheme } from '@/presentational/theme';
+import { getAsset } from '@/utils/asset';
 
-interface ICatchintAlertProps {
-  setCatchStatus: Dispatch<SetStateAction<null | string>>;
-}
+type CatchintAlertProps = {
+  onSuccess: () => void;
+  onError: () => void;
+};
 
-const CatchingAlert: FC<ICatchintAlertProps> = (props) => {
-  const { setCatchStatus } = props;
-
+const CatchingAlert: FunctionComponent<CatchintAlertProps> = (props) => {
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const successRate = Math.random();
-      successRate > 0.5 ? setCatchStatus('SUCCESS') : setCatchStatus('FAILED');
+      successRate > 0.5 ? props.onSuccess() : props.onError();
     }, 2000);
-  }, []);
 
-  const CatchIconStyle = css`
-    width: 70px;
-    height: 70px;
-    border-radius: 9999px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  `;
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <Alert headText="Catching">
-      <div>
-        <span css={CatchIconStyle}>
-          <span
-            css={css`
-              animation: ${CatchAnimation} 1s ease infinite;
-            `}
-          >
-            <Image
-              alt="pokeball"
-              src={getAsset('icons/pokeballSelected')}
-              width={30}
-              height={30}
-            />
-          </span>
-        </span>
-      </div>
+      <CatchIcon>
+        <PokeballAnimation>
+          <Image
+            alt="pokeball"
+            src={getAsset('icons/pokeballSelected')}
+            width={30}
+            height={30}
+          />
+        </PokeballAnimation>
+      </CatchIcon>
     </Alert>
   );
 };
 
 export default CatchingAlert;
+
+const CatchIcon = mainTheme.styled('span', {
+  width: '70px',
+  height: '70px',
+  borderRadius: '9999px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+});

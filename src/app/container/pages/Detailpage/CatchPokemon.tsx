@@ -1,115 +1,98 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx, keyframes } from '@emotion/react';
-
-import { FC, useState } from 'react';
-
-import { getAsset } from '@/utils/asset';
 import Image from 'next/image';
+import { FunctionComponent, useState } from 'react';
+
+import { PokeballAnimation } from '@/presentational/components/Animation';
+import { mainTheme } from '@/presentational/theme';
+import { getAsset } from '@/utils/asset';
 import CatchingAlert from './CatchingAlert';
 import FailedAlert from './FailedAlert';
 import SuccessAlert from './SuccessAlert';
 
-const CatchPokemonStyle = css`
-  position:absolute;
-  right: 20px;
-  top: 120px;
-  width: 70px;
-  height: 70px;
-  border-radius: 9999px
-  display:flex;
-  justify-content:center
-  align-items:center;
-`;
+type CatchStatus = 'SUCCESS' | 'FAILED' | 'CATCHING' | null;
 
-const CatchAnimation = keyframes`
-  from, 20%, 53%, 80%, to {
-    transform: translate3d(0,0,0);
-    transform: rotate(30deg);
-  };
-  40%, 43% {
-    transform: translate3d(0, -20px, 0);
-    transform: rotate(-30deg);
-  };
-  70% {
-    transform: translate3d(0, -5px, 0);
-  };
-  90% {
-    transform: translate3d(0,-4px,0);
-  }
-`;
-
-interface ICatchPokemonProps {
+type CatchPokemonProps = {
   id: number;
   iconColor: string;
   pokemonName: string;
-}
+};
 
-const CatchPokemon: FC<ICatchPokemonProps> = (props) => {
+const CatchPokemon: FunctionComponent<CatchPokemonProps> = (props) => {
   const { id, iconColor, pokemonName } = props;
-  const [catchStatus, setCatchStatus] = useState<null | string>(null);
+  const [catchStatus, setCatchStatus] = useState<null | CatchStatus>(null);
 
   const catchPokemon = () => {
     setCatchStatus('CATCHING');
   };
 
-  let Alert;
-  switch (catchStatus) {
-    case 'SUCCESS':
-      Alert = (
-        <SuccessAlert
-          id={id}
-          pokemonName={pokemonName}
-          color={iconColor}
-          setCatchStatus={setCatchStatus}
-        />
-      );
-      break;
+  const renderAlert = (status: CatchStatus) => {
+    switch (status) {
+      case 'SUCCESS':
+        return (
+          <SuccessAlert
+            id={id}
+            pokemonName={pokemonName}
+            color={iconColor}
+            onClose={() => setCatchStatus(null)}
+          />
+        );
 
-    case 'FAILED':
-      Alert = <FailedAlert iconColor={iconColor} catchPokemon={catchPokemon} />;
-      break;
+      case 'FAILED':
+        return (
+          <FailedAlert iconColor={iconColor} catchPokemon={catchPokemon} />
+        );
 
-    case 'CATCHING':
-      Alert = <CatchingAlert setCatchStatus={setCatchStatus} />;
-      break;
+      case 'CATCHING':
+        return (
+          <CatchingAlert
+            onSuccess={() => setCatchStatus('SUCCESS')}
+            onError={() => setCatchStatus('FAILED')}
+          />
+        );
 
-    default:
-      Alert = <div>Error</div>;
-      break;
-  }
+      default:
+        return <div>Error</div>;
+    }
+  };
 
-  const CatchIconStyle = css`
-    width: 70px;
-    height: 70px;
-    border-radius: 9999px;
-    background-color: ${iconColor};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  `;
+  const CatchIcon = mainTheme.styled('span', {
+    width: '70px',
+    height: '70px',
+    borderRadius: '35px',
+    backgroundColor: iconColor,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
 
   return (
-    <div css={CatchPokemonStyle}>
-      <span css={CatchIconStyle} onClick={catchPokemon}>
-        <span
-          css={css`
-            animation: ${CatchAnimation} 1s ease infinite;
-          `}
-        >
+    <FloatingButton>
+      <CatchIcon onClick={catchPokemon}>
+        <PokeballAnimation>
           <Image
             alt="pokeball"
             src={getAsset('icons/pokeballSelected')}
             width={30}
             height={30}
           />
-        </span>
+        </PokeballAnimation>
         Catch
-      </span>
-      {catchStatus && Alert}
-    </div>
+      </CatchIcon>
+      {catchStatus && renderAlert(catchStatus)}
+    </FloatingButton>
   );
 };
 
 export default CatchPokemon;
+
+const FloatingButton = mainTheme.styled('div', {
+  position: 'absolute',
+  right: '20px',
+  top: '120px',
+  width: '70px',
+  height: '70px',
+  borderRadius: '35px',
+  display: 'flex',
+  justifyContent: 'cente',
+  alignItems: 'center',
+});

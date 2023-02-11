@@ -1,12 +1,6 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-
 import {
   ChangeEvent,
-  Dispatch,
-  FC,
-  SetStateAction,
+  FunctionComponent,
   SyntheticEvent,
   useEffect,
   useState,
@@ -15,37 +9,24 @@ import {
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
 import Alert from '@/presentational/components/Alert';
+import { YStack } from '@/presentational/components/Layout';
+import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
 
-const FormStyle = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const InputStyle = css`
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px 0px;
-`;
-
-interface ISuccessAlertProps {
+type SuccessAlertProps = {
   id: number;
   pokemonName: string;
   color: string;
-  setCatchStatus: Dispatch<SetStateAction<null | string>>;
-}
+  onClose: () => void;
+};
 
-const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
+const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
   useEffect(() => {
     const audio = new Audio(getAsset('audios/pokemonCaughtSound'));
     audio.play();
   }, []);
 
-  const { id, pokemonName, color, setCatchStatus } = props;
-
-  const onClose = () => {
-    setCatchStatus(null);
-  };
+  const { id, pokemonName, color } = props;
 
   const [name, setName] = useState<string>('');
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +50,7 @@ const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
     } else {
       setOwnedPokemons(result);
     }
-    onClose();
+    props.onClose();
   };
 
   useEffect(() => {
@@ -78,31 +59,34 @@ const SuccessAlert: FC<ISuccessAlertProps> = (props) => {
     }
   }, [onSaving]);
 
-  const ButtonStyle = css`
-    background-color: ${color};
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0px;
-  `;
+  const Button = mainTheme.styled('button', {
+    backgroundColor: color,
+    borderRadius: '10px',
+    padding: '10px',
+    margin: '10px 0px',
+  });
 
   return (
     <Alert headText="SUCCESS">
-      <div css={FormStyle}>
+      <YStack>
         Gotcha! Pokemon catched!!!
         <label>Give your pokemon name!</label>
-        <input
-          css={InputStyle}
+        <Input
           type="text"
           value={name}
           onChange={handleChangeName}
           placeholder="Insert Pokemon Name"
         />
-        <button css={ButtonStyle} onClick={handleSubmit}>
-          OK
-        </button>
-      </div>
+        <Button onClick={handleSubmit}>OK</Button>
+      </YStack>
     </Alert>
   );
 };
 
 export default SuccessAlert;
+
+const Input = mainTheme.styled('input', {
+  borderRadius: '10px',
+  padding: '10px',
+  margin: '10px 0px',
+});

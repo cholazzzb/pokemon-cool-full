@@ -9,6 +9,10 @@ export const Center = mainTheme.styled(Flex, {
   alignItems: 'center',
 });
 
+export const YStack = mainTheme.styled(Flex, {
+  flexDirection: 'column',
+});
+
 export const Layout = mainTheme.styled('div', {
   height: '100vh',
   margin: '0 auto',
