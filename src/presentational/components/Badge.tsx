@@ -1,28 +1,31 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
+import { mainTheme } from '@/presentational/theme';
+import { FunctionComponent } from 'react';
 
 type BadgeProps = {
   top?: number;
   right?: number;
 };
 
-const Badge: FC<BadgeProps> = ({ top = 0, right = 0, children }) => {
-  const BadgeStyle = css`
-    position: absolute;
-    top: ${top}px;
-    right: ${right}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25px;
-    height: 25px;
-    border-radius: 9999px;
-    background-color: green;
-    color: white;
-  `;
-  return <div css={BadgeStyle}>{children}</div>;
+const Badge: FunctionComponent<BadgeProps> = ({
+  top = 0,
+  right = 0,
+  children,
+}) => {
+  const Component = mainTheme.styled('div', {
+    position: 'absolute',
+    top: `${top}px`,
+    right: `${right}px`,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '25px',
+    height: '25px',
+    borderRadius: '9999px',
+    backgroundColor: 'green',
+    color: 'white',
+  });
+
+  return <Component>{children}</Component>;
 };
 
 export default Badge;

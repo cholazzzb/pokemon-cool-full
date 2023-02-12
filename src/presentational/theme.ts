@@ -14,7 +14,6 @@ export const mainTheme = createStitches({
       overlay: 50,
       searchBar: 2,
       searchButton: 2,
-      navigator: 2,
     },
   },
   media: {
@@ -30,8 +29,7 @@ export const globalStyles = globalCss({
     margin: 0,
     fontFamily:
       '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-    overflow: 'hidden',
-    height: '100%,',
+    boxSizing: 'border-box',
   },
 
   body: {
@@ -39,9 +37,35 @@ export const globalStyles = globalCss({
     margin: 0,
     fontFamily:
       '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-    overflow: 'hidden',
-    height: '100%',
+    height: '100vh',
   },
+
+  '*': {
+    boxSizing: 'inherit',
+    scrollbarWidth: 'thin',
+    scrollbarColor: 'transparent transparent',
+    '&::-webkit-scrollbar': {
+      width: '1px',
+    },
+
+    '&::-webkit-scrollbar-track': {
+      background: 'transparent',
+    },
+
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'transparent',
+    },
+  },
+
+  '*:before': {
+    boxSizing: 'inherit',
+  },
+
+  '*:after': {
+    boxSizing: 'inherit',
+  },
+
+  a: { color: 'inherit', textDecoration: 'none' },
 
   p: {
     margin: 0,

@@ -1,34 +1,32 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-import { FC } from 'react';
+import { FunctionComponent } from 'react';
+import { mainTheme } from '../theme';
 
-const CardStyle = css`
-  text-transform: capitalize;
-  padding: 10px 0px;
-`;
-
-const CardHeaderStyle = css`
-  font-size: 25px;
-  font-weight: 900;
-`;
-
-const CardBodyStyle = css`
-  font-size: 20px;
-`;
-
-interface ICard {
+type CardProps = {
   headText: string;
   bodyText: string;
-}
+};
 
-const Card: FC<ICard> = (props) => {
+const Card: FunctionComponent<CardProps> = (props) => {
   return (
-    <div css={CardStyle}>
-      <div css={CardHeaderStyle}>{props.headText}</div>
-      <div css={CardBodyStyle}>{props.bodyText}</div>
-    </div>
+    <CardWrapper>
+      <CardHeader>{props.headText}</CardHeader>
+      <CardBody>{props.bodyText}</CardBody>
+    </CardWrapper>
   );
 };
 
 export default Card;
+
+const CardWrapper = mainTheme.styled('div', {
+  textTransform: 'capitalize',
+  padding: '10px 0px',
+});
+
+const CardHeader = mainTheme.styled('div', {
+  fontSize: '25px',
+  fontWeight: 900,
+});
+
+const CardBody = mainTheme.styled('div', {
+  fontSize: '20px',
+});

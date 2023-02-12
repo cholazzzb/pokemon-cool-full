@@ -1,47 +1,46 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 import Image from 'next/image';
-import { FC } from 'react';
-import { getSecondaryColorFromType } from 'src/presentational/colorTheme';
+import { FunctionComponent } from 'react';
 
-interface ImageProps {
+import { getSecondaryColorFromType } from '@/presentational/colorTheme';
+import { mainTheme } from '@/presentational/theme';
+
+type ImageProps = {
   type: string;
   size: number;
   image: string;
-}
+};
 
-const PokeImage: FC<ImageProps> = (props) => {
+const PokeImage: FunctionComponent<ImageProps> = (props) => {
   const { type, size, image } = props;
   const bgColor = getSecondaryColorFromType(type);
 
-  const ImageBackgroundStyle = css`
-    background-color: ${bgColor};
-    border-radius: 9999px;
-    width: ${size}px;
-    height: ${size}px;
-  `;
+  const ImageBackground = mainTheme.styled('div', {
+    backgroundColor: bgColor,
+    borderRadius: '9999px',
+    width: `${size}px`,
+    height: `${size}px`,
+  });
 
-  const ImageStyle = css`
-    position: relative;
-    border-radius: 9999px;
-    width: ${size + 40}px;
-    height: ${size + 40}px;
-    transform: translateX(-20px) translateY(15px);
-    transform-origin: bottom;
-  `;
+  const ImageWrapper = mainTheme.styled('div', {
+    position: 'relative',
+    borderRadius: '9999px',
+    width: `${size + 40}px`,
+    height: `${size + 40}px`,
+    transform: 'translateX(-20px) translateY(15px)',
+    transformOrigin: 'bottom',
+  });
 
   return (
-    <div css={ImageBackgroundStyle}>
-      <div css={ImageStyle}>
+    <ImageBackground>
+      <ImageWrapper>
         <Image
           data-testid="pokemon-image"
           src={image}
           alt="pokemon"
           layout="fill"
         />
-      </div>
-    </div>
+      </ImageWrapper>
+    </ImageBackground>
   );
 };
 

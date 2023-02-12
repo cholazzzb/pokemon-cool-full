@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import { CSSProperties, FunctionComponent } from 'react';
@@ -11,30 +8,6 @@ import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
 import { Center } from 'src/presentational/components/Layout';
 import PokemonCardHor from 'src/presentational/components/PokemonCardHor';
 import { mainTheme } from 'src/presentational/theme';
-
-const ListStyle = css`
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-
-  &::-webkit-scrollbar {
-    width: 1px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-`;
-
-const ListItemStyle = css`
-  display: flex;
-  width: 100%;
-  margin: 10px 0px;
-  justify-content: center;
-`;
 
 type RowProps = {
   data: {
@@ -50,7 +23,7 @@ const Row: FunctionComponent<RowProps> = (props) => {
   const { publicRuntimeConfig } = getConfig();
 
   return (
-    <div css={ListItemStyle} style={style}>
+    <ListItem style={style}>
       <Link href={`/detailed/${pokemons[index].id}`}>
         <a style={{ textDecoration: 'none' }}>
           {pokemons[index] && (
@@ -65,7 +38,7 @@ const Row: FunctionComponent<RowProps> = (props) => {
           )}
         </a>
       </Link>
-    </div>
+    </ListItem>
   );
 };
 
@@ -82,7 +55,6 @@ const PokemonList: FunctionComponent<PokemonList> = ({ pokemons }) => {
     <AutoSizer>
       {({ height, width }) => (
         <List
-          css={ListStyle}
           height={height}
           width={width}
           itemCount={pokemons.length}
@@ -107,4 +79,11 @@ const NoPokemonFoundWrapper = () => {
 const NoPokemonFound = mainTheme.styled(Center, {
   width: '100%',
   height: '100%',
+});
+
+const ListItem = mainTheme.styled('div', {
+  display: 'flex',
+  width: '100%',
+  margin: '10px 0px',
+  justifyContent: 'center',
 });

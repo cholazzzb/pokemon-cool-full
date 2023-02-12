@@ -1,42 +1,10 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-
-import { jsx } from '@emotion/react';
-import styled from '@emotion/styled';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
-import { Overlay } from 'src/presentational/components/Overlay';
+import { Overlay } from '@/presentational/components/Overlay';
+import { mainTheme } from '@/presentational/theme';
 import Header from './Header';
-
-const CloseIcon = styled.span`
-  display: flex;
-  width: 25px;
-  height: 25px;
-  color: black;
-`;
-
-const Body = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const Container = styled.div`
-  color: black;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  bottom: 0%;
-  height: 60%;
-  width: 100%;
-  background-color: white;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-`;
 
 type DialogProps = {
   headerText: string;
@@ -63,3 +31,31 @@ const Dialog: FunctionComponent<DialogProps> = ({
 };
 
 export default Dialog;
+
+const CloseIcon = mainTheme.styled('span', {
+  display: 'flex',
+  width: '25px',
+  height: '25px',
+  color: 'black',
+});
+
+const Body = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100%',
+});
+
+const Container = mainTheme.styled('div', {
+  color: 'black',
+  zIndex: '50',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  bottom: '0%',
+  height: '60%',
+  width: '100%',
+  backgroundColor: 'white',
+  borderTopLeftRadius: '30px',
+  borderTopRightRadius: '30px',
+});

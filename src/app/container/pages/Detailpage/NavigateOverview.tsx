@@ -1,31 +1,12 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/react';
-import styled from '@emotion/styled';
-import { FunctionComponent } from 'react';
 import {
   faChevronCircleLeft,
   faChevronCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
-const Container = styled.div`
-  position: absolute;
-  top: 60%;
-  display: flex;
-  flex-direction: row-reverse;
-  width: 100%;
-  justify-content: space-between;
-`;
-
-const Icon = styled.span`
-  display: flex;
-  width: 25px;
-  height: 25px;
-  padding: 20px;
-  color: white;
-`;
+import { mainTheme } from '@/presentational/theme';
 
 type NavigateOverviewProps = {
   currentId: number;
@@ -57,3 +38,20 @@ const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
 };
 
 export default NavigateOverview;
+
+const Container = mainTheme.styled('div', {
+  position: 'absolute',
+  top: '60%',
+  display: 'flex',
+  flexDirection: 'row-reverse',
+  width: '100%',
+  justifyContent: 'space-between',
+});
+
+const Icon = mainTheme.styled('span', {
+  display: 'flex',
+  width: '25px',
+  height: '25px',
+  padding: '20px',
+  color: 'white',
+});

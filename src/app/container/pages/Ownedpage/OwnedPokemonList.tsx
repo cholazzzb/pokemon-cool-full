@@ -1,45 +1,14 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-
-import { css, jsx } from '@emotion/react';
-import styled from '@emotion/styled';
 import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
 import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
-import Card from 'src/presentational/components/Card';
-import PokemonCardVer from 'src/presentational/components/PokemonCardVer';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 380px;
-  width: 100%;
-`;
-
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import Card from '@/presentational/components/Card';
+import PokemonCardVer from '@/presentational/components/PokemonCardVer';
+import { mainTheme } from '@/presentational/theme';
 
 const paddingX = 5;
-
-const AutoSizerContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  padding: 0px ${paddingX}px;
-`;
-
-const EmptyContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 0px;
-`;
 
 type RowProps = {
   data: {
@@ -63,23 +32,6 @@ const Row: FunctionComponent<RowProps> = (props) => {
   );
 };
 
-const ListStyle = css`
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-
-  &::-webkit-scrollbar {
-    width: 1px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-`;
-
 type OwnedPokemonListProps = {
   selectPokemon: (selectedPokemon: PokemonName) => void;
 };
@@ -102,7 +54,6 @@ const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
         <AutoSizer>
           {({ height, width }) => (
             <List
-              css={ListStyle}
               height={height}
               width={width - 2 * paddingX}
               itemCount={Object.values(ownedPokemons).length}
@@ -124,3 +75,30 @@ const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
 };
 
 export default OwnedPokemonList;
+
+const Container = mainTheme.styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '380px',
+  width: '100%',
+});
+
+const Center = mainTheme.styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+});
+
+const AutoSizerContainer = mainTheme.styled('div', {
+  height: '100%',
+  width: '100%',
+  padding: '0px ${paddingX}px',
+});
+
+const EmptyContainer = mainTheme.styled('div', {
+  display: 'flex',
+  width: '100%',
+  height: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '4px 0px',
+});

@@ -1,7 +1,8 @@
-import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { FunctionComponent } from 'react';
-import { getSecondaryColorFromType } from 'src/presentational/colorTheme';
-import { mainTheme } from 'src/presentational/theme';
+
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { getSecondaryColorFromType } from '@/presentational/colorTheme';
+import { mainTheme } from '@/presentational/theme';
 import TypeIcon from './TypeIcon';
 
 type TypeChipProps = {

@@ -1,8 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-
-import { jsx } from '@emotion/react';
-import styled from '@emotion/styled';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
@@ -13,7 +8,7 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 
 import Dialog from '@/presentational/components/Dialog';
-import { Layout, RightPane } from '@/presentational/components/Layout';
+import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
 import { getAsset } from '@/utils/asset';
 
@@ -26,29 +21,6 @@ const CollectionList = dynamic(
   () => import('@/app/container/pages/Ownedpage/CollectionList'),
   { ssr: false },
 );
-
-const Body = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  overflow: auto;
-
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-
-  &::-webkit-scrollbar {
-    width: 1px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-`;
 
 const Owned: NextPage = () => {
   const [activePokeName, setActivePokeName] = useState('');
