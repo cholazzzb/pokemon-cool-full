@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { YScrollable } from '@/presentational/components/Layout';
 import { mainTheme } from '@/presentational/theme';
 
 const tabs: Array<string> = ['About', 'Base Stats', 'Moves'];
@@ -33,7 +34,7 @@ const TabContainer: FunctionComponent<TabContainerProps> = ({
           ),
         )}
       </TabHeader>
-      <TabBody>{children}</TabBody>
+      <YScrollable>{children}</YScrollable>
     </Container>
   );
 };
@@ -54,7 +55,8 @@ const Container = mainTheme.styled('div', {
 
 const TabHeader = mainTheme.styled('div', {
   display: 'flex',
-  padding: '30px',
+  paddingBlockStart: '30px',
+  paddingInline: '10px',
   cursor: 'pointer',
 });
 
@@ -72,7 +74,3 @@ const createActiveTab = (primColor: string) =>
     borderColor: primColor,
     borderWidth: '0px 0px 2px 0px',
   });
-
-const TabBody = mainTheme.styled('div', {
-  height: '100%',
-});

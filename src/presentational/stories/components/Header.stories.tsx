@@ -14,9 +14,16 @@ withCaption.args = {
   caption: 'Caption',
 };
 
-export const withOnBack = Template.bind({});
-withOnBack.args = {
+export const withOnClickBack = Template.bind({});
+withOnClickBack.args = {
   caption: 'Caption',
   children: <>children</>,
-  onBack: () => {},
+  onClickBack: () => {},
+};
+
+export const withOnClickBackLink = Template.bind({});
+withOnClickBackLink.args = {
+  caption: 'Caption',
+  children: <>children</>,
+  onClickBackLink: '/',
 };

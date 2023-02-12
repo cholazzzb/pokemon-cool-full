@@ -1,8 +1,8 @@
-import { BaseName } from '@/domains/entity';
 import { FunctionComponent } from 'react';
-import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
 
-import { mainTheme } from 'src/presentational/theme';
+import { BaseName } from '@/domains/entity';
+import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { mainTheme } from '@/presentational/theme';
 
 type TabBaseStatsProps = {
   stats: Array<{
@@ -31,7 +31,7 @@ const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
   types,
 }) => {
   return (
-    <div>
+    <>
       {stats.map(
         (status: { stat: { name: string }; base_stat: number }, idx) => {
           const primaryColorType = getPrimaryColorFromType(types[0].type.name);
@@ -48,7 +48,7 @@ const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
           );
         },
       )}
-    </div>
+    </>
   );
 };
 

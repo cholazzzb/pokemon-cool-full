@@ -7,6 +7,7 @@ import {
 import type { AppProps } from 'next/app';
 
 import { globalStyles } from '@/presentational/theme';
+import Head from 'next/head';
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -38,6 +39,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
+      <Head>
+        <title>Pokemon Cool</title>
+        <meta name="description" content="Unofficial Pokedex" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, minimum-scale=1, initial-scale=1"
+        />
+      </Head>
       <Component {...pageProps} />
     </ApolloProvider>
   );

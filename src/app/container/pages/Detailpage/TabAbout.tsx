@@ -43,7 +43,7 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
 export default TabAbout;
 
 const TabBody = mainTheme.styled('div', {
-  overflow: 'auto',
+  height: '100%',
   padding: '10px',
 });
 

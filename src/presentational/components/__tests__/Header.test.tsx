@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import Header from '../Header';
 
@@ -17,9 +16,16 @@ describe('renders correctly', () => {
     expect(queryByTestId('header-children-label')).toBeTruthy();
   });
 
-  it('backIcon', () => {
+  it('backIcon with callback', () => {
     const { queryByTestId } = render(
-      <Header caption="normal" onBack={() => {}} />,
+      <Header caption="normal" onClickBack={() => {}} />,
+    );
+    expect(queryByTestId('header-backicon')).toBeTruthy();
+  });
+
+  it('backIcon with link', () => {
+    const { queryByTestId } = render(
+      <Header caption="normal" onClickBackLink="/" />,
     );
     expect(queryByTestId('header-backicon')).toBeTruthy();
   });

@@ -16,7 +16,6 @@ const NavigatorContainer = mainTheme.styled('div', {
   borderTop: 'solid 4px',
   borderColor: '#f2f3f5',
   backgroundColor: '#f2f3f5',
-  zIndex: '$navigator',
   '@md': {
     flexDirection: 'column',
     justifyContent: 'start',
@@ -51,7 +50,7 @@ export const NavigatorItem = mainTheme.styled('div', {
   },
   '@md': {
     flexDirection: 'row',
-    height: '30px',
+    minHeight: '50px',
     width: 'initial',
     justifyContent: 'start',
     padding: '10px',

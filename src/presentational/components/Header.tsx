@@ -1,26 +1,38 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
 import { mainTheme } from '@/presentational/theme';
 
 type HeaderProps = {
   caption?: string;
-  onBack?: () => void;
+  onClickBack?: () => void;
+  onClickBackLink?: string;
 };
 
 const Header: FunctionComponent<HeaderProps> = ({
   caption,
   children,
-  onBack,
+  onClickBack,
+  onClickBackLink,
 }) => {
   return (
     <HeaderWrapper>
       <BackButton>
-        {onBack && (
-          <IconWrapper data-testid="header-backicon" onClick={onBack}>
-            <FontAwesomeIcon icon={faChevronLeft} />
+        {onClickBack && (
+          <IconWrapper data-testid="header-backicon" onClick={onClickBack}>
+            <FontAwesomeIcon icon={faChevronLeft} color="black" />
           </IconWrapper>
+        )}
+        {onClickBackLink && (
+          <Link href={onClickBackLink}>
+            <a>
+              <IconWrapper data-testid="header-backicon">
+                <FontAwesomeIcon icon={faChevronLeft} color="black" />
+              </IconWrapper>
+            </a>
+          </Link>
         )}
       </BackButton>
       <Caption data-testid="header-label">{caption}</Caption>
@@ -34,8 +46,8 @@ const Header: FunctionComponent<HeaderProps> = ({
 export default Header;
 
 const HeaderWrapper = mainTheme.styled('div', {
-  color: 'white',
   display: 'flex',
+  height: '50px',
   width: '100%',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -52,6 +64,8 @@ const IconWrapper = mainTheme.styled('span', {
   padding: '10px',
   width: '15px',
   height: '15px',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const Caption = mainTheme.styled('div', {
@@ -61,7 +75,6 @@ const Caption = mainTheme.styled('div', {
   fontSize: '25px',
   fontWeight: 700,
   padding: '10px',
-  maxHeight: '30px',
   width: '70%',
   textTransform: 'capitalize',
 });

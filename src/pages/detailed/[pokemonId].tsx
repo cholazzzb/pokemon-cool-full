@@ -5,10 +5,9 @@ import {
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 
 import Overview from '@/app/container/pages/Detailpage/Overview';
 import Tab from '@/app/container/pages/Detailpage/Tab';
@@ -19,7 +18,7 @@ import {
   getPokemonName,
 } from '@/domains/pokemons/pokemonsService';
 import { getPrimaryColorFromType } from '@/presentational/colorTheme';
-import { Layout, RightPane } from '@/presentational/components/Layout';
+import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
 import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
@@ -40,63 +39,51 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
   const { types, ...others } = pokemonDetail.pokemon;
 
   const primColor = getPrimaryColorFromType(types[0].type.name);
-  const DetailPageContainer = mainTheme.styled('div', {
+  const DetailPageContainer = mainTheme.styled(Body, {
     backgroundColor: primColor,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    height: '100%',
   });
 
   return (
-    <Fragment>
-      <Head>
-        <title>Pokemon Cool</title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Layout>
-        <RightPane />
-        <DetailPageContainer>
-          <Overview
-            id={Number(pokemonId)}
-            currentName={pokemonName}
-            types={types}
-          />
-          <TabContainer
-            currentTab={currentTab}
-            setCurrentTab={(selectedTab: number) => setCurrentTab(selectedTab)}
-            primColor={primColor}
-          >
-            <Tab currentTab={currentTab} {...others} types={types} />
-          </TabContainer>
-        </DetailPageContainer>
-        <Navigator>
-          <Link href="/">
-            <Navigator.Item>
-              <Navigator.ItemIcon>
-                <FontAwesomeIcon icon={faBook} />
-              </Navigator.ItemIcon>
-              <Navigator.ItemText>Pokemon List</Navigator.ItemText>
-            </Navigator.Item>
-          </Link>
-          <Link href="/owned">
-            <Navigator.Item>
-              <Navigator.ItemIcon>
-                <Image
-                  alt="pokeball"
-                  src={getAsset('images/pokeball')}
-                  width={20}
-                  height={20}
-                />
-              </Navigator.ItemIcon>
-              <Navigator.ItemText>Owned</Navigator.ItemText>
-            </Navigator.Item>
-          </Link>
-        </Navigator>
-      </Layout>
-    </Fragment>
+    <Layout>
+      <RightPane />
+      <DetailPageContainer>
+        <Overview
+          id={Number(pokemonId)}
+          currentName={pokemonName}
+          types={types}
+        />
+        <TabContainer
+          currentTab={currentTab}
+          setCurrentTab={(selectedTab: number) => setCurrentTab(selectedTab)}
+          primColor={primColor}
+        >
+          <Tab currentTab={currentTab} {...others} types={types} />
+        </TabContainer>
+      </DetailPageContainer>
+      <Navigator>
+        <Link href="/">
+          <Navigator.Item>
+            <Navigator.ItemIcon>
+              <FontAwesomeIcon icon={faBook} />
+            </Navigator.ItemIcon>
+            <Navigator.ItemText>Pokemon List</Navigator.ItemText>
+          </Navigator.Item>
+        </Link>
+        <Link href="/owned">
+          <Navigator.Item>
+            <Navigator.ItemIcon>
+              <Image
+                alt="pokeball"
+                src={getAsset('images/pokeball')}
+                width={20}
+                height={20}
+              />
+            </Navigator.ItemIcon>
+            <Navigator.ItemText>Owned</Navigator.ItemText>
+          </Navigator.Item>
+        </Link>
+      </Navigator>
+    </Layout>
   );
 };
 

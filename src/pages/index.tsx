@@ -1,22 +1,25 @@
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { GetStaticPropsResult, NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
 
 import PokemonList from '@/app/container/pages/Listpage/PokemonList';
 import {
   AllPokemonsNameType,
   getAllPokemonsName,
 } from '@/domains/pokemons/pokemonsService';
+import Header from '@/presentational/components/Header';
+import {
+  Body,
+  Layout,
+  RightPane,
+  YScrollable,
+} from '@/presentational/components/Layout';
+import Navigator from '@/presentational/components/Navigator';
+import SearchBarWrapper from '@/presentational/pokemon-list/SearchBarWrapper';
 import { getAsset } from '@/utils/asset';
-import Link from 'next/link';
-import Body from 'src/presentational/components/Body';
-import Header from 'src/presentational/components/Header';
-import { Layout, RightPane } from 'src/presentational/components/Layout';
-import Navigator from 'src/presentational/components/Navigator';
-import SearchBarWrapper from 'src/presentational/pokemon-list/SearchBarWrapper';
 
 type HomeProps = AllPokemonsNameType;
 
@@ -34,45 +37,39 @@ const Home: NextPage<HomeProps> = (props) => {
         );
 
   return (
-    <Fragment>
-      <Head>
-        <title>Pokemon Cool</title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Layout>
-        <RightPane />
-        <Body>
-          <Header caption="List Pokemons" />
+    <Layout>
+      <RightPane />
+      <Body>
+        <Header caption="List Pokemons" />
+        <YScrollable>
           <PokemonList pokemons={filteredPokemons} />
-        </Body>
-        <Navigator>
-          <Link href="/">
-            <Navigator.Item>
-              <Navigator.ItemIcon>
-                <FontAwesomeIcon icon={faBookOpen} color="#ed5564" />
-              </Navigator.ItemIcon>
-              <Navigator.ItemText>Pokemon List</Navigator.ItemText>
-            </Navigator.Item>
-          </Link>
-          <Link href="/owned">
-            <Navigator.Item>
-              <Navigator.ItemIcon>
-                <Image
-                  alt="pokeball"
-                  src={getAsset('images/pokeball')}
-                  width={20}
-                  height={20}
-                />
-              </Navigator.ItemIcon>
-              <Navigator.ItemText>Owned</Navigator.ItemText>
-            </Navigator.Item>
-          </Link>
-          <SearchBarWrapper onChangeSearch={onChangeSearch} />
-        </Navigator>
-      </Layout>
-    </Fragment>
+        </YScrollable>
+      </Body>
+      <Navigator>
+        <Link href="/">
+          <Navigator.Item>
+            <Navigator.ItemIcon>
+              <FontAwesomeIcon icon={faBookOpen} color="#ed5564" />
+            </Navigator.ItemIcon>
+            <Navigator.ItemText>Pokemon List</Navigator.ItemText>
+          </Navigator.Item>
+        </Link>
+        <Link href="/owned">
+          <Navigator.Item>
+            <Navigator.ItemIcon>
+              <Image
+                alt="pokeball"
+                src={getAsset('images/pokeball')}
+                width={20}
+                height={20}
+              />
+            </Navigator.ItemIcon>
+            <Navigator.ItemText>Owned</Navigator.ItemText>
+          </Navigator.Item>
+        </Link>
+        <SearchBarWrapper onChangeSearch={onChangeSearch} />
+      </Navigator>
+    </Layout>
   );
 };
 

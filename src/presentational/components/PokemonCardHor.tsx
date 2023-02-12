@@ -35,12 +35,12 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
   const bgColor = getPrimaryColorFromType(type);
 
   const Card = mainTheme.styled('div', {
-    minWidth: '200px',
+    minWidth: '250px',
     maxWidth: '300px',
-    height: '150px',
+    height: '170px',
     backgroundColor: `${bgColor}`,
     color: 'white',
-    padding: '20px 0px 0px 22px',
+    padding: '20px 22px',
     margin: '10px 0px',
     borderRadius: '24px',
     display: 'grid',
