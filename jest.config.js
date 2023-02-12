@@ -17,10 +17,7 @@ module.exports = {
       https://jestjs.io/docs/webpack#handling-static-assets */
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js',
 
-    '^@/components/(.*)$': '<rootDir>/src/components/$1',
-    '^@/domains/(.*)$': '<rootDir>/src/domains/$1',
-    '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^@/hooks/(.*)$': '<rootDir>/src/hooks/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
