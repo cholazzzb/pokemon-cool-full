@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { YScrollable } from '@/presentational/components/Layout';
 import { mainTheme } from '@/presentational/theme';
@@ -11,7 +11,7 @@ type TabContainerProps = {
   setCurrentTab: (selectedTab: number) => void;
 };
 
-const TabContainer: FunctionComponent<TabContainerProps> = ({
+const TabContainer: FunctionComponent<PropsWithChildren<TabContainerProps>> = ({
   children,
   primColor,
   currentTab,

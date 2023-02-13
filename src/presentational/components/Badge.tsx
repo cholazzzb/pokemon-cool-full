@@ -1,12 +1,12 @@
 import { mainTheme } from '@/presentational/theme';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 type BadgeProps = {
   top?: number;
   right?: number;
 };
 
-const Badge: FunctionComponent<BadgeProps> = ({
+const Badge: FunctionComponent<PropsWithChildren<BadgeProps>> = ({
   top = 0,
   right = 0,
   children,

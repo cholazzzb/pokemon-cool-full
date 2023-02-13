@@ -1,6 +1,6 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { Overlay } from '@/presentational/components/Overlay';
 import { mainTheme } from '@/presentational/theme';
@@ -11,7 +11,7 @@ type DialogProps = {
   onClose: () => void;
 };
 
-const Dialog: FunctionComponent<DialogProps> = ({
+const Dialog: FunctionComponent<PropsWithChildren<DialogProps>> = ({
   headerText,
   onClose,
   children,

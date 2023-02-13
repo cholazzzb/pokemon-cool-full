@@ -32,7 +32,7 @@ const Row: FunctionComponent<RowProps> = (props) => {
   );
 };
 
-type OwnedPokemonListProps = {
+export type OwnedPokemonListProps = {
   selectPokemon: (selectedPokemon: PokemonName) => void;
 };
 const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({

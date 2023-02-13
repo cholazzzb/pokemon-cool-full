@@ -18,19 +18,23 @@ const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
   return (
     <Container>
       <Link href={`/detailed/${currentId + 1}`}>
-        <a style={{ textDecoration: 'none' }}>
-          <Icon>
-            <FontAwesomeIcon icon={faChevronCircleRight} />
-          </Icon>
-        </a>
+        <Icon>
+          <FontAwesomeIcon
+            style={{ width: 25, height: 25 }}
+            icon={faChevronCircleRight}
+            color="white"
+          />
+        </Icon>
       </Link>
       {currentId > 1 && (
         <Link href={`/detailed/${currentId - 1}`}>
-          <a style={{ textDecoration: 'none' }}>
-            <Icon>
-              <FontAwesomeIcon icon={faChevronCircleLeft} />
-            </Icon>
-          </a>
+          <Icon>
+            <FontAwesomeIcon
+              style={{ width: 25, height: 25 }}
+              icon={faChevronCircleLeft}
+              color="white"
+            />
+          </Icon>
         </Link>
       )}
     </Container>
@@ -50,8 +54,12 @@ const Container = mainTheme.styled('div', {
 
 const Icon = mainTheme.styled('span', {
   display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: '25px',
   height: '25px',
   padding: '20px',
-  color: 'white',
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
 });

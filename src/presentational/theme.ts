@@ -45,7 +45,7 @@ export const globalStyles = globalCss({
     scrollbarWidth: 'thin',
     scrollbarColor: 'transparent transparent',
     '&::-webkit-scrollbar': {
-      width: '1px',
+      width: '0px',
     },
 
     '&::-webkit-scrollbar-track': {

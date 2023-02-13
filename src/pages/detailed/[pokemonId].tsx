@@ -61,7 +61,7 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
         </TabContainer>
       </DetailPageContainer>
       <Navigator>
-        <Link href="/">
+        <Link href="/" style={{ width: '100%' }}>
           <Navigator.Item>
             <Navigator.ItemIcon>
               <FontAwesomeIcon icon={faBook} />
@@ -69,7 +69,7 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
             <Navigator.ItemText>Pokemon List</Navigator.ItemText>
           </Navigator.Item>
         </Link>
-        <Link href="/owned">
+        <Link href="/owned" style={{ width: '100%' }}>
           <Navigator.Item>
             <Navigator.ItemIcon>
               <Image
@@ -122,7 +122,6 @@ export const getStaticProps = async (
 
     return { props: { pokemonId, pokemonName, pokemonDetail } };
   } catch (error) {
-    console.error({ error });
     return {
       notFound: true,
     };

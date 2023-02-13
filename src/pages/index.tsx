@@ -46,7 +46,7 @@ const Home: NextPage<HomeProps> = (props) => {
         </YScrollable>
       </Body>
       <Navigator>
-        <Link href="/">
+        <Link href="/" style={{ width: '100%' }}>
           <Navigator.Item>
             <Navigator.ItemIcon>
               <FontAwesomeIcon icon={faBookOpen} color="#ed5564" />
@@ -54,7 +54,7 @@ const Home: NextPage<HomeProps> = (props) => {
             <Navigator.ItemText>Pokemon List</Navigator.ItemText>
           </Navigator.Item>
         </Link>
-        <Link href="/owned">
+        <Link href="/owned" style={{ width: '100%' }}>
           <Navigator.Item>
             <Navigator.ItemIcon>
               <Image
@@ -85,7 +85,6 @@ export const getStaticProps = async (): Promise<
     }
     return { props: allPokemons };
   } catch (error) {
-    console.error({ error });
     return {
       notFound: true,
     };

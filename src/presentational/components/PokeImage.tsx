@@ -37,7 +37,8 @@ const PokeImage: FunctionComponent<ImageProps> = (props) => {
           data-testid="pokemon-image"
           src={image}
           alt="pokemon"
-          layout="fill"
+          width={size + 40}
+          height={size + 40}
         />
       </ImageWrapper>
     </ImageBackground>

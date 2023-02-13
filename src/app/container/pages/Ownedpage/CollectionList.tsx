@@ -73,7 +73,7 @@ const AutoSizerContainer = mainTheme.styled('div', {
   width: '100%',
 });
 
-type CollectionListProps = {
+export type CollectionListProps = {
   activePokeName: string;
   onClickRelease: () => void;
 };

@@ -1,7 +1,7 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { mainTheme } from '@/presentational/theme';
 
@@ -11,7 +11,7 @@ type HeaderProps = {
   onClickBackLink?: string;
 };
 
-const Header: FunctionComponent<HeaderProps> = ({
+const Header: FunctionComponent<PropsWithChildren<HeaderProps>> = ({
   caption,
   children,
   onClickBack,
@@ -27,11 +27,9 @@ const Header: FunctionComponent<HeaderProps> = ({
         )}
         {onClickBackLink && (
           <Link href={onClickBackLink}>
-            <a>
-              <IconWrapper data-testid="header-backicon">
-                <FontAwesomeIcon icon={faChevronLeft} color="black" />
-              </IconWrapper>
-            </a>
+            <IconWrapper data-testid="header-backicon">
+              <FontAwesomeIcon icon={faChevronLeft} color="black" />
+            </IconWrapper>
           </Link>
         )}
       </BackButton>

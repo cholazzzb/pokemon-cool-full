@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 /** @type {import('next').NextConfig} */
 module.exports = {
@@ -6,6 +6,8 @@ module.exports = {
     apiEndpoint:
       process.env.API_ENDPOINT ||
       'https://graphql-pokeapi.vercel.app/api/graphql',
+    pokeApiEndpoint:
+      process.env.POKE_API_ENDPOINT || 'https://beta.pokeapi.co/graphql/v1beta',
     port: process.env.PORT || 3000,
   },
   publicRuntimeConfig: {
@@ -18,7 +20,7 @@ module.exports = {
     formats: ['image/avif', 'image/webp'],
   },
   webpack(config, options) {
-    config.resolve.alias['@'] = path.join(__dirname, 'src')
+    config.resolve.alias['@'] = path.join(__dirname, 'src');
     const { isServer } = options;
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,

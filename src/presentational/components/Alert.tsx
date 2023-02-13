@@ -1,15 +1,23 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Fragment, FunctionComponent, useState } from 'react';
+import {
+  Fragment,
+  FunctionComponent,
+  PropsWithChildren,
+  useState,
+} from 'react';
 
-import { mainTheme } from '../theme';
+import { mainTheme } from '@/presentational/theme';
 import Header from './Header';
 
 type AlertProps = {
   headText: string;
 };
 
-const Alert: FunctionComponent<AlertProps> = ({ headText, children }) => {
+const Alert: FunctionComponent<PropsWithChildren<AlertProps>> = ({
+  headText,
+  children,
+}) => {
   const [show, setShow] = useState<boolean>(true);
 
   const onClose = () => {

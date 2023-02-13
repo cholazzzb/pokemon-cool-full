@@ -1,5 +1,5 @@
+src/__generated__
 node_modules
 .next
 yarn.lock
-package-lock.json
 public

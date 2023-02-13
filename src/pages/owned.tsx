@@ -5,8 +5,10 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { Fragment, FunctionComponent, useState } from 'react';
 
+import { CollectionListProps } from '@/app/container/pages/Ownedpage/CollectionList';
+import { OwnedPokemonListProps } from '@/app/container/pages/Ownedpage/OwnedPokemonList';
 import Dialog from '@/presentational/components/Dialog';
 import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
@@ -15,12 +17,12 @@ import { getAsset } from '@/utils/asset';
 const OwnedPokemonList = dynamic(
   () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),
   { ssr: false },
-);
+) as FunctionComponent<OwnedPokemonListProps>;
 
 const CollectionList = dynamic(
   () => import('@/app/container/pages/Ownedpage/CollectionList'),
   { ssr: false },
-);
+) as FunctionComponent<CollectionListProps>;
 
 const Owned: NextPage = () => {
   const [activePokeName, setActivePokeName] = useState('');
@@ -56,7 +58,7 @@ const Owned: NextPage = () => {
           )}
         </Body>
         <Navigator>
-          <Link href="/">
+          <Link href="/" style={{ width: '100%' }}>
             <Navigator.Item>
               <Navigator.ItemIcon>
                 <FontAwesomeIcon icon={faBook} />
@@ -65,7 +67,7 @@ const Owned: NextPage = () => {
             </Navigator.Item>
           </Link>
 
-          <Link href="/owned">
+          <Link href="/owned" style={{ width: '100%' }}>
             <Navigator.Item>
               <Navigator.ItemIcon>
                 <Image

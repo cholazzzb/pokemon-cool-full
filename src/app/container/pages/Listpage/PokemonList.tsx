@@ -25,18 +25,16 @@ const Row: FunctionComponent<RowProps> = (props) => {
   return (
     <ListItem style={style}>
       <Link href={`/detailed/${pokemons[index].id}`}>
-        <a style={{ textDecoration: 'none' }}>
-          {pokemons[index] && (
-            <PokemonCardHor
-              id={pokemons[index].id}
-              name={pokemons[index].name}
-              image={publicRuntimeConfig.pokemonImageUrl.replace(
-                '{id}',
-                pokemons[index].id.toString(),
-              )}
-            />
-          )}
-        </a>
+        {pokemons[index] && (
+          <PokemonCardHor
+            id={pokemons[index].id}
+            name={pokemons[index].name}
+            image={publicRuntimeConfig.pokemonImageUrl.replace(
+              '{id}',
+              pokemons[index].id.toString(),
+            )}
+          />
+        )}
       </Link>
     </ListItem>
   );

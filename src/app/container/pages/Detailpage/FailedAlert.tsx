@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import Alert from '@/presentational/components/Alert';
 import { mainTheme } from '@/presentational/theme';
@@ -11,12 +11,14 @@ const AlertContainer = mainTheme.styled('div', {
   minHeight: '300px',
 });
 
-interface IFailedAlertProps {
+type FailedAlertProps = {
   iconColor: string;
   catchPokemon: () => void;
-}
+};
 
-const FailedAlert: FunctionComponent<IFailedAlertProps> = (props) => {
+const FailedAlert: FunctionComponent<PropsWithChildren<FailedAlertProps>> = (
+  props,
+) => {
   const { iconColor, catchPokemon } = props;
   const Text = mainTheme.styled('div', {
     display: 'flex',

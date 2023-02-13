@@ -7,3 +7,13 @@ export const typeSchema = t.Record({
 });
 
 export type type = t.Static<typeof typeSchema>;
+
+export const EffectivityMap = {
+  200: 'Super Effective',
+  100: 'Normal',
+  50: 'Not Very Effective',
+  0: 'No Effect',
+} as const;
+
+export type EffectivityMapKey = keyof typeof EffectivityMap;
+export type EffectivityMapVal = (typeof EffectivityMap)[EffectivityMapKey];
