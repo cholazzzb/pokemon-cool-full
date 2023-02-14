@@ -20,6 +20,7 @@ const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
       <Link href={`/detailed/${currentId + 1}`}>
         <Icon>
           <FontAwesomeIcon
+            data-testid="icon-next-pokemon"
             style={{ width: 25, height: 25 }}
             icon={faChevronCircleRight}
             color="white"
@@ -30,6 +31,7 @@ const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
         <Link href={`/detailed/${currentId - 1}`}>
           <Icon>
             <FontAwesomeIcon
+              data-testid="icon-prev-pokemon"
               style={{ width: 25, height: 25 }}
               icon={faChevronCircleLeft}
               color="white"
