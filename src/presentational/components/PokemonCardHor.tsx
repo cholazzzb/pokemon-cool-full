@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
 import { usePokeType } from '@/domains/pokemon/pokemonHook';
-import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
-import { mainTheme } from 'src/presentational/theme';
+import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { mainTheme } from '@/presentational/theme';
 import PokeImage from './PokeImage';
 import TypeChip from './TypeChip';
 

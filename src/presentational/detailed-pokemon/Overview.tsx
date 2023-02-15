@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 
 import { BaseName } from '@/domains/entity';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import Link from 'next/link';
 import { getSecondaryColorFromType } from 'src/presentational/colorTheme';
 import PokeImage from 'src/presentational/components/PokeImage';
 import TypeChip from 'src/presentational/components/TypeChip';
@@ -38,10 +39,12 @@ const Overview: FunctionComponent<OverviewProps> = ({
                 return <></>;
               }
               return (
-                <TypeChip
+                <Link
                   key={`information-pokemonn-type-${pokemonType}`}
-                  type={pokemonType}
-                />
+                  href={`/types/${type.type.id}`}
+                >
+                  <TypeChip type={pokemonType} />
+                </Link>
               );
             })}
           </TypesContainer>

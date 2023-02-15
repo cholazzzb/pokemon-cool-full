@@ -9,9 +9,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 
-import Overview from '@/app/container/pages/Detailpage/Overview';
-import Tab from '@/app/container/pages/Detailpage/Tab';
-import TabContainer from '@/app/container/pages/Detailpage/TabContainer';
 import {
   PokemonDetailByNameType,
   getPokemonDetailByName,
@@ -20,6 +17,9 @@ import {
 import { getPrimaryColorFromType } from '@/presentational/colorTheme';
 import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
+import Overview from '@/presentational/detailed-pokemon/Overview';
+import Tab from '@/presentational/detailed-pokemon/Tab';
+import TabContainer from '@/presentational/detailed-pokemon/TabContainer';
 import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
 import { convertURLQueryToString } from '@/utils/url';

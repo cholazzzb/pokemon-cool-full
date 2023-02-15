@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import PokemonList from '@/app/container/pages/Listpage/PokemonList';
 import {
   AllPokemonsNameType,
   getAllPokemonsName,
@@ -18,6 +17,7 @@ import {
   YScrollable,
 } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
+import PokemonList from '@/presentational/pokemon-list/PokemonList';
 import SearchBarWrapper from '@/presentational/pokemon-list/SearchBarWrapper';
 import { getAsset } from '@/utils/asset';
 

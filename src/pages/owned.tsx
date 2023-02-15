@@ -7,20 +7,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, FunctionComponent, useState } from 'react';
 
-import { CollectionListProps } from '@/app/container/pages/Ownedpage/CollectionList';
-import { OwnedPokemonListProps } from '@/app/container/pages/Ownedpage/OwnedPokemonList';
 import Dialog from '@/presentational/components/Dialog';
 import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
+import type { CollectionListProps } from '@/presentational/owned-pokemon//CollectionList';
+import type { OwnedPokemonListProps } from '@/presentational/owned-pokemon/OwnedPokemonList';
 import { getAsset } from '@/utils/asset';
 
 const OwnedPokemonList = dynamic(
-  () => import('@/app/container/pages/Ownedpage/OwnedPokemonList'),
+  () => import('@/presentational/owned-pokemon/OwnedPokemonList'),
   { ssr: false },
 ) as FunctionComponent<OwnedPokemonListProps>;
 
 const CollectionList = dynamic(
-  () => import('@/app/container/pages/Ownedpage/CollectionList'),
+  () => import('@/presentational/owned-pokemon/CollectionList'),
   { ssr: false },
 ) as FunctionComponent<CollectionListProps>;
 

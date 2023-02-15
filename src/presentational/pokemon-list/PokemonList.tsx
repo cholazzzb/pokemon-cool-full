@@ -5,9 +5,9 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
 import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
-import { Center } from 'src/presentational/components/Layout';
-import PokemonCardHor from 'src/presentational/components/PokemonCardHor';
-import { mainTheme } from 'src/presentational/theme';
+import { Center } from '@/presentational/components/Layout';
+import PokemonCardHor from '@/presentational/components/PokemonCardHor';
+import { mainTheme } from '@/presentational/theme';
 
 type RowProps = {
   data: {
