@@ -4,14 +4,20 @@ export const mainTheme = createStitches({
   theme: {
     colors: {
       primary100: 'rgba(108, 74, 182, 1)',
+      primary50: 'rgba(108, 74, 182, 0.5)',
       secondary100: 'rgba(141, 114, 225, 1)',
+      secondary50: 'rgba(141, 114, 225, 0.5)',
       tertiary100: 'rgba(141, 158, 255, 1)',
-      neutral100: 'rgba(185, 224, 255, 1)',
+      tertiary50: 'rgba(141, 158, 255, 1)',
+      neutral100: 'rgba(185, 224, 255, 0.5)',
       red100: 'rgba(233,105,87, 1)',
       red90: 'rgba(233,105,87, 0.9)',
+      red50: 'rgba(233,105,87, 0.5)',
     },
     zIndices: {
+      navigator: 60,
       overlay: 50,
+      pokeImage: 10,
       searchBar: 2,
       searchButton: 2,
     },

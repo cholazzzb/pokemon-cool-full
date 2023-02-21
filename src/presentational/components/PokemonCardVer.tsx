@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import getConfig from 'next/config';
 
 import { usePokeType } from '@/domains/pokemon/pokemonHook';
@@ -38,25 +39,35 @@ const PokemonCardVer: FunctionComponent<IPokemonCardVerProps> = (props) => {
       'rgba(0, 0, 0, 0.19) 0px 10px 20px,  rgba(0, 0, 0, 0.23) 0px 6px 6px',
   });
   return (
-    <Card>
-      <NameText>{name}</NameText>
-      <Flex>
-        {data &&
-          data.pokemon.types.map((type: any, idx: number) => (
-            <TypeChip key={idx} type={type.type.name} />
-          ))}
-      </Flex>
-      <FlexCenter>
-        <PokeImage
-          type={data.pokemon.types[0].type.name}
-          image={publicRuntimeConfig.pokemonImageUrl.replace(
-            '{id}',
-            id.toString(),
-          )}
-          size={75}
-        />
-      </FlexCenter>
-    </Card>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0, scale: 0.7 },
+        visible: { opacity: 1, scale: 1 },
+      }}
+      transition={{ duration: 1 }}
+    >
+      <Card>
+        <NameText>{name}</NameText>
+        <Flex>
+          {data &&
+            data.pokemon.types.map((type: any, idx: number) => (
+              <TypeChip key={idx} type={type.type.name} />
+            ))}
+        </Flex>
+        <FlexCenter>
+          <PokeImage
+            type={data.pokemon.types[0].type.name}
+            image={publicRuntimeConfig.pokemonImageUrl.replace(
+              '{id}',
+              id.toString(),
+            )}
+            size={75}
+          />
+        </FlexCenter>
+      </Card>
+    </motion.div>
   );
 };
 export default PokemonCardVer;

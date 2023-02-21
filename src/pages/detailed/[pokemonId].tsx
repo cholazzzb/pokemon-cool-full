@@ -7,7 +7,7 @@ import {
 } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 
 import {
   PokemonDetailByNameType,
@@ -15,11 +15,16 @@ import {
   getPokemonName,
 } from '@/domains/pokemons/pokemonsService';
 import { getPrimaryColorFromType } from '@/presentational/colorTheme';
-import { Body, Layout, RightPane } from '@/presentational/components/Layout';
+import {
+  Body,
+  BottomSheet,
+  Layout,
+  RightPane,
+} from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
+import InformationCards from '@/presentational/detailed-pokemon/InformationCards';
+import LocationCards from '@/presentational/detailed-pokemon/LocationCards';
 import Overview from '@/presentational/detailed-pokemon/Overview';
-import Tab from '@/presentational/detailed-pokemon/Tab';
-import TabContainer from '@/presentational/detailed-pokemon/TabContainer';
 import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
 import { convertURLQueryToString } from '@/utils/url';
@@ -35,12 +40,11 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
   pokemonName,
   pokemonDetail,
 }) => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const { types, ...others } = pokemonDetail.pokemon;
+  const { types, ...informations } = pokemonDetail.pokemon;
 
-  const primColor = getPrimaryColorFromType(types[0].type.name);
+  const primaryColor = getPrimaryColorFromType(types[0].type.name);
   const DetailPageContainer = mainTheme.styled(Body, {
-    backgroundColor: primColor,
+    backgroundColor: primaryColor,
   });
 
   return (
@@ -52,13 +56,13 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
           currentName={pokemonName}
           types={types}
         />
-        <TabContainer
-          currentTab={currentTab}
-          setCurrentTab={(selectedTab: number) => setCurrentTab(selectedTab)}
-          primColor={primColor}
-        >
-          <Tab currentTab={currentTab} {...others} types={types} />
-        </TabContainer>
+        <BottomSheet>
+          <InformationCards
+            primaryColor={primaryColor}
+            informations={informations}
+          />
+          <LocationCards />
+        </BottomSheet>
       </DetailPageContainer>
       <Navigator>
         <Link href="/" style={{ width: '100%' }}>

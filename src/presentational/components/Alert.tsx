@@ -43,7 +43,7 @@ const Alert: FunctionComponent<PropsWithChildren<AlertProps>> = ({
 export default Alert;
 
 const Overlay = mainTheme.styled('div', {
-  zIndex: '50',
+  zIndex: '$overlay',
   position: 'fixed',
   top: '0px',
   left: '0px',

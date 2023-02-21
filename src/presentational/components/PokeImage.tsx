@@ -23,6 +23,7 @@ const PokeImage: FunctionComponent<ImageProps> = (props) => {
 
   const ImageWrapper = mainTheme.styled('div', {
     position: 'relative',
+    zIndex: '$pokeImage',
     borderRadius: '9999px',
     width: `${size + 40}px`,
     height: `${size + 40}px`,

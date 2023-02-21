@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FunctionComponent } from 'react';
 
 import { usePokeType } from '@/domains/pokemon/pokemonHook';
@@ -51,20 +52,37 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
   });
 
   return (
-    <Card>
-      <Attribute>
-        <NameText>{`#${id} ${name}`}</NameText>
-        {data &&
-          data.pokemon.types.map((type: any, idx: number) => (
-            <TypeChip key={idx} type={type.type.name} />
-          ))}
-      </Attribute>
-      <PokeImage
-        type={data.pokemon.types[0].type.name}
-        size={75}
-        image={image}
-      />
-    </Card>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0, scale: 0.7 },
+        visible: { opacity: 1, scale: 1 },
+      }}
+      transition={{ duration: 1 }}
+    >
+      <Card>
+        <Attribute>
+          <NameText>{`#${id} ${name}`}</NameText>
+          {data &&
+            data.pokemon.types.map((type: any, idx: number) => (
+              <TypeChip key={idx} type={type.type.name} />
+            ))}
+        </Attribute>
+        <motion.div
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 1 },
+          }}
+        >
+          <PokeImage
+            type={data.pokemon.types[0].type.name}
+            size={75}
+            image={image}
+          />
+        </motion.div>
+      </Card>
+    </motion.div>
   );
 };
 

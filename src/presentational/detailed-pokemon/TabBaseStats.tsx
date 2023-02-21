@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { BaseName } from '@/domains/entity';
-import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { YScrollable } from '@/presentational/components/Layout';
 import { mainTheme } from '@/presentational/theme';
+import { ButtonOutline } from '../components/Button';
+import { TextWhite } from '../components/Text';
 
 type TabBaseStatsProps = {
   stats: Array<{
@@ -11,9 +12,7 @@ type TabBaseStatsProps = {
       name: string;
     };
   }>;
-  types: Array<{
-    type: BaseName;
-  }>;
+  primaryColor: string;
 };
 
 const BaseStatsLabels = [
@@ -28,27 +27,33 @@ const BaseStatsLabels = [
 
 const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
   stats,
-  types,
+  primaryColor,
 }) => {
   return (
-    <>
+    <YScrollable style={{ width: '100%' }}>
       {stats.map(
         (status: { stat: { name: string }; base_stat: number }, idx) => {
-          const primaryColorType = getPrimaryColorFromType(types[0].type.name);
-
           return (
             <Status key={status.stat.name}>
               <StatusKey>{BaseStatsLabels[idx]}</StatusKey>
               <StatusValue>{status.base_stat}</StatusValue>
               <BarContainer
-                color={primaryColorType}
+                color={primaryColor}
                 fill={Math.round((status.base_stat * 100) / 255)}
               />
             </Status>
           );
         },
       )}
-    </>
+      <ButtonOutline
+        style={{
+          margin: 12,
+          backgroundColor: 'transparent',
+        }}
+      >
+        <TextWhite>Close</TextWhite>
+      </ButtonOutline>
+    </YScrollable>
   );
 };
 
@@ -76,11 +81,12 @@ const Status = mainTheme.styled('div', {
   padding: '10px',
 });
 const StatusKey = mainTheme.styled('div', {
-  color: 'gray',
+  color: 'white',
   display: 'flex',
   width: '70px',
 });
 const StatusValue = mainTheme.styled('div', {
+  color: 'white',
   display: 'flex',
   padding: '0px 10px',
 });

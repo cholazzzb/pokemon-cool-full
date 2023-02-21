@@ -17,6 +17,10 @@ export const YStack = mainTheme.styled(Flex, {
   flexDirection: 'column',
 });
 
+export const XScrollable = mainTheme.styled(Flex, {
+  overflowX: 'scroll',
+});
+
 export const YScrollable = mainTheme.styled(YStack, {
   height: '100%',
   overflowY: 'scroll',
@@ -45,4 +49,17 @@ export const RightPane = mainTheme.styled('div', {
 
 export const Body = mainTheme.styled(YScrollable, {
   width: '100%',
+  paddingBlockEnd: '65px', // Navigator height 65px
+  '@md': {
+    paddingBlockEnd: 'initial',
+  },
+});
+
+export const BottomSheet = mainTheme.styled(YStack, {
+  backgroundColor: 'white',
+  height: '100%',
+  width: '100%',
+  borderTopLeftRadius: 40,
+  borderTopRightRadius: 40,
+  paddingBlockStart: 60,
 });

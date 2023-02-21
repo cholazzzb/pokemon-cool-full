@@ -9,6 +9,9 @@ function Navigator({ children }: PropsWithChildren<{}>) {
 export default Navigator;
 
 const NavigatorContainer = mainTheme.styled('div', {
+  position: 'fixed',
+  bottom: 0,
+  zIndex: '$navigator',
   display: 'flex',
   width: '100%',
   height: '65px',
@@ -17,6 +20,9 @@ const NavigatorContainer = mainTheme.styled('div', {
   borderColor: '#f2f3f5',
   backgroundColor: '#f2f3f5',
   '@md': {
+    position: 'initial',
+    bottom: 0,
+    zIndex: 'initial',
     flexDirection: 'column',
     justifyContent: 'start',
     height: '100%',
@@ -39,6 +45,7 @@ export const NavigatorItem = mainTheme.styled('div', {
   textDecoration: 'none',
   display: 'flex',
   width: '100%',
+  height: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
