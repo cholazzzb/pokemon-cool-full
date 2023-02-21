@@ -2,9 +2,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getConfig from 'next/config';
 import Image from 'next/image';
-import { FC } from 'react';
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
+import shallow from 'zustand/shallow';
 
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { mainTheme } from 'src/presentational/theme';
@@ -21,7 +23,7 @@ type RowProps = {
   style: any;
 };
 
-const Row: FC<RowProps> = (props) => {
+const Row: FunctionComponent<RowProps> = (props) => {
   const { data, index, style } = props;
   const { pokemonName, names, onClickRelease } = data;
   const { publicRuntimeConfig } = getConfig();
@@ -31,7 +33,10 @@ const Row: FC<RowProps> = (props) => {
       ownedPokemons: state.ownedPokemons,
       releasePokemonByName: state.releasePokemonByName,
     }),
+    shallow,
   );
+
+  const pokemonId = ownedPokemons[pokemonName].id.toString();
 
   const releasePokemon = () => {
     onClickRelease();
@@ -42,15 +47,18 @@ const Row: FC<RowProps> = (props) => {
     <div style={style}>
       <ListItem>
         <PokeImage>
-          <Image
-            data-testid="pokemon-image"
-            src={publicRuntimeConfig.pokemonImageUrl.replace(
-              '{id}',
-              ownedPokemons[pokemonName].id.toString(),
-            )}
-            alt="pokemon"
-            layout="fill"
-          />
+          <Link href={`detailed/${pokemonId}`}>
+            <Image
+              data-testid="pokemon-image"
+              src={publicRuntimeConfig.pokemonImageUrl.replace(
+                '{id}',
+                pokemonId,
+              )}
+              alt="pokemon"
+              width={75}
+              height={75}
+            />
+          </Link>
         </PokeImage>
 
         <Main>
@@ -78,7 +86,7 @@ export type CollectionListProps = {
   onClickRelease: () => void;
 };
 
-const CollectionList: FC<CollectionListProps> = (props) => {
+const CollectionList: FunctionComponent<CollectionListProps> = (props) => {
   const { activePokeName, onClickRelease } = props;
   const { ownedPokemons } = useOwnedPokemonStore();
 

@@ -2,15 +2,13 @@ import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, FunctionComponent, useState } from 'react';
 
-import Dialog from '@/presentational/components/Dialog';
 import { Body, Layout, RightPane } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
-import type { CollectionListProps } from '@/presentational/owned-pokemon//CollectionList';
+import OwnedBottomSheet from '@/presentational/owned-pokemon/OwnedBottomSheet';
 import type { OwnedPokemonListProps } from '@/presentational/owned-pokemon/OwnedPokemonList';
 import { getAsset } from '@/utils/asset';
 
@@ -19,23 +17,12 @@ const OwnedPokemonList = dynamic(
   { ssr: false },
 ) as FunctionComponent<OwnedPokemonListProps>;
 
-const CollectionList = dynamic(
-  () => import('@/presentational/owned-pokemon/CollectionList'),
-  { ssr: false },
-) as FunctionComponent<CollectionListProps>;
-
 const Owned: NextPage = () => {
   const [activePokeName, setActivePokeName] = useState('');
   const [showDetailed, setShowDetailed] = useState(false);
 
   return (
     <Fragment>
-      <Head>
-        <title>Pokemon Cool</title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Layout>
         <RightPane />
         <Body>
@@ -46,15 +33,10 @@ const Owned: NextPage = () => {
             }}
           />
           {showDetailed && activePokeName.length > 0 && (
-            <Dialog
-              headerText={activePokeName}
+            <OwnedBottomSheet
+              pokemonName={activePokeName}
               onClose={() => setShowDetailed(false)}
-            >
-              <CollectionList
-                activePokeName={activePokeName}
-                onClickRelease={() => setShowDetailed(false)}
-              />
-            </Dialog>
+            />
           )}
         </Body>
         <Navigator>
