@@ -48,12 +48,12 @@ export const RightPane = mainTheme.styled('div', {
 });
 
 export const Body = mainTheme.styled(YScrollable, {
-  borderLeft: 'solid 4px #f2f3f5',
-  borderRight: 'solid 4px #f2f3f5',
   width: '100%',
   paddingBlockEnd: '65px', // Navigator height 65px
   '@md': {
     paddingBlockEnd: 'initial',
+    borderLeft: 'solid 4px #f2f3f5',
+    borderRight: 'solid 4px #f2f3f5',
   },
 });
 
