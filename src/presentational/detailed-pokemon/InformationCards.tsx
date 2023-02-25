@@ -12,7 +12,7 @@ import { FixedSizeList as List } from 'react-window';
 import { PokemonDetailByNameType } from '@/domains/pokemons/pokemonsService';
 import { Flex } from '@/presentational/components/Layout';
 import { ModalOverlay } from '@/presentational/components/ModalOverlay';
-import { H1, TextWhite } from '@/presentational/components/Text';
+import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
 import Tab from './Tab';
 
@@ -46,7 +46,9 @@ const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
 
   return (
     <>
-      <H1 style={{ marginInlineStart: 20 }}>Information</H1>
+      <Text variant="h2" color="black" style={{ marginInlineStart: 20 }}>
+        Information
+      </Text>
       <Flex style={{ width: '100%', height: 140 }}>
         <AutoSizer>
           {({ height, width }) => (
@@ -91,7 +93,7 @@ const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
                         color="white"
                       />
                     </Icon>
-                    <TextWhite>{data[index].label}</TextWhite>
+                    <Text>{data[index].label}</Text>
                   </motion.div>
                 );
               }}
@@ -137,11 +139,9 @@ const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
                     color="white"
                   />
                 </Icon>
-                <TextWhite
-                  style={{ marginBlockStart: 5, marginInlineStart: 15 }}
-                >
+                <Text style={{ marginBlockStart: 5, marginInlineStart: 15 }}>
                   {cards[currentTab].label}
-                </TextWhite>
+                </Text>
               </Flex>
 
               <Tab

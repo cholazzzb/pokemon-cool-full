@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
+import { ButtonOutline } from '@/presentational/components/Button';
 import { YScrollable } from '@/presentational/components/Layout';
+import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
-import { ButtonOutline } from '../components/Button';
-import { TextWhite } from '../components/Text';
 
 type TabBaseStatsProps = {
   stats: Array<{
@@ -51,7 +51,7 @@ const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
           backgroundColor: 'transparent',
         }}
       >
-        <TextWhite>Close</TextWhite>
+        <Text>Close</Text>
       </ButtonOutline>
     </YScrollable>
   );

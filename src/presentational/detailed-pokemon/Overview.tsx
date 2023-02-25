@@ -1,13 +1,14 @@
 import getConfig from 'next/config';
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
 import { BaseName } from '@/domains/entity';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import Link from 'next/link';
-import { getSecondaryColorFromType } from 'src/presentational/colorTheme';
-import PokeImage from 'src/presentational/components/PokeImage';
-import TypeChip from 'src/presentational/components/TypeChip';
-import { mainTheme } from 'src/presentational/theme';
+import { getSecondaryColorFromType } from '@/presentational/colorTheme';
+import PokeImage from '@/presentational/components/PokeImage';
+import PokemonTag from '@/presentational/components/Tags/PokemonTag';
+import Text from '@/presentational/components/Text';
+import { mainTheme } from '@/presentational/theme';
 import CatchPokemon from './CatchPokemon';
 import NavigateOverview from './NavigateOverview';
 
@@ -30,8 +31,7 @@ const Overview: FunctionComponent<OverviewProps> = ({
     <Container>
       <RelativePosition>
         <Information>
-          <TextName>{currentName}</TextName>
-          <TextId>#{id}</TextId>
+          <TextName variant="h1">{`#${id} ${currentName}`} </TextName>
           <TypesContainer>
             {types.map((type) => {
               const pokemonType = asPokemonType(type.type.name);
@@ -43,7 +43,10 @@ const Overview: FunctionComponent<OverviewProps> = ({
                   key={`information-pokemonn-type-${pokemonType}`}
                   href={`/types/${type.type.id}`}
                 >
-                  <TypeChip type={pokemonType} />
+                  <PokemonTag
+                    pokemonType={pokemonType}
+                    css={{ marginInlineEnd: '$2' }}
+                  />
                 </Link>
               );
             })}
@@ -76,11 +79,8 @@ const Information = mainTheme.styled('div', {
   padding: '20px',
 });
 
-const TextName = mainTheme.styled('p', {
+const TextName = mainTheme.styled(Text, {
   width: '100%',
-  fontSize: '30px',
-  fontWeight: '700',
-  lineHeight: '30px',
   textTransform: 'capitalize',
   padding: '0px 20px 10px 20px',
 });
@@ -95,12 +95,6 @@ const ImageContainer = mainTheme.styled('div', {
   display: 'flex',
   justifyContent: 'center',
   height: '200px',
-});
-
-const TextId = mainTheme.styled('p', {
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
 });
 
 const Container = mainTheme.styled('div', {

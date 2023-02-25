@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { BaseName } from '@/domains/entity';
 import { ButtonOutline } from '@/presentational/components/Button';
 import { Flex } from '@/presentational/components/Layout';
-import { TextWhite } from '@/presentational/components/Text';
+import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
 
 type TabMoveProps = {
@@ -18,9 +18,9 @@ const TabMoves: FunctionComponent<TabMoveProps> = ({ moves }) => {
       <MoveContainer>
         {moves.map((move) => (
           <Row key={move.move.name}>
-            <TextWhite style={{ textTransform: 'capitalize' }}>
+            <Text style={{ textTransform: 'capitalize' }}>
               {move.move.name.replace(/-/g, ' ')}
-            </TextWhite>
+            </Text>
           </Row>
         ))}
       </MoveContainer>
@@ -36,7 +36,7 @@ const TabMoves: FunctionComponent<TabMoveProps> = ({ moves }) => {
             backgroundColor: 'transparent',
           }}
         >
-          <TextWhite>Close</TextWhite>
+          <Text>Close</Text>
         </ButtonOutline>
       </Flex>
     </>

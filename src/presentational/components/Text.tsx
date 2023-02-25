@@ -13,9 +13,11 @@ const Text = mainTheme.styled('p', {
     variant: {
       h1: {
         fontSize: 28,
+        fontWeight: 800,
       },
       h2: {
         fontSize: 24,
+        fontWeight: 700,
       },
       h3: {
         fontSize: 20,
@@ -28,14 +30,10 @@ const Text = mainTheme.styled('p', {
       },
     },
   },
+  defaultVariants: {
+    variant: 'h4',
+    color: 'white',
+  },
 });
 
 export default Text;
-
-export const H1 = mainTheme.styled('h1', {
-  fontSize: 24,
-});
-
-export const TextWhite = mainTheme.styled('p', {
-  color: 'white',
-});

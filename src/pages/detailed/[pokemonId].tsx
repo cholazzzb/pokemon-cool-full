@@ -9,12 +9,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import {
   PokemonDetailByNameType,
   getPokemonDetailByName,
   getPokemonName,
 } from '@/domains/pokemons/pokemonsService';
-import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import {
+  createPokemonTypeColor,
+  getPrimaryColorFromType,
+} from '@/presentational/colorTheme';
 import {
   Body,
   BottomSheet,
@@ -42,15 +46,14 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
 }) => {
   const { types, ...informations } = pokemonDetail.pokemon;
 
+  const pokemonType = types[0].type.name as PokemonType;
+
   const primaryColor = getPrimaryColorFromType(types[0].type.name);
-  const DetailPageContainer = mainTheme.styled(Body, {
-    backgroundColor: primaryColor,
-  });
 
   return (
     <Layout>
       <RightPane />
-      <DetailPageContainer>
+      <DetailPageContainer pokemonType={pokemonType}>
         <Overview
           id={Number(pokemonId)}
           currentName={pokemonName}
@@ -131,3 +134,9 @@ export const getStaticProps = async (
     };
   }
 };
+
+const DetailPageContainer = mainTheme.styled(Body, {
+  variants: {
+    pokemonType: createPokemonTypeColor(0.9),
+  },
+});
