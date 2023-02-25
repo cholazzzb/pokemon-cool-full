@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import './style.css';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
