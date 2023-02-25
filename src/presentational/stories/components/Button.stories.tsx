@@ -16,23 +16,31 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 export const ButtonDefault = Template.bind({});
 ButtonDefault.args = {
-  children: <Text variant="h4">Button Default</Text>,
+  children: (
+    <Text variant="h4" color="black">
+      Button Default
+    </Text>
+  ),
 };
 
 export const ButtonPrimary = Template.bind({});
 ButtonPrimary.args = {
-  type: 'primary',
+  variant: 'primary',
   children: <Text variant="h4">Button Primary</Text>,
 };
 
 export const ButtonSecondary = Template.bind({});
 ButtonSecondary.args = {
-  type: 'secondary',
-  children: <Text variant="h4">Button Secondary</Text>,
+  variant: 'secondary',
+  children: (
+    <Text variant="h4" color="black">
+      Button Secondary
+    </Text>
+  ),
 };
 
 export const ButtonDanger = Template.bind({});
 ButtonDanger.args = {
-  type: 'danger',
+  variant: 'danger',
   children: <Text variant="h4">Button Danger</Text>,
 };

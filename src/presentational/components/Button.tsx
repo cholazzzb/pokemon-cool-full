@@ -8,6 +8,7 @@ export const ButtonOutline = mainTheme.styled('button', {
 
 const Button = mainTheme.styled('button', {
   cursor: 'pointer',
+  height: 44,
   paddingInline: '$5',
   borderRadius: 12,
   border: 'solid 1px',
@@ -18,7 +19,7 @@ const Button = mainTheme.styled('button', {
     borderColor: '$primary100',
   },
   variants: {
-    type: {
+    variant: {
       primary: {
         borderColor: '$primary100',
         backgroundColor: '$primary100',
@@ -28,7 +29,9 @@ const Button = mainTheme.styled('button', {
           backgroundColor: '$primary90',
         },
       },
-      secondary: {},
+      secondary: {
+        color: 'black',
+      },
       danger: {
         borderColor: '$red100',
         backgroundColor: '$red100',
@@ -46,7 +49,7 @@ const Button = mainTheme.styled('button', {
       sm: {},
     },
   },
-  defaultVariants: { type: 'secondary' },
+  defaultVariants: { variant: 'secondary' },
 });
 
 export default Button;
