@@ -5,10 +5,7 @@ import { FixedSizeList as List } from 'react-window';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { GetListTypesRes } from '@/domains/type/typeService.gql';
-import {
-  getPrimaryColorFromType,
-  getSecondaryColorFromType,
-} from '@/presentational/colorTheme';
+import { getPrimaryColorFromType } from '@/presentational/colorTheme';
 import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
 
@@ -53,7 +50,6 @@ const Row: FunctionComponent<RowProps> = ({ data, index, style }) => {
   const pokemonType = types[index].name as PokemonType;
   const pokemonTypeId = types[index].id;
   const primaryColor = getPrimaryColorFromType(pokemonType);
-  const secondaryColor = getSecondaryColorFromType(pokemonType);
 
   const ListItem = createListItem(primaryColor);
 
@@ -61,7 +57,7 @@ const Row: FunctionComponent<RowProps> = ({ data, index, style }) => {
     <ListItem style={{ ...style, height: 80 }}>
       <Link href={`/types/${pokemonTypeId}`}>
         <ListItemLink>
-          <TypeIcon size={50} type={pokemonType} color={secondaryColor} />
+          <TypeIcon size={50} type={pokemonType} />
           <Text>{types[index]?.name}</Text>
         </ListItemLink>
       </Link>

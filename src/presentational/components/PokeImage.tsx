@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { FunctionComponent } from 'react';
 
-import { getSecondaryColorFromType } from '@/presentational/colorTheme';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { createPokemonTypeColor } from '@/presentational/colorTheme';
 import { mainTheme } from '@/presentational/theme';
 
 type ImageProps = {
@@ -12,13 +13,14 @@ type ImageProps = {
 
 const PokeImage: FunctionComponent<ImageProps> = (props) => {
   const { type, size, image } = props;
-  const bgColor = getSecondaryColorFromType(type);
 
   const ImageBackground = mainTheme.styled('div', {
-    backgroundColor: bgColor,
     borderRadius: '9999px',
     width: `${size}px`,
     height: `${size}px`,
+    variants: {
+      pokemonType: createPokemonTypeColor(0.9),
+    },
   });
 
   const ImageWrapper = mainTheme.styled('div', {
@@ -32,7 +34,7 @@ const PokeImage: FunctionComponent<ImageProps> = (props) => {
   });
 
   return (
-    <ImageBackground>
+    <ImageBackground pokemonType={type as PokemonType}>
       <ImageWrapper>
         <Image
           data-testid="pokemon-image"

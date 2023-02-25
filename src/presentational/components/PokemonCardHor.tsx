@@ -2,10 +2,12 @@ import { motion } from 'framer-motion';
 import { FunctionComponent } from 'react';
 
 import { usePokeType } from '@/domains/pokemon/pokemonHook';
-import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { createPokemonTypeColor } from '@/presentational/colorTheme';
 import { mainTheme } from '@/presentational/theme';
 import PokeImage from './PokeImage';
-import TypeChip from './TypeChip';
+import PokemonTag from './Tags/PokemonTag';
+import Text from './Text';
 
 const PokemonCardHorLoading = mainTheme.styled('div', {
   minWidth: '200px',
@@ -17,13 +19,13 @@ const PokemonCardHorLoading = mainTheme.styled('div', {
   animation: 'shine 1.5s linear infinite',
 });
 
-interface IPokemonCardHorProps {
+type PokemonCardHorProps = {
   id: number;
   name: string;
   image: string;
-}
+};
 
-const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
+const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
   const { id, name, image } = props;
 
   const { loading, error, data } = usePokeType(name);
@@ -32,24 +34,7 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
   if (error) return <div>Error</div>;
   if (!data) return <div>No Data</div>;
 
-  const type = data.pokemon.types[0].type.name;
-  const bgColor = getPrimaryColorFromType(type);
-
-  const Card = mainTheme.styled('div', {
-    minWidth: '250px',
-    maxWidth: '300px',
-    height: '170px',
-    backgroundColor: `${bgColor}`,
-    color: 'white',
-    padding: '20px 22px',
-    margin: '10px 0px',
-    borderRadius: '24px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gap: '24px',
-    boxShadow:
-      'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
-  });
+  const pokemonType = data.pokemon.types[0].type.name as PokemonType;
 
   return (
     <motion.div
@@ -61,12 +46,16 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
       }}
       transition={{ duration: 1 }}
     >
-      <Card>
+      <Card pokemonType={pokemonType}>
         <Attribute>
-          <NameText>{`#${id} ${name}`}</NameText>
+          <NameText variant="h4">{`#${id} ${name}`}</NameText>
           {data &&
             data.pokemon.types.map((type: any, idx: number) => (
-              <TypeChip key={idx} type={type.type.name} />
+              <PokemonTag
+                key={idx}
+                pokemonType={type.type.name}
+                css={{ marginBlockEnd: '$1' }}
+              />
             ))}
         </Attribute>
         <motion.div
@@ -88,15 +77,30 @@ const PokemonCardHor: FunctionComponent<IPokemonCardHorProps> = (props) => {
 
 export default PokemonCardHor;
 
-const NameText = mainTheme.styled('p', {
-  fontSize: '15px',
-  fontWeight: 700,
-  lineHeight: '15px',
+const NameText = mainTheme.styled(Text, {
   textTransform: 'capitalize',
-  marginBlockEnd: '10px',
+  marginBlockEnd: '$3',
 });
 
 const Attribute = mainTheme.styled('div', {
   display: 'flex',
   flexDirection: 'column',
+});
+
+const Card = mainTheme.styled('div', {
+  minWidth: '250px',
+  maxWidth: '300px',
+  height: '170px',
+  color: 'white',
+  padding: '20px 22px',
+  margin: '10px 0px',
+  borderRadius: '24px',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+  gap: '24px',
+  boxShadow:
+    'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
+  variants: {
+    pokemonType: createPokemonTypeColor(0.8),
+  },
 });

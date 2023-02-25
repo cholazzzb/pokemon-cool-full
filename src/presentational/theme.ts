@@ -3,7 +3,9 @@ import { createStitches, globalCss } from '@stitches/react';
 export const mainTheme = createStitches({
   theme: {
     colors: {
+      gray: '#D9D9D9',
       primary100: 'rgba(108, 74, 182, 1)',
+      primary90: 'rgba(108, 74, 182, 0.9)',
       primary50: 'rgba(108, 74, 182, 0.5)',
       secondary100: 'rgba(141, 114, 225, 1)',
       secondary50: 'rgba(141, 114, 225, 0.5)',
@@ -13,6 +15,13 @@ export const mainTheme = createStitches({
       red100: 'rgba(233,105,87, 1)',
       red90: 'rgba(233,105,87, 0.9)',
       red50: 'rgba(233,105,87, 0.5)',
+    },
+    space: {
+      1: '4px',
+      2: '8px',
+      3: '12px',
+      4: '16px',
+      5: '20px',
     },
     zIndices: {
       navigator: 60,

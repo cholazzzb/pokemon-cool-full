@@ -49,14 +49,9 @@ const icons: Map<PokemonType, IconDefinition> = new Map([
 type TypeIconProps = {
   type: PokemonType;
   size?: number;
-  color?: string;
 };
 
-const TypeIcon: FunctionComponent<TypeIconProps> = ({
-  type,
-  size = 10,
-  color = 'white',
-}) => {
+const TypeIcon: FunctionComponent<TypeIconProps> = ({ type, size = 20 }) => {
   const icon = icons.get(type);
 
   return (
@@ -67,13 +62,7 @@ const TypeIcon: FunctionComponent<TypeIconProps> = ({
       }}
       data-testid="typeicon"
     >
-      {icon && (
-        <FontAwesomeIcon
-          style={{ width: size, height: size }}
-          icon={icon}
-          color={color}
-        />
-      )}
+      {icon && <PokemonIcon icon={icon} />}
     </TypeIconWrapper>
   );
 };
@@ -82,7 +71,30 @@ export default TypeIcon;
 
 const TypeIconWrapper = mainTheme.styled('span', {
   display: 'flex',
-  padding: '2px',
   justifyContent: 'center',
   alignItems: 'center',
+  width: 12,
+  height: 12,
+  '@md': {
+    width: 16,
+    height: 16,
+  },
+  '@lg': {
+    width: 20,
+    height: 20,
+  },
+});
+
+const PokemonIcon = mainTheme.styled(FontAwesomeIcon, {
+  color: 'white',
+  width: 12,
+  height: 12,
+  '@md': {
+    width: 16,
+    height: 16,
+  },
+  '@lg': {
+    width: 20,
+    height: 20,
+  },
 });
