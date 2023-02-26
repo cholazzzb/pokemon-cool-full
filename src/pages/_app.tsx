@@ -1,7 +1,9 @@
 import {
   ApolloClient,
+  ApolloLink,
   ApolloProvider,
   DefaultOptions,
+  HttpLink,
   InMemoryCache,
 } from '@apollo/client';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -31,8 +33,20 @@ const defaultOptions: DefaultOptions = {
   },
 };
 
-const client = new ApolloClient({
+const pokeapiMazipanLink = new HttpLink({
   uri: 'https://graphql-pokeapi.vercel.app/api/graphql',
+});
+
+const pokeapiLink = new HttpLink({
+  uri: 'https://beta.pokeapi.co/graphql/v1beta',
+});
+
+const client = new ApolloClient({
+  link: ApolloLink.split(
+    (operation) => operation.getContext().clientName === 'mazipan',
+    pokeapiMazipanLink,
+    pokeapiLink,
+  ),
   cache,
   defaultOptions,
 });

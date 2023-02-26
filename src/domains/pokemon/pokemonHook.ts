@@ -29,6 +29,9 @@ export const usePokeType = (name: string) =>
     variables: {
       name,
     },
+    context: {
+      clientName: 'mazipan',
+    },
     fetchPolicy: 'cache-first',
   });
 
