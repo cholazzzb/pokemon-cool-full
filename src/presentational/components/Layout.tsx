@@ -28,13 +28,13 @@ export const YScrollable = mainTheme.styled(YStack, {
 
 export const Layout = mainTheme.styled('div', {
   height: '100vh',
-  borderInline: '4px solid #e7e7ef',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   maxWidth: '640px', // media sm = 640px
   '@md': {
     maxWidth: '100%',
+    borderInline: '4px solid #e7e7ef',
     flexDirection: 'row-reverse',
   },
 });
