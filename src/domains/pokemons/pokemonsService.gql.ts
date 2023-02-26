@@ -5,37 +5,44 @@ import { pokeApiEndpoint } from '@/utils/fetcher';
 
 const getPokemonDetailByIdQuery = graphql(`
   query GetPokemonDetailById($pokemonId: Int!) {
-    pokemon_v2_pokemon(where: { id: { _eq: $pokemonId } }) {
+    about: pokemon_v2_pokemon(where: { id: { _eq: $pokemonId } }) {
       name
       height
       weight
-      pokemon_v2_pokemontypes {
-        pokemon_v2_type {
+      types: pokemon_v2_pokemontypes {
+        type: pokemon_v2_type {
           name
+          id
         }
       }
-      pokemon_v2_pokemonstats {
-        base_stat
-        pokemon_v2_stat {
+      stats: pokemon_v2_pokemonstats {
+        value: base_stat
+        stat: pokemon_v2_stat {
           id
           name
         }
       }
+      abilities: pokemon_v2_pokemonabilities {
+        ability: pokemon_v2_ability {
+          name
+          id
+        }
+      }
     }
-    pokemon_v2_pokemonmove(
+    moves: pokemon_v2_pokemonmove(
       where: { pokemon_id: { _eq: $pokemonId } }
       order_by: { move_id: asc }
       distinct_on: move_id
     ) {
-      move_id
-      pokemon_v2_move {
+      moveId: move_id
+      move: pokemon_v2_move {
         name
         accuracy
-        type_id
+        typeId: type_id
         pp
         power
       }
-      pokemon_v2_movelearnmethod {
+      learnMethod: pokemon_v2_movelearnmethod {
         name
       }
     }

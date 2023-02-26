@@ -1,17 +1,13 @@
 import { FunctionComponent } from 'react';
 
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { ButtonOutline } from '@/presentational/components/Button';
 import { YScrollable } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
 
 type TabBaseStatsProps = {
-  stats: Array<{
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }>;
+  stats: GetPokemonDetailByIdQuery['about'][0]['stats'];
   primaryColor: string;
 };
 
@@ -31,20 +27,18 @@ const TabBaseStats: FunctionComponent<TabBaseStatsProps> = ({
 }) => {
   return (
     <YScrollable style={{ width: '100%' }}>
-      {stats.map(
-        (status: { stat: { name: string }; base_stat: number }, idx) => {
-          return (
-            <Status key={status.stat.name}>
-              <StatusKey>{BaseStatsLabels[idx]}</StatusKey>
-              <StatusValue>{status.base_stat}</StatusValue>
-              <BarContainer
-                color={primaryColor}
-                fill={Math.round((status.base_stat * 100) / 255)}
-              />
-            </Status>
-          );
-        },
-      )}
+      {stats.map((status, idx) => {
+        return (
+          <Status key={status?.stat?.name}>
+            <StatusKey>{BaseStatsLabels[idx]}</StatusKey>
+            <StatusValue>{status.value}</StatusValue>
+            <BarContainer
+              color={primaryColor}
+              fill={Math.round((status.value * 100) / 255)}
+            />
+          </Status>
+        );
+      })}
       <ButtonOutline
         style={{
           margin: 12,

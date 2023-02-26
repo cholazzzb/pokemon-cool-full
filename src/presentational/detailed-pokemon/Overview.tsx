@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { BaseName } from '@/domains/entity';
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { getSecondaryColorFromType } from '@/presentational/colorTheme';
 import PokeImage from '@/presentational/components/PokeImage';
@@ -15,7 +15,7 @@ import NavigateOverview from './NavigateOverview';
 type OverviewProps = {
   id: number;
   currentName: string;
-  types: Array<{ type: BaseName }>;
+  types: GetPokemonDetailByIdQuery['about'][0]['types'];
 };
 
 const Overview: FunctionComponent<OverviewProps> = ({
@@ -23,7 +23,8 @@ const Overview: FunctionComponent<OverviewProps> = ({
   currentName,
   types,
 }) => {
-  const seconColor = getSecondaryColorFromType(types[0].type.name);
+  const pokemonMainType = types[0]?.type!.name;
+  const seconColor = getSecondaryColorFromType(pokemonMainType);
 
   const { publicRuntimeConfig } = getConfig();
 
@@ -34,14 +35,14 @@ const Overview: FunctionComponent<OverviewProps> = ({
           <TextName variant="h1">{`#${id} ${currentName}`} </TextName>
           <TypesContainer>
             {types.map((type) => {
-              const pokemonType = asPokemonType(type.type.name);
+              const pokemonType = asPokemonType(type?.type?.name ?? '');
               if (pokemonType === null) {
                 return <></>;
               }
               return (
                 <Link
                   key={`information-pokemonn-type-${pokemonType}`}
-                  href={`/types/${type.type.id}`}
+                  href={`/types/${type!.type!.id}`}
                 >
                   <PokemonTag
                     pokemonType={pokemonType}
@@ -54,7 +55,7 @@ const Overview: FunctionComponent<OverviewProps> = ({
         </Information>
         <ImageContainer>
           <PokeImage
-            type={types[0].type.name}
+            type={pokemonMainType}
             image={publicRuntimeConfig.pokemonImageUrl.replace(
               '{id}',
               id.toString(),

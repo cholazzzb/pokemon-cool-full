@@ -3,9 +3,9 @@ import request from 'graphql-request';
 import { graphql } from '@/__generated__/pokeapi/gql';
 import { pokeApiEndpoint } from '@/utils/fetcher';
 
-const getListTypesQuery = graphql(`
+export const getListTypesQuery = graphql(`
   query GetListTypes {
-    pokemon_v2_type {
+    types: pokemon_v2_type {
       id
       name
     }

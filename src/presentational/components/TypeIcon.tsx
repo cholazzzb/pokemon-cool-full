@@ -20,7 +20,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FunctionComponent } from 'react';
+import { ComponentProps, FunctionComponent } from 'react';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { mainTheme } from '@/presentational/theme';
@@ -49,18 +49,19 @@ const icons: Map<PokemonType, IconDefinition> = new Map([
 type TypeIconProps = {
   type: PokemonType;
   size?: number;
-};
+} & ComponentProps<typeof TypeIconWrapper>;
 
-const TypeIcon: FunctionComponent<TypeIconProps> = ({ type, size = 20 }) => {
-  const icon = icons.get(type);
+const TypeIcon: FunctionComponent<TypeIconProps> = (props) => {
+  const icon = icons.get(props.type);
 
   return (
     <TypeIconWrapper
-      style={{
-        width: size,
-        height: size,
+      css={{
+        width: props.size,
+        height: props.size,
       }}
       data-testid="typeicon"
+      {...props}
     >
       {icon && <PokemonIcon icon={icon} />}
     </TypeIconWrapper>

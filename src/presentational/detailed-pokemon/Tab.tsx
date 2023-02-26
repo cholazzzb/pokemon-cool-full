@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { BaseName } from '@/domains/entity';
-
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import TabAbout from './TabAbout';
 import TabBaseStats from './TabBaseStats';
 import TabMoves from './TabMoves';
@@ -9,36 +8,27 @@ import TabMoves from './TabMoves';
 type TabProps = {
   currentTab: number;
   primaryColor: string;
-  height: number;
-  weight: number;
-  abilities: Array<{ ability: Omit<BaseName, 'id'> }>;
-  stats: Array<{
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }>;
-  moves: Array<{
-    move: Omit<BaseName, 'id'>;
-  }>;
-};
+} & GetPokemonDetailByIdQuery;
 
-const Tab: FunctionComponent<TabProps> = ({
-  currentTab,
-  primaryColor,
-  height,
-  weight,
-  abilities,
-  stats,
-  moves,
-}) => {
-  switch (currentTab) {
+const Tab: FunctionComponent<TabProps> = (props) => {
+  switch (props.currentTab) {
     case 0:
-      return <TabAbout height={height} weight={weight} abilities={abilities} />;
+      return (
+        <TabAbout
+          height={props.about[0].height ?? 0}
+          weight={props.about[0].weight ?? 0}
+          abilities={props.about[0].abilities}
+        />
+      );
     case 1:
-      return <TabBaseStats stats={stats} primaryColor={primaryColor} />;
+      return (
+        <TabBaseStats
+          stats={props.about[0].stats}
+          primaryColor={props.primaryColor}
+        />
+      );
     case 2:
-      return <TabMoves moves={moves} />;
+      return <TabMoves moves={props.moves} />;
     default:
       return <></>;
   }

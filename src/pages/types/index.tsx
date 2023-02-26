@@ -9,7 +9,7 @@ import Navigator from '@/presentational/components/Navigator';
 import ListTypes from '@/presentational/type/ListTypes';
 
 type MovesPageProps = {
-  types: GetListTypesRes['pokemon_v2_type'];
+  types: GetListTypesRes['types'];
 };
 
 const MovesPage: NextPage<MovesPageProps> = (props) => {
@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<MovesPageProps> = async () => {
     if (!listPokemonMoves) {
       throw new Error('getListTypes Error');
     }
-    return { props: { types: listPokemonMoves['pokemon_v2_type'] } };
+    return { props: { types: listPokemonMoves['types'] } };
   } catch (error) {
     return {
       notFound: true,

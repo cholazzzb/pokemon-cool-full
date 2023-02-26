@@ -9,12 +9,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import {
-  PokemonDetailByNameType,
-  getPokemonDetailByName,
-  getPokemonName,
-} from '@/domains/pokemons/pokemonsService';
+import { getPokemonDetailById } from '@/domains/pokemons/pokemonsService.gql';
 import {
   createPokemonTypeColor,
   getPrimaryColorFromType,
@@ -35,20 +32,18 @@ import { convertURLQueryToString } from '@/utils/url';
 
 type DetailPageProps = {
   pokemonId: string;
-  pokemonName: string;
-  pokemonDetail: PokemonDetailByNameType;
+  pokemonDetail: GetPokemonDetailByIdQuery;
 };
 
 const DetailPage: FunctionComponent<DetailPageProps> = ({
   pokemonId,
-  pokemonName,
   pokemonDetail,
 }) => {
-  const { types, ...informations } = pokemonDetail.pokemon;
+  const pokemonTypes = pokemonDetail.about[0].types;
+  const pokemonType = (pokemonDetail.about[0].types[0].type?.name ??
+    'normal') as PokemonType;
 
-  const pokemonType = types[0].type.name as PokemonType;
-
-  const primaryColor = getPrimaryColorFromType(types[0].type.name);
+  const primaryColor = getPrimaryColorFromType(pokemonType);
 
   return (
     <Layout>
@@ -56,13 +51,13 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
       <DetailPageContainer pokemonType={pokemonType}>
         <Overview
           id={Number(pokemonId)}
-          currentName={pokemonName}
-          types={types}
+          currentName={pokemonDetail.about[0].name}
+          types={pokemonTypes}
         />
         <BottomSheet>
           <InformationCards
             primaryColor={primaryColor}
-            informations={informations}
+            informations={pokemonDetail}
           />
           <LocationCards />
         </BottomSheet>
@@ -97,15 +92,13 @@ const DetailPage: FunctionComponent<DetailPageProps> = ({
 export default DetailPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = [];
-  for (let pokemonId = 1; pokemonId <= 898; pokemonId++) {
-    paths.push({
-      params: { pokemonId: `${pokemonId}` },
-    });
-  }
   return {
     fallback: 'blocking',
-    paths,
+    paths: Array.from(Array(20).keys()).map((idx) => ({
+      params: {
+        pokemonId: `${idx + 1}`,
+      },
+    })),
   };
 };
 
@@ -116,18 +109,9 @@ export const getStaticProps = async (
 
   const pokemonId = convertURLQueryToString(params?.pokemonId);
   try {
-    const pokemon = await getPokemonName(Number(pokemonId));
-    if (pokemon === null) {
-      throw new Error('getPokemonName Error');
-    }
-    const pokemonName = pokemon.pokemons.results[0].name;
+    const pokemonDetail = await getPokemonDetailById(Number(pokemonId));
 
-    const pokemonDetail = await getPokemonDetailByName(pokemonName);
-    if (pokemonDetail === null) {
-      throw new Error('getPokemonDetailByName Error');
-    }
-
-    return { props: { pokemonId, pokemonName, pokemonDetail } };
+    return { props: { pokemonId, pokemonDetail } };
   } catch (error) {
     return {
       notFound: true,

@@ -9,7 +9,7 @@ import { FunctionComponent, useState } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 
-import { PokemonDetailByNameType } from '@/domains/pokemons/pokemonsService';
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { Flex } from '@/presentational/components/Layout';
 import { ModalOverlay } from '@/presentational/components/ModalOverlay';
 import Text from '@/presentational/components/Text';
@@ -39,7 +39,7 @@ const cards = [
 
 type InformationCardsProps = {
   primaryColor: string;
-  informations: Omit<PokemonDetailByNameType['pokemon'], 'types'>;
+  informations: GetPokemonDetailByIdQuery;
 };
 const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
   const [currentTab, setCurrentTab] = useState<number>(-1);

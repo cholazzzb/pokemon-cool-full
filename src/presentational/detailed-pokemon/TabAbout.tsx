@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { BaseName } from '@/domains/entity';
+import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { ButtonOutline } from '@/presentational/components/Button';
 import { Flex } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
@@ -9,7 +9,7 @@ import { mainTheme } from '@/presentational/theme';
 type TabAboutProps = {
   height: number;
   weight: number;
-  abilities: Array<{ ability: Omit<BaseName, 'id'> }>;
+  abilities: GetPokemonDetailByIdQuery['about'][0]['abilities'];
 };
 
 const TabAbout: FunctionComponent<TabAboutProps> = ({
@@ -31,12 +31,7 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
         <TextContainer>
           <Label> Abilities</Label>
           <Data>
-            {abilities
-              .map(
-                (ability: { [key: string]: { [key: string]: string } }) =>
-                  `${ability.ability.name}`,
-              )
-              .join(', ')}
+            {abilities.map((ability) => `${ability?.ability?.name}`).join(', ')}
             .
           </Data>
         </TextContainer>

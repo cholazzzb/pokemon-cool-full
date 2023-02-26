@@ -10,7 +10,7 @@ import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
 
 type ListTypesProps = {
-  types: GetListTypesRes['pokemon_v2_type'];
+  types: GetListTypesRes['types'];
 };
 
 const ListTypes: FunctionComponent<ListTypesProps> = (props) => {
@@ -36,7 +36,7 @@ const ListTypes: FunctionComponent<ListTypesProps> = (props) => {
 export default ListTypes;
 
 type RowProps = {
-  data: { types: GetListTypesRes['pokemon_v2_type'] };
+  data: { types: GetListTypesRes['types'] };
   index: number;
   style: CSSProperties;
 };
