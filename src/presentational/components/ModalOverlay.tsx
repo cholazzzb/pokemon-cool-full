@@ -1,4 +1,5 @@
 import {
+  ComponentProps,
   FunctionComponent,
   PropsWithChildren,
   useEffect,
@@ -9,8 +10,8 @@ import { createPortal } from 'react-dom';
 import { Overlay } from './Overlay';
 
 type ModalOverlayProps = {
-  onClick: () => void;
-};
+  onClick?: () => void;
+} & ComponentProps<typeof Overlay>;
 
 export const ModalOverlay: FunctionComponent<
   PropsWithChildren<ModalOverlayProps>
@@ -38,7 +39,7 @@ export const ModalOverlay: FunctionComponent<
 
   return portalElement
     ? createPortal(
-        <Overlay onClick={props.onClick}>{props.children}</Overlay>,
+        <Overlay {...props}>{props.children}</Overlay>,
         portalElement,
       )
     : null;

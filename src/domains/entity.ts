@@ -1,4 +1,5 @@
 import * as t from 'runtypes';
+
 import { Pokemon, PokemonList } from '@/domains/pokemon/pokemonEntity';
 
 export type BaseResponse = {
@@ -31,34 +32,32 @@ type GraphqlQuery<VarType, DataType> = {
 };
 
 export type Query = {
-  abilities: GraphqlQuery<{}, BaseList>;
+  abilities: GraphqlQuery<Record<string, never>, BaseList>;
   ability: GraphqlQuery<{ ability: string }, BaseResponse>;
-  berries: GraphqlQuery<{}, BaseList>;
+  berries: GraphqlQuery<Record<string, never>, BaseList>;
   berry: GraphqlQuery<{ berry: string }, BaseResponse>;
-  eggGroups: GraphqlQuery<{}, BaseList>;
+  eggGroups: GraphqlQuery<Record<string, never>, BaseList>;
   eggGroup: GraphqlQuery<{ eggGroup: string }, BaseResponse>;
-  encounterMethods: GraphqlQuery<{}, BaseList>;
+  encounterMethods: GraphqlQuery<Record<string, never>, BaseList>;
   encounterMethod: GraphqlQuery<{ encounterMethod: string }, BaseResponse>;
-  evolutionChains: GraphqlQuery<{}, BaseList>;
+  evolutionChains: GraphqlQuery<Record<string, never>, BaseList>;
   evolutionChain: GraphqlQuery<{ id: string }, BaseResponse>;
-  evolutionTriggers: GraphqlQuery<{}, BaseList>;
+  evolutionTriggers: GraphqlQuery<Record<string, never>, BaseList>;
   evolutionTrigger: GraphqlQuery<{ name: string }, BaseResponse>;
-  genders: GraphqlQuery<{}, BaseList>;
+  genders: GraphqlQuery<Record<string, never>, BaseList>;
   gender: GraphqlQuery<{ gender: string }, BaseResponse>;
-  growthRates: GraphqlQuery<{}, BaseList>;
+  growthRates: GraphqlQuery<Record<string, never>, BaseList>;
   growthRate: GraphqlQuery<{ growthRate: string }, BaseResponse>;
-  locations: GraphqlQuery<{}, BaseList>;
+  locations: GraphqlQuery<Record<string, never>, BaseList>;
   location: GraphqlQuery<{ location: string }, BaseResponse>;
-  moves: GraphqlQuery<{}, BaseList>;
+  moves: GraphqlQuery<Record<string, never>, BaseList>;
   move: GraphqlQuery<{ move: string }, BaseResponse>;
-  natures: GraphqlQuery<{}, BaseList>;
+  natures: GraphqlQuery<Record<string, never>, BaseList>;
   nature: GraphqlQuery<{ nature: string }, BaseResponse>;
   pokemons: GraphqlQuery<{ limit: number; offset: number }, PokemonList>;
   pokemon: GraphqlQuery<{ name: string }, Pokemon>;
-  regions: GraphqlQuery<{}, BaseList>;
+  regions: GraphqlQuery<Record<string, never>, BaseList>;
   region: GraphqlQuery<{ region: string }, BaseResponse>;
-  species: GraphqlQuery<{}, BaseList>;
-  types: GraphqlQuery<{}, BaseList>;
+  species: GraphqlQuery<Record<string, never>, BaseList>;
+  types: GraphqlQuery<Record<string, never>, BaseList>;
 };
-
-export {};

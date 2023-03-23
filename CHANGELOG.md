@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 (23 March 2023)
+
+- Add Pokemon Filter by Types and Generation for mobile
+- Add Skeleton
+- Temporary remove Search functionality
+
 ## 1.0.0 (13 Feb 2023)
 
 - Upgrade to React 18, Next.js 13

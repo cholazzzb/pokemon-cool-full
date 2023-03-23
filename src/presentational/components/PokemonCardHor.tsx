@@ -1,40 +1,22 @@
 import { motion } from 'framer-motion';
 import { FunctionComponent } from 'react';
 
-import { usePokeType } from '@/domains/pokemon/pokemonHook';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { createPokemonTypeColor } from '@/presentational/colorTheme';
 import { mainTheme } from '@/presentational/theme';
 import PokeImage from './PokeImage';
-import PokemonTag from './Tags/PokemonTag';
+import PokemonTag from './Tags/PokemonTypeTag';
 import Text from './Text';
-
-const PokemonCardHorLoading = mainTheme.styled('div', {
-  minWidth: '200px',
-  maxWidth: '300px',
-  height: '150px',
-  borderRadius: '24px',
-  background: 'linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)',
-  backgroundSize: '200% 100%',
-  animation: 'shine 1.5s linear infinite',
-});
 
 type PokemonCardHorProps = {
   id: number;
   name: string;
+  pokemonTypes: Array<PokemonType>;
   image: string;
 };
 
 const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
   const { id, name, image } = props;
-
-  const { loading, error, data } = usePokeType(name);
-
-  if (loading) return <PokemonCardHorLoading />;
-  if (error) return <div>Error</div>;
-  if (!data) return <div>No Data</div>;
-
-  const pokemonType = data.pokemon.types[0].type.name as PokemonType;
 
   return (
     <motion.div
@@ -46,17 +28,16 @@ const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
       }}
       transition={{ duration: 1 }}
     >
-      <Card pokemonType={pokemonType}>
+      <Card pokemonType={props.pokemonTypes[0]}>
         <Attribute>
           <NameText variant="h4">{`#${id} ${name}`}</NameText>
-          {data &&
-            data.pokemon.types.map((type: any, idx: number) => (
-              <PokemonTag
-                key={idx}
-                pokemonType={type.type.name}
-                css={{ marginBlockEnd: '$1' }}
-              />
-            ))}
+          {props.pokemonTypes.map((type, idx) => (
+            <PokemonTag
+              key={idx}
+              pokemonType={type}
+              css={{ marginBlockEnd: '$1' }}
+            />
+          ))}
         </Attribute>
         <motion.div
           whileHover={{
@@ -64,11 +45,7 @@ const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
             transition: { duration: 1 },
           }}
         >
-          <PokeImage
-            type={data.pokemon.types[0].type.name}
-            size={75}
-            image={image}
-          />
+          <PokeImage type={props.pokemonTypes[0]} size={75} image={image} />
         </motion.div>
       </Card>
     </motion.div>

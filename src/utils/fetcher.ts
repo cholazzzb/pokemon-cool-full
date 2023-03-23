@@ -1,11 +1,11 @@
 import getConfig from 'next/config';
 import { Runtype } from 'runtypes';
 
-const { serverRuntimeConfig } = getConfig();
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 export const apiEndpoint = serverRuntimeConfig?.apiEndpoint;
-export const pokeApiEndpoint = serverRuntimeConfig?.pokeApiEndpoint;
+export const pokeApiEndpoint = publicRuntimeConfig?.pokeApiEndpoint;
 
-export const fetcher = async <VariablesData, VariablesType extends {}>(
+export const fetcher = async <VariablesData, VariablesType extends object>(
   query: string,
   variables: VariablesType,
   runtypesSchema: Runtype<VariablesData>,

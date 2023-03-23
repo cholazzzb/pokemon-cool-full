@@ -2,6 +2,7 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
+import FloatingActionButton from '@/presentational/components/FloatingActionButton';
 import { BaseInput } from '@/presentational/components/Input';
 import { Center } from '@/presentational/components/Layout';
 import { mainTheme } from '@/presentational/theme';
@@ -79,25 +80,8 @@ type SearchIconButtonProps = {
 };
 const SearchIconButton: FunctionComponent<SearchIconButtonProps> = (props) => {
   return (
-    <SearchButton onClick={props.onClick}>
-      <FontAwesomeIcon icon={faSearch} />
-    </SearchButton>
+    <FloatingActionButton posIndex={1} size="lg" onClick={props.onClick}>
+      <FontAwesomeIcon icon={faSearch} size="lg" />
+    </FloatingActionButton>
   );
 };
-
-const SearchButton = mainTheme.styled('div', {
-  zIndex: '$searchButton',
-  position: 'fixed',
-  bottom: 70,
-  right: 20,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '30px',
-  width: '30px',
-  padding: '10px',
-  cursor: 'pointer',
-  borderRadius: '50%',
-  backgroundColor: '$primary100',
-  color: 'white',
-});

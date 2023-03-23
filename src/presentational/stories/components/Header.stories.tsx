@@ -18,7 +18,9 @@ export const withOnClickBack = Template.bind({});
 withOnClickBack.args = {
   caption: 'Caption',
   children: <>children</>,
-  onClickBack: () => {},
+  onClickBack: () => {
+    //
+  },
 };
 
 export const withOnClickBackLink = Template.bind({});

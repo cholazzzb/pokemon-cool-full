@@ -1,14 +1,14 @@
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { GetStaticPropsResult, NextPage } from 'next';
+import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import {
-  AllPokemonsNameType,
-  getAllPokemonsName,
-} from '@/domains/pokemons/pokemonsService';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
+import { useListTypes } from '@/domains/type/typeHook';
+import FloatingActionButton from '@/presentational/components/FloatingActionButton';
 import Header from '@/presentational/components/Header';
 import {
   Body,
@@ -17,33 +17,120 @@ import {
   YScrollable,
 } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
+import PokemonGenerationTag from '@/presentational/components/Tags/PokemonGenerationTag';
+import PokemonTypeTag from '@/presentational/components/Tags/PokemonTypeTag';
+import FilterBadgeRow from '@/presentational/pokemon-list/FilterBadgeRow';
+import FilterBottomSheet from '@/presentational/pokemon-list/FilterBottomSheet';
 import PokemonList from '@/presentational/pokemon-list/PokemonList';
 import SearchBarWrapper from '@/presentational/pokemon-list/SearchBarWrapper';
+import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
 
 type HomeProps = AllPokemonsNameType;
 
-const Home: NextPage<HomeProps> = (props) => {
-  const [searchValue, setSearchValue] = useState('');
+const Home: NextPage<HomeProps> = () => {
+  const [_searchValue, setSearchValue] = useState('');
   const onChangeSearch = (searchValue: string) => {
     setSearchValue(searchValue);
   };
 
-  const filteredPokemons =
-    searchValue.length === 0
-      ? props.pokemons.results
-      : props.pokemons.results.filter((pokemon) =>
-          pokemon.name.match(new RegExp(searchValue)),
-        );
+  const typesQuery = useListTypes();
+
+  const pokemonTypeMap = (useMemo(() => {
+    return typesQuery.data?.types.reduce(
+      (acc, pokemonType) => ({
+        ...acc,
+        [pokemonType.name as PokemonType]: pokemonType.id,
+      }),
+      {},
+    );
+  }, [typesQuery.data]) ?? {}) as Record<PokemonType, number>;
+
+  const [pokemonGenFilter, setPokemonGenFilter] = useState(new Set<number>());
+  const [pokemonTypeFilter, setPokemonTypeFilter] = useState(
+    new Set<PokemonType>(),
+  );
+
+  const onClickGenFilter = (gen: number) =>
+    setPokemonGenFilter((prev) => {
+      const next = new Set(prev);
+      if (prev.has(gen)) {
+        next.delete(gen);
+      } else {
+        next.add(gen);
+      }
+
+      return next;
+    });
+
+  const onClickPokemontTypeFilter = (pokemonType: PokemonType) =>
+    setPokemonTypeFilter((prev) => {
+      const next = new Set(prev);
+      if (prev.has(pokemonType)) {
+        next.delete(pokemonType);
+      } else {
+        next.add(pokemonType);
+      }
+
+      return next;
+    });
+
+  const [showBottomSheet, setShowBottomSheet] = useState(false);
+  const onClickBottomSheetFAB = () => setShowBottomSheet(true);
 
   return (
     <Layout>
       <RightPane />
       <Body>
         <Header caption="List Pokemons" />
+        {pokemonTypeFilter.size > 0 && (
+          <FilterBadgeRow>
+            {Array.from(pokemonTypeFilter.values()).map((pokemonType) => (
+              <PokemonTypeFilterTag
+                key={`pokemon-type-tag-${pokemonType}`}
+                pokemonType={pokemonType}
+                withClose
+                onClickClose={() => onClickPokemontTypeFilter(pokemonType)}
+              />
+            ))}
+          </FilterBadgeRow>
+        )}
+        {pokemonGenFilter.size > 0 && (
+          <FilterBadgeRow>
+            {Array.from(pokemonGenFilter.values()).map((gen) => (
+              <PokemonGenerationFilterTag
+                key={`pokemon-generation-tag-${gen}`}
+                generation={gen}
+                withClose
+                onClickClose={() => onClickGenFilter(gen)}
+              />
+            ))}
+          </FilterBadgeRow>
+        )}
+        <FloatingActionButton
+          size="lg"
+          posIndex={2}
+          onClick={onClickBottomSheetFAB}
+        >
+          <FontAwesomeIcon icon={faFilter} size="lg" />
+        </FloatingActionButton>
         <YScrollable>
-          <PokemonList pokemons={filteredPokemons} />
+          <PokemonList
+            genIds={Array.from(pokemonGenFilter.values()).sort((a, b) => a - b)}
+            typeIds={Array.from(pokemonTypeFilter.values())
+              .map((type) => pokemonTypeMap[type])
+              .sort((a, b) => a - b)}
+          />
         </YScrollable>
+        {showBottomSheet && (
+          <FilterBottomSheet
+            pokemonGenFilter={pokemonGenFilter}
+            onClickPokemonGenFilter={onClickGenFilter}
+            pokemonTypeFilter={pokemonTypeFilter}
+            onClickPokemonTypeFilter={onClickPokemontTypeFilter}
+            onClickClose={() => setShowBottomSheet(false)}
+          />
+        )}
       </Body>
       <Navigator>
         <Link href="/" style={{ width: '100%' }}>
@@ -75,18 +162,10 @@ const Home: NextPage<HomeProps> = (props) => {
 
 export default Home;
 
-export const getStaticProps = async (): Promise<
-  GetStaticPropsResult<HomeProps>
-> => {
-  try {
-    const allPokemons = await getAllPokemonsName();
-    if (allPokemons === null) {
-      throw new Error('getPokemonName Error');
-    }
-    return { props: allPokemons };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
-};
+const PokemonTypeFilterTag = mainTheme.styled(PokemonTypeTag, {
+  marginInlineEnd: '$3',
+});
+
+const PokemonGenerationFilterTag = mainTheme.styled(PokemonGenerationTag, {
+  marginInlineEnd: '$3',
+});

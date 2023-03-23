@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getConfig from 'next/config';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import { CSSProperties, FunctionComponent } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 import shallow from 'zustand/shallow';
@@ -20,7 +20,7 @@ type RowData = {
 type RowProps = {
   data: RowData;
   index: number;
-  style: any;
+  style: CSSProperties;
 };
 
 const Row: FunctionComponent<RowProps> = (props) => {

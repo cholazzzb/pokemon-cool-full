@@ -18,7 +18,12 @@ describe('renders correctly', () => {
 
   it('backIcon with callback', () => {
     const { queryByTestId } = render(
-      <Header caption="normal" onClickBack={() => {}} />,
+      <Header
+        caption="normal"
+        onClickBack={() => {
+          //
+        }}
+      />,
     );
     expect(queryByTestId('header-backicon')).toBeTruthy();
   });

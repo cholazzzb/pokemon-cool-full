@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('should show pokemon list', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  //　Mobile Screen
+  // Mobile Screen
   await page.setViewportSize({ width: 640, height: 800 });
   await expect(page.locator('text=Bulbasaur')).toBeVisible();
   page.mouse.move(50, 200);

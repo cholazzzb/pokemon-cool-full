@@ -27,8 +27,9 @@ export const mainTheme = createStitches({
       navigator: 60,
       overlay: 50,
       pokeImage: 10,
+      bottomSheet: 5,
+      floatingActionButton: 2,
       searchBar: 2,
-      searchButton: 2,
     },
   },
   media: {

@@ -1,6 +1,8 @@
 import request from 'graphql-request';
 
 import { graphql } from '@/__generated__/pokeapi/gql';
+import { GetPokemonsByGensAndTypesQuery } from '@/__generated__/pokeapi/gql/graphql';
+
 import { pokeApiEndpoint } from '@/utils/fetcher';
 
 const getPokemonDetailByIdQuery = graphql(`
@@ -52,4 +54,57 @@ const getPokemonDetailByIdQuery = graphql(`
 export const getPokemonDetailById = (pokemonId: number) =>
   request(pokeApiEndpoint, getPokemonDetailByIdQuery, {
     pokemonId,
+  });
+
+export const getPokemonsByGensAndTypesQuery = graphql(`
+  query GetPokemonsByGensAndTypes(
+    $genIds: [Int!]
+    $typeIds: [Int!]
+    $limit: Int!
+    $offset: Int!
+  ) {
+    pokemons: pokemon_v2_pokemonspecies(
+      where: {
+        pokemon_v2_pokemons: {
+          pokemon_v2_pokemontypes: { type_id: { _in: $typeIds } }
+        }
+        generation_id: { _in: $genIds }
+      }
+      limit: $limit
+      offset: $offset
+      order_by: { id: asc }
+    ) {
+      id
+      genId: generation_id
+      name
+      pokemons: pokemon_v2_pokemons {
+        types: pokemon_v2_pokemontypes {
+          type: pokemon_v2_type {
+            name
+            id
+          }
+        }
+      }
+    }
+  }
+`);
+
+type GetPokemonsByGensAndTypes = (params: {
+  genIds: Array<number>;
+  typeIds: Array<number>;
+  page: number;
+  pageSize: number;
+}) => Promise<GetPokemonsByGensAndTypesQuery>;
+
+export const getPokemonsByGensAndTypes: GetPokemonsByGensAndTypes = ({
+  genIds,
+  typeIds,
+  page,
+  pageSize,
+}) =>
+  request(pokeApiEndpoint, getPokemonsByGensAndTypesQuery, {
+    genIds,
+    typeIds,
+    offset: (page - 1) * pageSize,
+    limit: pageSize,
   });

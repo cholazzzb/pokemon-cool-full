@@ -11,7 +11,7 @@ test('should show owned pokemon', async ({ page }) => {
   const ownedPokemons = {};
   const { result } = addPokemon(ownedPokemons, 1, 'bulbasaur', 'dino');
 
-  page
+  await page
     .evaluate(async (newPokemon) => {
       // Template from Zustand to sessionStorage
       const zustandPersist = {
@@ -23,7 +23,9 @@ test('should show owned pokemon', async ({ page }) => {
       localStorage.ownedPokemons = JSON.stringify(zustandPersist);
       await new Promise((f) => setTimeout(f, 0));
     }, result)
-    .catch(() => {});
+    .catch((err) => {
+      throw `failed to evaluate sessionStorage: ${err}`;
+    });
 
   await page.reload();
   await page.locator('text=Owned').click();

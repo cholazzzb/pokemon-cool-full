@@ -7,22 +7,35 @@ test('should open detailed-pokemon', async ({ page }) => {
   // Render Correctly
   await expect(page).toHaveURL('http://localhost:3000/detailed/1');
   await expect(page.locator('text=Bulbasaur')).toBeVisible();
+  await expect(page.locator('text=Poison')).toBeVisible();
+  await expect(page.locator('text=Catch')).toBeVisible();
+  await expect(page.locator('text=Information')).toBeVisible();
+  await expect(page.locator('text=About')).toBeVisible();
+  await expect(page.locator('text=Base Stats')).toBeVisible();
+  await expect(page.locator('text=Moves')).toBeVisible();
+  await expect(page.locator('text=Locations')).toBeVisible();
+  await expect(page.locator('text=Wait for it soon!')).toBeVisible();
 
-  // Tab About
+  // Item About
+  await page.locator('text=about').click();
   await expect(page.locator('text=Height')).toBeVisible();
   await expect(page.locator('text=7')).toBeVisible();
   await expect(page.locator('text=Overgrow, Chlorophyl')).toBeVisible();
+  await page.locator('text=Close').click();
 
-  // Tab Stats
+  // Item Stats
   await page.locator('text=Base Stats').click();
   await expect(page.locator('text=HP')).toBeVisible();
+  await expect(page.locator('text=SPD')).toBeVisible();
+  await page.locator('text=Close').click();
 
-  // Tab Moves
+  // Item Moves
   await page.locator('text=Moves').click();
-  await expect(page.locator('text=razor-wind')).toBeVisible();
-  await expect(page.locator('text=swords-dance')).toBeVisible();
-  await expect(page.locator('text=bind')).toBeVisible();
-  await expect(page.locator('text=vine-whip')).toBeVisible();
+  await expect(page.locator('text=Razor Wind')).toBeVisible();
+  await expect(page.locator('text=Swords Dance')).toBeVisible();
+  await expect(page.locator('text=Bind')).toBeVisible();
+  await expect(page.locator('text=Vine Whip')).toBeVisible();
+  await page.locator('text=Close').click();
 
   // Next pokemon
   await page.getByTestId('icon-next-pokemon').click();
@@ -30,21 +43,33 @@ test('should open detailed-pokemon', async ({ page }) => {
   await expect(page.locator('text=Ivysaur')).toBeVisible();
   await expect(page.locator('text=#2')).toBeVisible();
   await expect(page.locator('text=Catch')).toBeVisible();
+  await expect(page.locator('text=Information')).toBeVisible();
+  await expect(page.locator('text=About')).toBeVisible();
+  await expect(page.locator('text=Base Stats')).toBeVisible();
+  await expect(page.locator('text=Moves')).toBeVisible();
+  await expect(page.locator('text=Locations')).toBeVisible();
+  await expect(page.locator('text=Wait for it soon!')).toBeVisible();
 
-  // Tab Moves
-  await expect(page.locator('text=headbutt')).toBeVisible();
-  await expect(page.locator('text=swords-dance')).toBeVisible();
-  await expect(page.locator('text=bind')).toBeVisible();
-  await expect(page.locator('text=vine-whip')).toBeVisible();
-
-  // Tab Stats
-  await page.locator('text=Base Stats').click();
-
-  // Tab About
+  // Item About
   await page.locator('text=About').click();
   await expect(page.locator('text=Height')).toBeVisible();
   await expect(page.locator('text=10')).toBeVisible();
   await expect(page.locator('text=Overgrow, Chlorophyll.')).toBeVisible();
+  await page.locator('text=Close').click();
+
+  // Item Stats
+  await page.locator('text=Base Stats').click();
+  await expect(page.locator('text=HP')).toBeVisible();
+  await expect(page.locator('text=SPD')).toBeVisible();
+  await page.locator('text=Close').click();
+
+  // Item Moves
+  await page.locator('text=Moves').click();
+  await expect(page.locator('text=Swords Dance')).toBeVisible();
+  await expect(page.locator('text=Cut')).toBeVisible();
+  await expect(page.locator('text=Bind')).toBeVisible();
+  await expect(page.locator('text=Vine Whip')).toBeVisible();
+  await page.locator('text=Close').click();
 
   // Prev pokemon (initial)
   await page.getByTestId('icon-prev-pokemon').click();
@@ -53,20 +78,31 @@ test('should open detailed-pokemon', async ({ page }) => {
   await expect(page.locator('text=Bulbasaur')).toBeVisible();
   await expect(page.locator('text=Poison')).toBeVisible();
   await expect(page.locator('text=Catch')).toBeVisible();
+  await expect(page.locator('text=Information')).toBeVisible();
+  await expect(page.locator('text=About')).toBeVisible();
+  await expect(page.locator('text=Base Stats')).toBeVisible();
+  await expect(page.locator('text=Moves')).toBeVisible();
+  await expect(page.locator('text=Locations')).toBeVisible();
+  await expect(page.locator('text=Wait for it soon!')).toBeVisible();
 
-  // Tab About
+  // Item About
+  await page.locator('text=about').click();
   await expect(page.locator('text=Height')).toBeVisible();
   await expect(page.locator('text=7')).toBeVisible();
   await expect(page.locator('text=Overgrow, Chlorophyl')).toBeVisible();
+  await page.locator('text=Close').click();
 
-  // Tab Stats
+  // Item Stats
   await page.locator('text=Base Stats').click();
   await expect(page.locator('text=HP')).toBeVisible();
+  await expect(page.locator('text=SPD')).toBeVisible();
+  await page.locator('text=Close').click();
 
-  // Tab Moves
+  // Item Moves
   await page.locator('text=Moves').click();
-  await expect(page.locator('text=razor-wind')).toBeVisible();
-  await expect(page.locator('text=swords-dance')).toBeVisible();
-  await expect(page.locator('text=bind')).toBeVisible();
-  await expect(page.locator('text=vine-whip')).toBeVisible();
+  await expect(page.locator('text=Razor Wind')).toBeVisible();
+  await expect(page.locator('text=Swords Dance')).toBeVisible();
+  await expect(page.locator('text=Bind')).toBeVisible();
+  await expect(page.locator('text=Vine Whip')).toBeVisible();
+  await page.locator('text=Close').click();
 });

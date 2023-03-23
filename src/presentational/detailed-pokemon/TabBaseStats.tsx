@@ -16,7 +16,7 @@ const BaseStatsLabels = [
   'ATK',
   'DEF',
   'SP.ATK',
-  'Sp.DEF',
+  'SP.DEF',
   'SPD',
   'TOTAL',
 ];

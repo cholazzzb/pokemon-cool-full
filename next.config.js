@@ -14,6 +14,8 @@ module.exports = {
     pokemonImageUrl:
       process.env.POKEMON_IMAGE_URL ||
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/{id}.png',
+    pokeApiEndpoint:
+      process.env.POKE_API_ENDPOINT || 'https://beta.pokeapi.co/graphql/v1beta',
   },
   images: {
     domains: ['raw.githubusercontent.com'],

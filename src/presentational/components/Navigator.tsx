@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import { mainTheme } from 'src/presentational/theme';
 
-function Navigator({ children }: PropsWithChildren<{}>) {
+function Navigator({ children }: PropsWithChildren) {
   return <NavigatorContainer>{children}</NavigatorContainer>;
 }
 

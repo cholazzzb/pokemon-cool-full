@@ -1,6 +1,8 @@
+import { motion } from 'framer-motion';
+
 import { mainTheme } from '@/presentational/theme';
 
-export const Flex = mainTheme.styled('div', {
+export const Flex = mainTheme.styled(motion.div, {
   display: 'flex',
 });
 
@@ -40,9 +42,9 @@ export const Layout = mainTheme.styled('div', {
 });
 
 export const RightPane = mainTheme.styled('div', {
-  display: 'none',
+  display: 'flex',
+  width: '0%',
   '@md': {
-    display: 'flex',
     width: '100%',
   },
 });
@@ -64,4 +66,5 @@ export const BottomSheet = mainTheme.styled(YStack, {
   borderTopLeftRadius: 40,
   borderTopRightRadius: 40,
   paddingBlockStart: 60,
+  marginBlockEnd: 65, // Navigator height 65px
 });

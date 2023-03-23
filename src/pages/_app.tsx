@@ -8,6 +8,8 @@ import {
 } from '@apollo/client';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 config.autoAddCss = false;
@@ -51,22 +53,29 @@ const client = new ApolloClient({
   defaultOptions,
 });
 
+const queryClient = new QueryClient({});
+
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles();
 
   return (
-    <ApolloProvider client={client}>
-      <Head>
-        <title>Pokemon Cool</title>
-        <meta name="description" content="Unofficial Pokedex" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="width=device-width, minimum-scale=1, initial-scale=1"
-        />
-      </Head>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={client}>
+        <Head>
+          <title>Pokemon Cool</title>
+          <meta name="description" content="Unofficial Pokedex" />
+          <link rel="icon" href="/favicon.ico" />
+          <meta
+            name="viewport"
+            content="width=device-width, minimum-scale=1, initial-scale=1"
+          />
+        </Head>
+        <Component {...pageProps} />
+      </ApolloProvider>
+      {process.env.NODE_ENV === 'development' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
+    </QueryClientProvider>
   );
 }
 export default MyApp;

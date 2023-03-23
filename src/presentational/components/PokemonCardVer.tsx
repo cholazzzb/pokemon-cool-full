@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import getConfig from 'next/config';
+import { FunctionComponent } from 'react';
 
 import { usePokeType } from '@/domains/pokemon/pokemonHook';
-import { FunctionComponent } from 'react';
+import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { getPrimaryColorFromType } from 'src/presentational/colorTheme';
 import { mainTheme } from 'src/presentational/theme';
 import PokeImage from './PokeImage';
@@ -52,8 +53,8 @@ const PokemonCardVer: FunctionComponent<IPokemonCardVerProps> = (props) => {
         <NameText>{name}</NameText>
         <Flex>
           {data &&
-            data.pokemon.types.map((type: any, idx: number) => (
-              <TypeChip key={idx} type={type.type.name} />
+            data.pokemon.types.map((type, idx: number) => (
+              <TypeChip key={idx} type={type.type.name as PokemonType} />
             ))}
         </Flex>
         <FlexCenter>

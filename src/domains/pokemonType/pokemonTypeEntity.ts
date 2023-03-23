@@ -30,3 +30,24 @@ export const asPokemonType = (value: string): PokemonType | null => {
 };
 
 export type PokemonType = t.Static<typeof PokemonTypeSchema>;
+
+export const pokemonTypes: Array<PokemonType> = [
+  'normal',
+  'fire',
+  'fighting',
+  'water',
+  'flying',
+  'grass',
+  'poison',
+  'electric',
+  'ground',
+  'psychic',
+  'rock',
+  'ice',
+  'bug',
+  'dragon',
+  'ghost',
+  'dark',
+  'steel',
+  'fairy',
+];

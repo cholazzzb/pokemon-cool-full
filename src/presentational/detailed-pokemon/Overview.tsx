@@ -6,7 +6,7 @@ import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { asPokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { getSecondaryColorFromType } from '@/presentational/colorTheme';
 import PokeImage from '@/presentational/components/PokeImage';
-import PokemonTag from '@/presentational/components/Tags/PokemonTag';
+import PokemonTag from '@/presentational/components/Tags/PokemonTypeTag';
 import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
 import CatchPokemon from './CatchPokemon';
@@ -23,7 +23,7 @@ const Overview: FunctionComponent<OverviewProps> = ({
   currentName,
   types,
 }) => {
-  const pokemonMainType = types[0]?.type!.name;
+  const pokemonMainType = types[0]?.type?.name ?? 'normal';
   const seconColor = getSecondaryColorFromType(pokemonMainType);
 
   const { publicRuntimeConfig } = getConfig();
@@ -41,8 +41,8 @@ const Overview: FunctionComponent<OverviewProps> = ({
               }
               return (
                 <Link
-                  key={`information-pokemonn-type-${pokemonType}`}
-                  href={`/types/${type!.type!.id}`}
+                  key={`information-pokemon-type-${pokemonType}`}
+                  href={`/types/${type?.type?.id ?? 1}`}
                 >
                   <PokemonTag
                     pokemonType={pokemonType}
