@@ -13,7 +13,7 @@ import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { getPokemonDetailById } from '@/domains/pokemons/pokemonsService.gql';
 import {
-  createPokemonTypeColor,
+  createPokemonTypeBgColor,
   getPrimaryColorFromType,
 } from '@/presentational/colorTheme';
 import {
@@ -121,6 +121,6 @@ export const getStaticProps = async (
 
 const DetailPageContainer = mainTheme.styled(Body, {
   variants: {
-    pokemonType: createPokemonTypeColor(0.9),
+    pokemonType: createPokemonTypeBgColor(0.9),
   },
 });

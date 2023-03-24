@@ -10,30 +10,20 @@ import { AllPokemonsNameType } from '@/domains/pokemons/pokemonsService';
 import { useListTypes } from '@/domains/type/typeHook';
 import FloatingActionButton from '@/presentational/components/FloatingActionButton';
 import Header from '@/presentational/components/Header';
-import {
-  Body,
-  Layout,
-  RightPane,
-  YScrollable,
-} from '@/presentational/components/Layout';
+import { Body, Layout, YScrollable } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
 import PokemonGenerationTag from '@/presentational/components/Tags/PokemonGenerationTag';
 import PokemonTypeTag from '@/presentational/components/Tags/PokemonTypeTag';
 import FilterBadgeRow from '@/presentational/pokemon-list/FilterBadgeRow';
 import FilterBottomSheet from '@/presentational/pokemon-list/FilterBottomSheet';
 import PokemonList from '@/presentational/pokemon-list/PokemonList';
-import SearchBarWrapper from '@/presentational/pokemon-list/SearchBarWrapper';
+import SearchFilterPane from '@/presentational/pokemon-list/SearchFilterPane';
 import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
 
 type HomeProps = AllPokemonsNameType;
 
 const Home: NextPage<HomeProps> = () => {
-  const [_searchValue, setSearchValue] = useState('');
-  const onChangeSearch = (searchValue: string) => {
-    setSearchValue(searchValue);
-  };
-
   const typesQuery = useListTypes();
 
   const pokemonTypeMap = (useMemo(() => {
@@ -75,12 +65,19 @@ const Home: NextPage<HomeProps> = () => {
       return next;
     });
 
-  const [showBottomSheet, setShowBottomSheet] = useState(false);
-  const onClickBottomSheetFAB = () => setShowBottomSheet(true);
+  const [showFilter, setShowFilter] = useState(false);
+  const onClickToggleFilter = () => setShowFilter((prev) => !prev);
 
   return (
     <Layout>
-      <RightPane />
+      <SearchFilterPane
+        showFilter={showFilter}
+        onClickToggleFilter={onClickToggleFilter}
+        pokemonGenFilter={pokemonGenFilter}
+        onClickPokemonGenFilter={onClickGenFilter}
+        pokemonTypeFilter={pokemonTypeFilter}
+        onClickPokemonTypeFilter={onClickPokemontTypeFilter}
+      />
       <Body>
         <Header caption="List Pokemons" />
         {pokemonTypeFilter.size > 0 && (
@@ -110,7 +107,7 @@ const Home: NextPage<HomeProps> = () => {
         <FloatingActionButton
           size="lg"
           posIndex={2}
-          onClick={onClickBottomSheetFAB}
+          onClick={onClickToggleFilter}
         >
           <FontAwesomeIcon icon={faFilter} size="lg" />
         </FloatingActionButton>
@@ -122,13 +119,13 @@ const Home: NextPage<HomeProps> = () => {
               .sort((a, b) => a - b)}
           />
         </YScrollable>
-        {showBottomSheet && (
+        {showFilter && (
           <FilterBottomSheet
             pokemonGenFilter={pokemonGenFilter}
             onClickPokemonGenFilter={onClickGenFilter}
             pokemonTypeFilter={pokemonTypeFilter}
             onClickPokemonTypeFilter={onClickPokemontTypeFilter}
-            onClickClose={() => setShowBottomSheet(false)}
+            onClickClose={() => setShowFilter(false)}
           />
         )}
       </Body>
@@ -154,7 +151,10 @@ const Home: NextPage<HomeProps> = () => {
             <Navigator.ItemText>Owned</Navigator.ItemText>
           </Navigator.Item>
         </Link>
-        <SearchBarWrapper onChangeSearch={onChangeSearch} />
+        {/*
+         * // TODO: Unremove this after correctly implemented with graphql
+         * <SearchBarWrapper onChangeSearch={onChangeSearch} />
+         * */}
       </Navigator>
     </Layout>
   );

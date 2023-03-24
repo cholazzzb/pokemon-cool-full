@@ -41,10 +41,10 @@ export const Layout = mainTheme.styled('div', {
   },
 });
 
-export const RightPane = mainTheme.styled('div', {
-  display: 'flex',
-  width: '0%',
+export const RightPane = mainTheme.styled(Flex, {
+  display: 'none',
   '@md': {
+    display: 'flex',
     width: '100%',
   },
 });

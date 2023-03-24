@@ -2,8 +2,11 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ComponentProps } from 'react';
 
-import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import { createPokemonTypeColor } from '@/presentational/colorTheme';
+import {
+  PokemonType,
+  pokemonTypes,
+} from '@/domains/pokemonType/pokemonTypeEntity';
+import { createPokemonTypeBaseColor } from '@/presentational/colorTheme';
 import Text from '@/presentational/components/Text';
 import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
@@ -14,21 +17,26 @@ type PokemonTypeTagProps = ComponentProps<typeof PokemonTypeTagItem> & {
   onClickClose?: () => void;
 };
 
-function PokemonTypeTag({ onClickClose, ...props }: PokemonTypeTagProps) {
+function PokemonTypeTag({
+  pokemonType,
+  onClickClose,
+  ...props
+}: PokemonTypeTagProps) {
   return (
     <PokemonTypeTagItem
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      pokemonType={pokemonType}
       {...props}
     >
-      <TypeIcon type={props.pokemonType} />
+      <TypeIcon type={pokemonType} />
       <Text
         variant="body1"
         color="white"
         css={{ textTransform: 'capitalize', marginInline: 4 }}
       >
-        {props.pokemonType}
+        {pokemonType}
       </Text>
       {onClickClose && (
         <FontAwesomeIcon icon={faTimes} color="white" onClick={onClickClose} />
@@ -39,12 +47,37 @@ function PokemonTypeTag({ onClickClose, ...props }: PokemonTypeTagProps) {
 
 export default PokemonTypeTag;
 
+const pokemonTypeBaseColor07 = createPokemonTypeBaseColor(0.7);
+const pokemonTypeBaseColor08 = createPokemonTypeBaseColor(0.8);
+const pokemonTypeBaseColor10 = createPokemonTypeBaseColor(1);
+
+const pokemonTypeBackgroundColor = pokemonTypes.reduce(
+  (acc, pokemonType) => ({
+    ...acc,
+    [pokemonType]: {
+      backgroundColor: pokemonTypeBaseColor08[pokemonType],
+      '&:hover': {
+        backgroundColor: pokemonTypeBaseColor07[pokemonType],
+      },
+    },
+  }),
+  {},
+) as Record<
+  PokemonType,
+  {
+    backgroundColor: string;
+    '&:hover': {
+      backgroundColor: string;
+    };
+  }
+>;
+
 const PokemonTypeTagItem = mainTheme.styled(TagItem, {
   variants: {
     focused: {
       true: {
         border: '4px solid',
-        borderColor: '#b3b3cc',
+        borderColor: '$neutral100',
       },
     },
     disabled: {
@@ -58,6 +91,19 @@ const PokemonTypeTagItem = mainTheme.styled(TagItem, {
         justifyContent: 'space-between',
       },
     },
-    pokemonType: createPokemonTypeColor(0.9),
+    pokemonType: pokemonTypeBackgroundColor,
   },
+
+  compoundVariants: pokemonTypes.map((pokemonType) => ({
+    pokemonType,
+    focused: true,
+    css: {
+      backgroundColor: pokemonTypeBaseColor08[pokemonType],
+      '&:hover': {
+        backgroundColor: pokemonTypeBaseColor07[pokemonType],
+      },
+      border: '4px solid',
+      borderColor: pokemonTypeBaseColor10[pokemonType],
+    },
+  })),
 });

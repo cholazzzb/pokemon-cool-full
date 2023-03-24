@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FunctionComponent } from 'react';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import { createPokemonTypeColor } from '@/presentational/colorTheme';
+import { createPokemonTypeBgColor } from '@/presentational/colorTheme';
 import { mainTheme } from '@/presentational/theme';
 import PokeImage from './PokeImage';
 import PokemonTag from './Tags/PokemonTypeTag';
@@ -78,6 +78,6 @@ const Card = mainTheme.styled('div', {
   boxShadow:
     'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
   variants: {
-    pokemonType: createPokemonTypeColor(0.8),
+    pokemonType: createPokemonTypeBgColor(0.8),
   },
 });

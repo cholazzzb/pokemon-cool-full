@@ -48,7 +48,7 @@ const PokemonGenerationTagItem = mainTheme.styled(TagItem, {
     focused: {
       true: {
         border: '4px solid',
-        borderColor: '#b3b3cc',
+        borderColor: '$neutral100',
       },
     },
     disabled: {

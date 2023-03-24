@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FunctionComponent } from 'react';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import { createPokemonTypeColor } from '@/presentational/colorTheme';
+import { createPokemonTypeBgColor } from '@/presentational/colorTheme';
 import { mainTheme } from '@/presentational/theme';
 
 type ImageProps = {
@@ -19,7 +19,7 @@ const PokeImage: FunctionComponent<ImageProps> = (props) => {
     width: `${size}px`,
     height: `${size}px`,
     variants: {
-      pokemonType: createPokemonTypeColor(0.9),
+      pokemonType: createPokemonTypeBgColor(0.9),
     },
   });
 

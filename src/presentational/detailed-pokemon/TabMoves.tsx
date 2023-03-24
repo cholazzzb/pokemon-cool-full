@@ -8,7 +8,7 @@ import { FixedSizeList as List } from 'react-window';
 import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { useListTypes } from '@/domains/type/typeHook';
-import { createPokemonTypeColor } from '@/presentational/colorTheme';
+import { createPokemonTypeBgColor } from '@/presentational/colorTheme';
 import { ButtonOutline } from '@/presentational/components/Button';
 import { Center, Flex } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
@@ -122,7 +122,7 @@ const Row = mainTheme.styled('div', {
   borderColor: 'rgba(141, 158, 255, 0.5)',
   borderInline: '6px',
   variants: {
-    pokemonType: createPokemonTypeColor(0.8),
+    pokemonType: createPokemonTypeBgColor(0.8),
   },
 });
 

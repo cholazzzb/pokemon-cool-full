@@ -29,7 +29,7 @@ type FilterBottomSheetProps = {
 
 function FilterBottomSheet(props: FilterBottomSheetProps) {
   return (
-    <ModalOverlay css={{ alignItems: 'flex-end' }}>
+    <ModalOverlay css={{ alignItems: 'flex-end', '@md': { display: 'none' } }}>
       <AnimatePresence>
         <BottomSheet
           initial={{ y: 500, opacity: 0 }}
