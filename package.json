@@ -12,7 +12,7 @@
     "type-check": "tsc --pretty --noEmit",
     "test": "jest",
     "test:preview": "jest-preview",
-    "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.{ts,jxs}'",
+    "test:coverage": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}'",
     "test:e2e": "playwright test",
     "test:e2e-debug": "PWDEBUG=1 playwright test",
     "storybook": "start-storybook -p 6006",

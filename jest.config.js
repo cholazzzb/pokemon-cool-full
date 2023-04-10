@@ -7,12 +7,18 @@ const createJestConfig = nextJest({
 });
 
 const config = {
+  collectCoverage: true,
   collectCoverageFrom: [
     './**/__tests__/*.{test.ts,test.tsx}',
     '**/*.{test.ts,test.tsx}',
     '!**/node_modules/**',
     '!**/.next/**',
   ],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    '<rootDir>/src/__generated__',
+  ],
+  coverageDirectory: '<rootDir>/coverage/',
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)
       https://jestjs.io/docs/webpack#mocking-css-modules */
