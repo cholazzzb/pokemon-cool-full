@@ -9,10 +9,12 @@ type ImageProps = {
   type: string;
   size: number;
   image: string;
+  posX?: number;
+  posY?: number;
 };
 
 const PokeImage: FunctionComponent<ImageProps> = (props) => {
-  const { type, size, image } = props;
+  const { type, size, image, posX = -20, posY = 15 } = props;
 
   const ImageBackground = mainTheme.styled('div', {
     borderRadius: '9999px',
@@ -29,7 +31,7 @@ const PokeImage: FunctionComponent<ImageProps> = (props) => {
     borderRadius: '9999px',
     width: `${size + 40}px`,
     height: `${size + 40}px`,
-    transform: 'translateX(-20px) translateY(15px)',
+    transform: `translateX(${posX}px) translateY(${posY}px)`,
     transformOrigin: 'bottom',
   });
 

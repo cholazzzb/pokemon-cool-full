@@ -1,13 +1,19 @@
+import getConfig from 'next/config';
 import Link from 'next/link';
-import { CSSProperties, FunctionComponent } from 'react';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List } from 'react-window';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
+
+import { GetPokemonsByGensAndTypesQuery } from '@/__generated__/pokeapi/gql/graphql';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
+import { useGetPokemonsByGensAndTypesQuery } from '@/domains/pokemons/pokemonsHook';
 import { GetListTypesRes } from '@/domains/type/typeService.gql';
-import { getPrimaryColorFromType } from '@/presentational/colorTheme';
+import { createPokemonTypeBgColor } from '@/presentational/colorTheme';
+import { Flex, YStack } from '@/presentational/components/Layout';
+import PokeImage from '@/presentational/components/PokeImage';
 import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
+
+const { publicRuntimeConfig } = getConfig();
 
 type ListTypesProps = {
   types: GetListTypesRes['types'];
@@ -15,73 +21,122 @@ type ListTypesProps = {
 
 const ListTypes: FunctionComponent<ListTypesProps> = (props) => {
   return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <List
-          height={height}
-          width={width}
-          itemCount={props.types.length ?? 0}
-          itemSize={100}
-          itemData={{
-            types: props.types,
-          }}
-        >
-          {Row}
-        </List>
-      )}
-    </AutoSizer>
+    <YStack css={{ width: '100%', height: '100%' }}>
+      {props.types.map((pokemonType) => (
+        <Row
+          key={`row-pokemonType-${pokemonType}`}
+          pokemonTypes={pokemonType}
+        />
+      ))}
+    </YStack>
   );
 };
 
 export default ListTypes;
 
+type Miliseconds = number;
+
 type RowProps = {
-  data: { types: GetListTypesRes['types'] };
-  index: number;
-  style: CSSProperties;
+  pokemonTypes: GetListTypesRes['types'][0];
 };
 
-const Row: FunctionComponent<RowProps> = ({ data, index, style }) => {
-  const types = data.types;
-  if (types.length === 0) {
-    return <></>;
-  }
+const Row: FunctionComponent<RowProps> = ({ pokemonTypes }) => {
+  const pokemonQuery = useGetPokemonsByGensAndTypesQuery({
+    pageSize: 4 * 8,
+    genIds: [],
+    typeIds: [pokemonTypes?.id],
+  });
 
-  const pokemonType = types[index].name as PokemonType;
-  const pokemonTypeId = types[index].id;
-  const primaryColor = getPrimaryColorFromType(pokemonType);
+  const [randomPokemon, setRandomPokemon] = useState<
+    GetPokemonsByGensAndTypesQuery['pokemons']
+  >([]);
 
-  const ListItem = createListItem(primaryColor);
+  const calculateRandomDelay = (): Miliseconds => {
+    return 4000 + Math.random() * 10000;
+  };
+
+  const showRandomPokemon = (
+    pokemons: GetPokemonsByGensAndTypesQuery['pokemons'],
+  ) => {
+    const selected = [...pokemons];
+    const shownPokemon = 4;
+    for (let iter = 0; iter < shownPokemon; iter++) {
+      const lastLength = selected.length - 1 - iter;
+      const randomIdx = Math.floor(Math.random() * lastLength);
+      [selected[randomIdx], selected[lastLength]] = [
+        selected[lastLength],
+        selected[randomIdx],
+      ];
+    }
+    setRandomPokemon(
+      selected.slice(selected.length - 1 - shownPokemon, selected.length - 1),
+    );
+  };
+
+  const delayRef = useRef<NodeJS.Timeout>();
+  const changeGenId = () => {
+    delayRef.current = setTimeout(() => {
+      showRandomPokemon(pokemonQuery.flattenData);
+      changeGenId();
+    }, calculateRandomDelay());
+  };
+
+  useEffect(() => {
+    changeGenId();
+    return () => {
+      delayRef.current && clearTimeout(delayRef.current);
+    };
+  }, [delayRef.current]);
+
+  const pokemonType = pokemonTypes.name as PokemonType;
+  const pokemonTypeId = pokemonTypes.id;
 
   return (
-    <ListItem style={{ ...style, height: 80 }}>
+    <ListItem pokemonType={pokemonType}>
       <Link href={`/types/${pokemonTypeId}`}>
         <ListItemLink>
           <TypeIcon size={50} type={pokemonType} />
-          <Text>{types[index]?.name}</Text>
+          <Text>{pokemonType}</Text>
+          <Flex css={{ width: '100%', justifyContent: 'space-between' }}>
+            {randomPokemon.map((pokemon) => (
+              <PokeImage
+                key={`pokemon-image-${pokemon.name}`}
+                type={pokemonType}
+                image={publicRuntimeConfig.pokemonImageUrl.replace(
+                  '{id}',
+                  pokemon.id.toString(),
+                )}
+                size={36}
+                posY={-20}
+              />
+            ))}
+          </Flex>
         </ListItemLink>
       </Link>
     </ListItem>
   );
 };
 
-const createListItem = (backgroundColor: string) =>
-  mainTheme.styled('div', {
-    backgroundColor,
-    borderRadius: 10,
-  });
+const ListItem = mainTheme.styled('div', {
+  borderRadius: 10,
+  marginBlock: '$3',
+  variants: {
+    pokemonType: createPokemonTypeBgColor(0.8),
+  },
+});
 
-const ListItemLink = mainTheme.styled('a', {
-  textDecoration: 'none',
+const ListItemLink = mainTheme.styled('div', {
   color: 'initial',
   width: '100%',
   height: '100%',
-  paddingInlineStart: 30,
+  paddingInlineStart: '$2',
+  paddingInlineEnd: '$5',
   display: 'flex',
   alignItems: 'center',
 });
 
 const Text = mainTheme.styled('p', {
   color: 'white',
-  marginInlineStart: '10px',
+  marginInlineEnd: '$5',
+  textTransform: 'capitalize',
 });

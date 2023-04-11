@@ -13,6 +13,8 @@ import PokemonCardHor from '@/presentational/components/PokemonCardHor';
 import Skeleton from '@/presentational/components/Skeleton';
 import { mainTheme } from '@/presentational/theme';
 
+const { publicRuntimeConfig } = getConfig();
+
 type RowProps = {
   data: {
     pokemons: GetPokemonsByGensAndTypesQuery['pokemons'];
@@ -24,7 +26,6 @@ type RowProps = {
 const Row: FunctionComponent<RowProps> = (props) => {
   const { data, index, style } = props;
   const { pokemons } = data;
-  const { publicRuntimeConfig } = getConfig();
 
   const pokemonTypes = pokemons[index].pokemons[0].types.map(
     (poke) => (poke?.type?.name ?? 'normal') as PokemonType,

@@ -56,7 +56,7 @@ export const getPokemonDetailById = (pokemonId: number) =>
     pokemonId,
   });
 
-export const getPokemonsByGensAndTypesQuery = graphql(`
+const getPokemonsByGensAndTypesQuery = graphql(`
   query GetPokemonsByGensAndTypes(
     $genIds: [Int!]
     $typeIds: [Int!]
