@@ -1,23 +1,11 @@
-import React from 'react';
-import { screen, render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+
 import Alert from '../Alert';
 
 describe('renders correctly', () => {
-  it('Close Alert', () => {
-    render(
-      <Alert headText="this is headtext">
-        <div>This is children</div>
-      </Alert>,
-    );
-    const closeButton = screen.queryByTestId('alert-close-button');
-
-    expect(closeButton).toBeTruthy();
-  });
-});
-
-describe('onfire', () => {
   it('Close the alert when clicked', () => {
-    render(
+    const screen = render(
       <Alert headText="this is headtext">
         <div>This is children</div>
       </Alert>,
@@ -25,6 +13,8 @@ describe('onfire', () => {
     const closeButton = screen.queryByTestId(
       'alert-close-button',
     ) as HTMLElement;
+    expect(closeButton).toBeTruthy();
+
     fireEvent.click(closeButton);
 
     const closeButtonAfterClicked = screen.queryByTestId(

@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { expect, it } from 'vitest';
+
 import TypeChip from '../TypeChip';
 
 it('renders correctly', () => {

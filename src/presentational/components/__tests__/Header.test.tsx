@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+
 import Header from '../Header';
 
 describe('renders correctly', () => {
@@ -25,13 +27,13 @@ describe('renders correctly', () => {
         }}
       />,
     );
-    expect(queryByTestId('header-backicon')).toBeTruthy();
+    expect(queryByTestId('header-backicon-button')).toBeTruthy();
   });
 
   it('backIcon with link', () => {
     const { queryByTestId } = render(
       <Header caption="normal" onClickBackLink="/" />,
     );
-    expect(queryByTestId('header-backicon')).toBeTruthy();
+    expect(queryByTestId('header-backicon-link')).toBeTruthy();
   });
 });

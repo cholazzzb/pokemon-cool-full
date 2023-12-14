@@ -7,7 +7,7 @@ Unofficial-pokedex
 Next.js, Graphql, zustand, css-in-js (stitches), Framer-motion, Storybook
 
 ## Test
-A small ammount of testing with jest and playwright 
+A small ammount of testing with vitest and playwright 
 ### Coverage
 `yarn test --coverage --collectCoverageFrom='src/**/*.{ts,tsx}'`
 

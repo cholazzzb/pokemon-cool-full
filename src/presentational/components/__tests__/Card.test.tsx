@@ -1,4 +1,6 @@
+import { it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+
 import Card from '../Card';
 
 it('render correctly', () => {

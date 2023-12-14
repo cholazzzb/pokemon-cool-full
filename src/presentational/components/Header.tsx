@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { mainTheme } from '@/presentational/theme';
+import { Show } from './Show';
 
 type HeaderProps = {
   caption?: string;
@@ -21,22 +22,27 @@ const Header: FunctionComponent<PropsWithChildren<HeaderProps>> = ({
     <HeaderWrapper>
       <BackButton>
         {onClickBack && (
-          <IconWrapper data-testid="header-backicon" onClick={onClickBack}>
+          <IconWrapper
+            data-testid="header-backicon-button"
+            onClick={onClickBack}
+          >
             <FontAwesomeIcon icon={faChevronLeft} color="black" />
           </IconWrapper>
         )}
         {onClickBackLink && (
           <Link href={onClickBackLink}>
-            <IconWrapper data-testid="header-backicon">
+            <IconWrapper data-testid="header-backicon-link">
               <FontAwesomeIcon icon={faChevronLeft} color="black" />
             </IconWrapper>
           </Link>
         )}
       </BackButton>
       <Caption data-testid="header-label">{caption}</Caption>
-      <ChildrenWrapper data-testid="header-children-label">
-        {children}
-      </ChildrenWrapper>
+      <Show when={!!children}>
+        <ChildrenWrapper data-testid="header-children-label">
+          {children}
+        </ChildrenWrapper>
+      </Show>
     </HeaderWrapper>
   );
 };
