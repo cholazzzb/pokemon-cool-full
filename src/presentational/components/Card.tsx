@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import { mainTheme } from '../theme';
+
+import { styled } from '../panda-css/jsx';
 
 type CardProps = {
   headText: string;
@@ -17,16 +18,22 @@ const Card: FunctionComponent<CardProps> = (props) => {
 
 export default Card;
 
-const CardWrapper = mainTheme.styled('div', {
-  textTransform: 'capitalize',
-  padding: '10px 0px',
+const CardWrapper = styled('div', {
+  base: {
+    textTransform: 'capitalize',
+    padding: '10px 0px',
+  },
 });
 
-const CardHeader = mainTheme.styled('div', {
-  fontSize: '25px',
-  fontWeight: 900,
+const CardHeader = styled('div', {
+  base: {
+    fontSize: '25px',
+    fontWeight: 900,
+  },
 });
 
-const CardBody = mainTheme.styled('div', {
-  fontSize: '20px',
+const CardBody = styled('div', {
+  base: {
+    fontSize: '20px',
+  },
 });

@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 import Header from './Header';
 
 type AlertProps = {
@@ -42,39 +42,47 @@ const Alert: FunctionComponent<PropsWithChildren<AlertProps>> = ({
 
 export default Alert;
 
-const Overlay = mainTheme.styled('div', {
-  zIndex: '$overlay',
-  position: 'fixed',
-  top: '0px',
-  left: '0px',
-  width: '100%',
-  height: '100%',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+const Overlay = styled('div', {
+  base: {
+    zIndex: 'overlay',
+    position: 'fixed',
+    top: '0px',
+    left: '0px',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
 });
 
-const CloseIcon = mainTheme.styled('span', {
-  display: 'flex;',
-  width: '25px;',
-  height: '25px;',
-  color: 'black;',
+const CloseIcon = styled('span', {
+  base: {
+    display: 'flex',
+    width: '25px',
+    height: '25px',
+    color: 'black',
+  },
 });
 
-const AlertBody = mainTheme.styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  width: '100%',
+const AlertBody = styled('div', {
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  },
 });
 
-const Container = mainTheme.styled('div', {
-  color: 'black',
-  zIndex: '50',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  bottom: '0%',
-  height: '60%',
-  width: '100%',
-  backgroundColor: 'white',
-  borderTopLeftRadius: '30px',
-  borderTopRightRadius: '30px',
+const Container = styled('div', {
+  base: {
+    color: 'black',
+    zIndex: '50',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    bottom: '0%',
+    height: '60%',
+    width: '100%',
+    backgroundColor: 'white',
+    borderTopLeftRadius: '30px',
+    borderTopRightRadius: '30px',
+  },
 });

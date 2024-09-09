@@ -3,9 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
 import { BaseInput } from '@/presentational/components/Input';
-import { Center } from '@/presentational/components/Layout';
 import Navigator from '@/presentational/components/Navigator';
-import { mainTheme } from '@/presentational/theme';
+import { Center, styled } from '../panda-css/jsx';
 
 type SearchBarDesktopProps = SearchInputProps & {
   show: boolean;
@@ -37,10 +36,12 @@ const SearchBarDesktop: FunctionComponent<SearchBarDesktopProps> = (props) => {
 
 export default SearchBarDesktop;
 
-const ShowOnDesktopOnly = mainTheme.styled('div', {
-  display: 'none',
-  '@md': {
-    display: 'initial',
+const ShowOnDesktopOnly = styled('div', {
+  base: {
+    display: 'none',
+    md: {
+      display: 'initial',
+    },
   },
 });
 
@@ -64,42 +65,48 @@ const SearchInput = (props: SearchInputProps) => {
   );
 };
 
-const SearchInputContainer = mainTheme.styled(Center, {
-  textDecoration: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  margin: '3px',
-  backgroundColor: 'white',
-  cursor: 'pointer',
-  '&:hover': {
-    backgroundColor: '#d9dadc',
+const SearchInputContainer = styled(Center, {
+  base: {
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    margin: '3px',
+    backgroundColor: 'white',
+    cursor: 'pointer',
+    _hover: {
+      backgroundColor: '#d9dadc',
+    },
+    flexDirection: 'row',
+    height: '30px',
+    justifyContent: 'start',
+    padding: '10px',
+    marginInline: '70px',
   },
-  flexDirection: 'row',
-  height: '30px',
-  justifyContent: 'start',
-  padding: '10px',
-  marginInline: '70px',
 });
 
-const CloseIconContainer = mainTheme.styled('button', {
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '30px',
-  width: '30px',
-  borderRadius: '4px',
-  border: '0px',
-  marginInlineEnd: '4px',
+const CloseIconContainer = styled('button', {
+  base: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '30px',
+    width: '30px',
+    borderRadius: '4px',
+    border: '0px',
+    marginInlineEnd: '4px',
+  },
 });
 
-const SearchIcon = mainTheme.styled('span', {
-  backgroundColor: '$primary100',
-  color: 'white',
-  width: 30,
-  height: 30,
-  borderRadius: 15,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+const SearchIcon = styled('span', {
+  base: {
+    backgroundColor: 'primary.100',
+    color: 'white',
+    width: '30px',
+    height: '30px',
+    borderRadius: '15px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

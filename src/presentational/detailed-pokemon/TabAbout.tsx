@@ -4,7 +4,7 @@ import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { ButtonOutline } from '@/presentational/components/Button';
 import { Flex } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 type TabAboutProps = {
   height: number;
@@ -57,22 +57,30 @@ const TabAbout: FunctionComponent<TabAboutProps> = ({
 
 export default TabAbout;
 
-const TabBody = mainTheme.styled('div', {
-  height: '100%',
-  width: '100%',
-  padding: '10px',
+const TabBody = styled('div', {
+  base: {
+    height: '100%',
+    width: '100%',
+    padding: '10px',
+  },
 });
 
-const TextContainer = mainTheme.styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  height: '30px',
+const TextContainer = styled('div', {
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '30px',
+  },
 });
 
-const Label = mainTheme.styled(Text, {
-  width: '30%',
+const Label = styled(Text, {
+  base: {
+    width: '30%',
+  },
 });
 
-const Data = mainTheme.styled(Text, {
-  textTransform: 'capitalize',
+const Data = styled(Text, {
+  base: {
+    textTransform: 'capitalize',
+  },
 });

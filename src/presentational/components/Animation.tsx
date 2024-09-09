@@ -1,4 +1,4 @@
-import { mainTheme } from '../theme';
+import { mainTheme } from '../panda-config/theme';
 
 const Animation = mainTheme.keyframes({
   '20%': {

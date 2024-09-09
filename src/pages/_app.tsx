@@ -1,3 +1,4 @@
+import '../presentational/globals.css';
 import {
   ApolloClient,
   ApolloLink,

@@ -8,7 +8,7 @@ import { getPrimaryColorFromType } from '@/presentational/colorTheme';
 import { BottomSheet, Center, Flex } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
 import { CollectionListProps } from '@/presentational/owned-pokemon/CollectionList';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 const CollectionList = dynamic(
   () => import('@/presentational/owned-pokemon/CollectionList'),
@@ -58,11 +58,13 @@ function OwnedBottomSheet(props: OwnedBottomSheetProps) {
 
 export default OwnedBottomSheet;
 
-const CloseIcon = mainTheme.styled('span', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '24px',
-  height: '24px',
-  color: 'black',
+const CloseIcon = styled('span', {
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '24px',
+    height: '24px',
+    color: 'black',
+  },
 });

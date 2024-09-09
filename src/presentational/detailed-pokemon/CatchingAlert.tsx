@@ -3,8 +3,8 @@ import { FunctionComponent, useEffect } from 'react';
 
 import Alert from '@/presentational/components/Alert';
 import { PokeballAnimation } from '@/presentational/components/Animation';
-import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
+import { styled } from '../panda-css/jsx';
 
 type CatchintAlertProps = {
   onSuccess: () => void;
@@ -39,12 +39,14 @@ const CatchingAlert: FunctionComponent<CatchintAlertProps> = (props) => {
 
 export default CatchingAlert;
 
-const CatchIcon = mainTheme.styled('span', {
-  width: '70px',
-  height: '70px',
-  borderRadius: '9999px',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
+const CatchIcon = styled('span', {
+  base: {
+    width: '70px',
+    height: '70px',
+    borderRadius: '9999px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

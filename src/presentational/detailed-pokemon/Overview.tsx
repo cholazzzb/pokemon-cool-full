@@ -8,7 +8,7 @@ import { getSecondaryColorFromType } from '@/presentational/colorTheme';
 import PokeImage from '@/presentational/components/PokeImage';
 import PokemonTag from '@/presentational/components/Tags/PokemonTypeTag';
 import Text from '@/presentational/components/Text';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 import CatchPokemon from './CatchPokemon';
 import NavigateOverview from './NavigateOverview';
 
@@ -72,36 +72,48 @@ const Overview: FunctionComponent<OverviewProps> = ({
 
 export default Overview;
 
-const Information = mainTheme.styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '20px',
+const Information = styled('div', {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '20px',
+  },
 });
 
-const TextName = mainTheme.styled(Text, {
-  width: '100%',
-  textTransform: 'capitalize',
-  padding: '0px 20px 10px 20px',
+const TextName = styled(Text, {
+  base: {
+    width: '100%',
+    textTransform: 'capitalize',
+    padding: '0px 20px 10px 20px',
+  },
 });
 
-const TypesContainer = mainTheme.styled('div', {
-  display: 'flex',
-  width: '100%',
-  padding: '0px 20px 10px 20px',
+const TypesContainer = styled('div', {
+  base: {
+    display: 'flex',
+    width: '100%',
+    padding: '0px 20px 10px 20px',
+  },
 });
 
-const ImageContainer = mainTheme.styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  height: '200px',
+const ImageContainer = styled('div', {
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    height: '200px',
+  },
 });
 
-const Container = mainTheme.styled('div', {
-  color: 'white',
+const Container = styled('div', {
+  base: {
+    color: 'white',
+  },
 });
 
-const RelativePosition = mainTheme.styled('div', {
-  position: 'relative',
+const RelativePosition = styled('div', {
+  base: {
+    position: 'relative',
+  },
 });

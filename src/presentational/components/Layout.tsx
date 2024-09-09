@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
 import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 export const Flex = mainTheme.styled(motion.div, {
   display: 'flex',
@@ -28,16 +29,18 @@ export const YScrollable = mainTheme.styled(YStack, {
   overflowY: 'scroll',
 });
 
-export const Layout = mainTheme.styled('div', {
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  maxWidth: '640px', // media sm = 640px
-  '@md': {
-    maxWidth: '100%',
-    borderInline: '4px solid #e7e7ef',
-    flexDirection: 'row-reverse',
+export const Layout = styled('div', {
+  base: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    maxWidth: '640px', // media sm = 640px
+    md: {
+      maxWidth: '100%',
+      borderInline: '4px solid #e7e7ef',
+      flexDirection: 'row-reverse',
+    },
   },
 });
 
@@ -59,12 +62,16 @@ export const Body = mainTheme.styled(YScrollable, {
   },
 });
 
-export const BottomSheet = mainTheme.styled(YStack, {
-  backgroundColor: 'white',
-  height: '100%',
-  width: '100%',
-  borderTopLeftRadius: 40,
-  borderTopRightRadius: 40,
-  paddingBlockStart: 60,
-  marginBlockEnd: 65, // Navigator height 65px
+export const BottomSheet = styled(motion.div, {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    height: '100%',
+    width: '100%',
+    borderTopLeftRadius: '40px',
+    borderTopRightRadius: '40px',
+    paddingBlockStart: '60px',
+    marginBlockEnd: '65px', // Navigator height 65px
+  },
 });

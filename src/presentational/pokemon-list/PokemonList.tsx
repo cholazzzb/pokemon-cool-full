@@ -8,10 +8,10 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import { GetPokemonsByGensAndTypesQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
 import { useGetPokemonsByGensAndTypesQuery } from '@/domains/pokemons/pokemonsHook';
-import { Center, Flex, YStack } from '@/presentational/components/Layout';
+import { Flex, YStack } from '@/presentational/components/Layout';
 import PokemonCardHor from '@/presentational/components/PokemonCardHor';
 import Skeleton from '@/presentational/components/Skeleton';
-import { mainTheme } from '@/presentational/theme';
+import { Center, styled } from '../panda-css/jsx';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -148,14 +148,18 @@ const NoPokemonFoundWrapper = () => {
   return <NoPokemonFound>No Pokemon Found</NoPokemonFound>;
 };
 
-const NoPokemonFound = mainTheme.styled(Center, {
-  width: '100%',
-  height: '100%',
+const NoPokemonFound = styled(Center, {
+  base: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
-const ListItem = mainTheme.styled('div', {
-  display: 'flex',
-  width: '100%',
-  margin: '0px 0px 10px 0px',
-  justifyContent: 'center',
+const ListItem = styled('div', {
+  base: {
+    display: 'flex',
+    width: '100%',
+    margin: '0px 0px 10px 0px',
+    justifyContent: 'center',
+  },
 });

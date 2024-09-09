@@ -1,21 +1,23 @@
 import { motion } from 'framer-motion';
 
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '@/presentational/panda-css/jsx';
 
-export const TagItem = mainTheme.styled(motion.div, {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  paddingInline: '$3',
-  borderRadius: 8,
-  width: 96,
-  height: 32,
-  '@md': {
-    width: 100,
-    height: 32,
-  },
-  '@lg': {
-    width: 104,
-    height: 32,
+export const TagItem = styled(motion.div, {
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingInline: '3x',
+    borderRadius: '8px',
+    width: '96px',
+    height: '32px',
+    md: {
+      width: '100px',
+      height: '32px',
+    },
+    lg: {
+      width: '104px',
+      height: '32px',
+    },
   },
 });

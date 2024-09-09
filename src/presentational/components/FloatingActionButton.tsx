@@ -2,10 +2,10 @@
  * FAB or Floating Action Button
  * only appear for mobile
  **/
-
 import { ComponentProps } from 'react';
 
-import { mainTheme } from '@/presentational/theme';
+import { RecipeVariantProps, cva } from '../panda-css/css';
+import { styled } from '../panda-css/jsx';
 
 type FloatingActionButtonProps = ComponentProps<
   typeof FloatingActionButtonBase
@@ -27,37 +27,44 @@ export default function FloatingActionButton({
   );
 }
 
-const FloatingActionButtonBase = mainTheme.styled('div', {
-  zIndex: '$floatingActionButton',
-  position: 'absolute',
-  right: 20,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderColor: 'black',
-  height: 24,
-  width: 24,
-  cursor: 'pointer',
-  borderRadius: '50%',
-  backgroundColor: '$primary100',
-  color: 'white',
+const floatingActionButtonStyle = cva({
+  base: {
+    zIndex: 'floatingActionButton',
+    position: 'absolute',
+    right: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'black',
+    height: '24px',
+    width: '24xpx',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    backgroundColor: 'primary.100',
+    color: 'white',
+    md: {
+      display: 'none',
+    },
+  },
   variants: {
     size: {
       sm: {
-        height: 32,
-        width: 32,
+        height: '32px',
+        width: '32px',
       },
       md: {
-        height: 36,
-        width: 36,
+        height: '36px',
+        width: '36px',
       },
       lg: {
-        height: 40,
-        width: 40,
+        height: '40px',
+        width: '40px',
       },
     },
   },
-  '@md': {
-    display: 'none',
-  },
 });
+
+export type FloatingActionButtonVariants = RecipeVariantProps<
+  typeof floatingActionButtonStyle
+>;
+const FloatingActionButtonBase = styled('div', floatingActionButtonStyle);

@@ -7,6 +7,7 @@ import { getAsset } from '@/utils/asset';
 import CatchingAlert from './CatchingAlert';
 import FailedAlert from './FailedAlert';
 import SuccessAlert from './SuccessAlert';
+import { styled } from '../panda-css/jsx';
 
 type CatchStatus = 'SUCCESS' | 'FAILED' | 'CATCHING' | null;
 
@@ -85,14 +86,16 @@ const CatchPokemon: FunctionComponent<CatchPokemonProps> = (props) => {
 
 export default CatchPokemon;
 
-const FloatingButton = mainTheme.styled('div', {
-  position: 'absolute',
-  right: '20px',
-  top: '120px',
-  width: '70px',
-  height: '70px',
-  borderRadius: '35px',
-  display: 'flex',
-  justifyContent: 'cente',
-  alignItems: 'center',
+const FloatingButton = styled('div', {
+  base: {
+    position: 'absolute',
+    right: '20px',
+    top: '120px',
+    width: '70px',
+    height: '70px',
+    borderRadius: '35px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

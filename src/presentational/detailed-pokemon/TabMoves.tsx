@@ -14,6 +14,7 @@ import { Center, Flex } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
 import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 type TabMoveProps = {
   moves: GetPokemonDetailByIdQuery['moves'];
@@ -127,8 +128,10 @@ const Row = mainTheme.styled('div', {
   },
 });
 
-const MoveContainer = mainTheme.styled('div', {
-  height: '100%',
-  width: '100%',
-  paddingInlineStart: '10px',
+const MoveContainer = styled('div', {
+  base: {
+    height: '100%',
+    width: '100%',
+    paddingInlineStart: '10px',
+  },
 });

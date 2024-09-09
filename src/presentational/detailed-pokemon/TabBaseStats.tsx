@@ -5,6 +5,7 @@ import { ButtonOutline } from '@/presentational/components/Button';
 import { YScrollable } from '@/presentational/components/Layout';
 import Text from '@/presentational/components/Text';
 import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 type TabBaseStatsProps = {
   stats: GetPokemonDetailByIdQuery['about'][0]['stats'];
@@ -69,18 +70,24 @@ const BarContainer = (props: BarContainerProps) => {
   return <Bar />;
 };
 
-const Status = mainTheme.styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  padding: '10px',
+const Status = styled('div', {
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '10px',
+  },
 });
-const StatusKey = mainTheme.styled('div', {
-  color: 'white',
-  display: 'flex',
-  width: '70px',
+const StatusKey = styled('div', {
+  base: {
+    color: 'white',
+    display: 'flex',
+    width: '70px',
+  },
 });
-const StatusValue = mainTheme.styled('div', {
-  color: 'white',
-  display: 'flex',
-  padding: '0px 10px',
+const StatusValue = styled('div', {
+  base: {
+    color: 'white',
+    display: 'flex',
+    padding: '0px 10px',
+  },
 });

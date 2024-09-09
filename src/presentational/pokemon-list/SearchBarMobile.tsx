@@ -4,8 +4,7 @@ import { FunctionComponent } from 'react';
 
 import FloatingActionButton from '@/presentational/components/FloatingActionButton';
 import { BaseInput } from '@/presentational/components/Input';
-import { Center } from '@/presentational/components/Layout';
-import { mainTheme } from '@/presentational/theme';
+import { Center, styled } from '../panda-css/jsx';
 
 type SearchBarMobileProps = SearchInputProps & {
   show: boolean;
@@ -29,9 +28,11 @@ const SearchBarMobile: FunctionComponent<SearchBarMobileProps> = (props) => {
 
 export default SearchBarMobile;
 
-const ShowOnMobileOnly = mainTheme.styled('div', {
-  '@md': {
-    display: 'none',
+const ShowOnMobileOnly = styled('div', {
+  base: {
+    md: {
+      display: 'none',
+    },
   },
 });
 
@@ -55,24 +56,28 @@ const SearchInput = (props: SearchInputProps) => {
   );
 };
 
-const SearchInputContainer = mainTheme.styled(Center, {
-  position: 'fixed',
-  width: '100vw',
-  left: 0,
-  bottom: 50,
-  zIndex: '$searchBar',
+const SearchInputContainer = styled(Center, {
+  base: {
+    position: 'fixed',
+    width: '100vw',
+    left: 0,
+    bottom: 50,
+    zIndex: 'searchBar',
+  },
 });
 
-const CloseIconContainer = mainTheme.styled('button', {
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '30px',
-  width: '30px',
-  borderRadius: '4px',
-  border: '0px',
-  marginInlineEnd: '4px',
+const CloseIconContainer = styled('button', {
+  base: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '30px',
+    width: '30px',
+    borderRadius: '4px',
+    border: '0px',
+    marginInlineEnd: '4px',
+  },
 });
 
 type SearchIconButtonProps = {

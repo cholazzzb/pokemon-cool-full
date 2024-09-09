@@ -17,7 +17,7 @@ import { ModalOverlay } from '@/presentational/components/ModalOverlay';
 import PokemonGenerationTag from '@/presentational/components/Tags/PokemonGenerationTag';
 import PokemonTag from '@/presentational/components/Tags/PokemonTypeTag';
 import Text from '@/presentational/components/Text';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 type FilterBottomSheetProps = {
   pokemonGenFilter: Set<number>;
@@ -29,13 +29,12 @@ type FilterBottomSheetProps = {
 
 function FilterBottomSheet(props: FilterBottomSheetProps) {
   return (
-    <ModalOverlay css={{ alignItems: 'flex-end', '@md': { display: 'none' } }}>
+    <ModalOverlay css={{ alignItems: 'flex-end', md: { display: 'none' } }}>
       <AnimatePresence>
         <BottomSheet
           initial={{ y: 500, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -500, opacity: 0 }}
-          transition={{ duration: 0.5 }}
         >
           <Center>
             <div style={{ width: '15%' }}></div>
@@ -109,9 +108,11 @@ function FilterBottomSheet(props: FilterBottomSheetProps) {
 
 export default FilterBottomSheet;
 
-const BottomSheet = mainTheme.styled(BottomSheetDefault, {
-  paddingBlockStart: '$5',
-  paddingInline: '$5',
-  height: 420,
-  boxShadow: '0px -4px 4px #b3b3cc',
+const BottomSheet = styled(BottomSheetDefault, {
+  base: {
+    paddingBlockStart: '5x',
+    paddingInline: '5x',
+    height: '420px',
+    boxShadow: '0px -4px 4px #b3b3cc',
+  },
 });

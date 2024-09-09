@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 type NavigateOverviewProps = {
   currentId: number;
@@ -45,23 +45,27 @@ const NavigateOverview: FunctionComponent<NavigateOverviewProps> = ({
 
 export default NavigateOverview;
 
-const Container = mainTheme.styled('div', {
-  position: 'absolute',
-  top: '60%',
-  display: 'flex',
-  flexDirection: 'row-reverse',
-  width: '100%',
-  justifyContent: 'space-between',
+const Container = styled('div', {
+  base: {
+    position: 'absolute',
+    top: '60%',
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
 });
 
-const Icon = mainTheme.styled('span', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '25px',
-  height: '25px',
-  padding: '20px',
-  '&:hover': {
-    transform: 'scale(1.1)',
+const Icon = styled('span', {
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '25px',
+    height: '25px',
+    padding: '20px',
+    _hover: {
+      transform: 'scale(1.1)',
+    },
   },
 });

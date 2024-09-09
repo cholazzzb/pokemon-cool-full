@@ -9,7 +9,7 @@ import { FixedSizeList as List } from 'react-window';
 import shallow from 'zustand/shallow';
 
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
-import { mainTheme } from 'src/presentational/theme';
+import { Center, Flex, styled } from '../panda-css/jsx';
 
 type RowData = {
   pokemonName: string;
@@ -64,7 +64,10 @@ const Row: FunctionComponent<RowProps> = (props) => {
         <Main>
           <div>{names[index]}</div>
         </Main>
-        <Release onClick={releasePokemon}>
+        <Release
+          // className={css({ backgroundColor: 'red.100' })}
+          onClick={releasePokemon}
+        >
           <ReleaseIcon>
             <FontAwesomeIcon icon={faTrash} />
           </ReleaseIcon>
@@ -75,10 +78,12 @@ const Row: FunctionComponent<RowProps> = (props) => {
   );
 };
 
-const AutoSizerContainer = mainTheme.styled('div', {
-  display: 'flex',
-  height: '100%',
-  width: '100%',
+const AutoSizerContainer = styled('div', {
+  base: {
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+  },
 });
 
 export type CollectionListProps = {
@@ -116,47 +121,53 @@ const CollectionList: FunctionComponent<CollectionListProps> = (props) => {
 
 export default CollectionList;
 
-const PokeImage = mainTheme.styled('div', {
-  position: 'relative',
-  width: '100px',
-  height: '100px',
-});
-
-const Main = mainTheme.styled('div', {
-  flexGrow: 1,
-});
-
-const Release = mainTheme.styled('div', {
-  display: 'flex',
-  cursor: 'pointer',
-  backgroundColor: '$red100',
-  color: 'white',
-  alignItems: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  height: '100px',
-  width: '100px',
-  '&:hover': {
-    backgroundColor: '$red90',
+const PokeImage = styled('div', {
+  base: {
+    position: 'relative',
+    width: '100px',
+    height: '100px',
   },
 });
 
-const ReleaseIcon = mainTheme.styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderRadius: '10px',
-  width: '20px',
-  height: '20px',
-  marginBottom: '10px',
+const Main = styled('div', {
+  base: {
+    flexGrow: 1,
+  },
 });
 
-const ListItem = mainTheme.styled('div', {
-  display: 'flex',
-  width: '100%',
-  height: '100px',
-  alignItems: 'center',
-  borderStyle: 'solid',
-  borderWidth: '2px 0px',
-  borderColor: '#f2f2f5',
+const Release = styled(Flex, {
+  base: {
+    cursor: 'pointer',
+    backgroundColor: 'red.100',
+    color: 'white',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100px',
+    width: '100px',
+    _hover: {
+      backgroundColor: 'red.90',
+    },
+  },
+});
+
+const ReleaseIcon = styled(Center, {
+  base: {
+    borderRadius: '10px',
+    width: '20px',
+    height: '20px',
+    marginBottom: '10px',
+  },
+});
+
+const ListItem = styled('div', {
+  base: {
+    display: 'flex',
+    width: '100%',
+    height: '100px',
+    alignItems: 'center',
+    borderStyle: 'solid',
+    borderWidth: '2px 0px',
+    borderColor: '#f2f2f5',
+  },
 });

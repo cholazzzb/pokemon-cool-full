@@ -10,8 +10,8 @@ import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import { addPokemon } from '@/domains/ownedPokemon/ownedPokemonUtil';
 import Alert from '@/presentational/components/Alert';
 import { YStack } from '@/presentational/components/Layout';
-import { mainTheme } from '@/presentational/theme';
 import { getAsset } from '@/utils/asset';
+import { styled } from '../panda-css/jsx';
 
 type SuccessAlertProps = {
   id: number;
@@ -26,6 +26,8 @@ const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
     audio.play();
   }, []);
 
+  const { ownedPokemons, setOwnedPokemons } = useOwnedPokemonStore();
+
   const { id, pokemonName, color } = props;
 
   const [name, setName] = useState<string>('');
@@ -35,15 +37,8 @@ const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
 
   const [_, setWarningMessage] = useState('');
 
-  const [onSaving, setOnSaving] = useState<boolean>(false);
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    setOnSaving(true);
-  };
-
-  const { ownedPokemons, setOwnedPokemons } = useOwnedPokemonStore();
-
-  const submitForm = () => {
     const { error, result } = addPokemon(ownedPokemons, id, pokemonName, name);
     if (error) {
       setWarningMessage(error);
@@ -53,17 +48,12 @@ const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
     props.onClose();
   };
 
-  useEffect(() => {
-    if (onSaving) {
-      submitForm();
-    }
-  }, [onSaving]);
-
-  const Button = mainTheme.styled('button', {
-    backgroundColor: color,
-    borderRadius: '10px',
-    padding: '10px',
-    margin: '10px 0px',
+  const Button = styled('button', {
+    base: {
+      borderRadius: '10px',
+      padding: '10px',
+      margin: '10px 0px',
+    },
   });
 
   return (
@@ -77,7 +67,9 @@ const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
           onChange={handleChangeName}
           placeholder="Insert Pokemon Name"
         />
-        <Button onClick={handleSubmit}>OK</Button>
+        <Button style={{ backgroundColor: color }} onClick={handleSubmit}>
+          OK
+        </Button>
       </YStack>
     </Alert>
   );
@@ -85,8 +77,11 @@ const SuccessAlert: FunctionComponent<SuccessAlertProps> = (props) => {
 
 export default SuccessAlert;
 
-const Input = mainTheme.styled('input', {
-  borderRadius: '10px',
-  padding: '10px',
-  margin: '10px 0px',
+const Input = styled('input', {
+  base: {
+    borderRadius: '10px',
+    border: 'solid 1px',
+    padding: '10px',
+    margin: '10px 0px',
+  },
 });

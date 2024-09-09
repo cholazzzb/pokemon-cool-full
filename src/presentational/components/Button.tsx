@@ -1,44 +1,50 @@
-import { mainTheme } from '@/presentational/theme';
+import { cva } from '../panda-css/css';
+import { styled } from '../panda-css/jsx';
 
-export const ButtonOutline = mainTheme.styled('button', {
-  padding: 12,
-  borderRadius: 8,
-  border: 'solid 4px white',
+export const ButtonOutline = styled('button', {
+  base: {
+    padding: '3x',
+    borderRadius: '2x',
+    border: 'solid 4px white',
+  },
 });
 
-const Button = mainTheme.styled('button', {
-  cursor: 'pointer',
-  height: 44,
-  paddingInline: '$5',
-  borderRadius: 12,
-  border: 'solid 1px',
-  borderColor: '$gray',
-  backgroundColor: 'white',
-  '&:hover': {
-    color: '$primary100',
-    borderColor: '$primary100',
+const buttonStyle = cva({
+  base: {
+    cursor: 'pointer',
+    height: '44px',
+    paddingInline: '5x',
+    borderRadius: '12px',
+    border: 'solid 1px',
+    borderColor: 'gray',
+    backgroundColor: 'white',
+    _hover: {
+      color: 'primary.100',
+      borderColor: 'primary.100',
+    },
   },
+
   variants: {
     variant: {
       primary: {
-        borderColor: '$primary100',
-        backgroundColor: '$primary100',
+        borderColor: 'primary.100',
+        backgroundColor: 'primary.100',
         color: 'white',
-        '&:hover': {
+        _hover: {
           color: 'white',
-          backgroundColor: '$primary90',
+          backgroundColor: 'primary.90',
         },
       },
       secondary: {
         color: 'black',
       },
       danger: {
-        borderColor: '$red100',
-        backgroundColor: '$red100',
+        borderColor: 'red.100',
+        backgroundColor: 'red.100',
         color: 'white',
-        '&:hover': {
-          borderColor: '$red100',
-          backgroundColor: '$red90',
+        _hover: {
+          borderColor: 'red.100',
+          backgroundColor: 'red.90',
           color: 'white',
         },
       },
@@ -51,5 +57,6 @@ const Button = mainTheme.styled('button', {
   },
   defaultVariants: { variant: 'secondary' },
 });
+const Button = styled('button', buttonStyle);
 
 export default Button;

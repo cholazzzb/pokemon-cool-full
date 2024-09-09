@@ -12,6 +12,7 @@ import { Flex, YStack } from '@/presentational/components/Layout';
 import PokeImage from '@/presentational/components/PokeImage';
 import TypeIcon from '@/presentational/components/TypeIcon';
 import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -125,18 +126,22 @@ const ListItem = mainTheme.styled('div', {
   },
 });
 
-const ListItemLink = mainTheme.styled('div', {
-  color: 'initial',
-  width: '100%',
-  height: '100%',
-  paddingInlineStart: '$2',
-  paddingInlineEnd: '$5',
-  display: 'flex',
-  alignItems: 'center',
+const ListItemLink = styled('div', {
+  base: {
+    color: 'initial',
+    width: '100%',
+    height: '100%',
+    paddingInlineStart: '2x',
+    paddingInlineEnd: '5x',
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
 
-const Text = mainTheme.styled('p', {
-  color: 'white',
-  marginInlineEnd: '$5',
-  textTransform: 'capitalize',
+const Text = styled('p', {
+  base: {
+    color: 'white',
+    marginInlineEnd: '5x',
+    textTransform: 'capitalize',
+  },
 });

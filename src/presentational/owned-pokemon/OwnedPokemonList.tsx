@@ -6,7 +6,7 @@ import { PokemonName } from '@/domains/ownedPokemon/ownedPokemonEntity';
 import { useOwnedPokemonStore } from '@/domains/ownedPokemon/ownedPokemonStore';
 import Card from '@/presentational/components/Card';
 import PokemonCardVer from '@/presentational/components/PokemonCardVer';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
 const paddingX = 5;
 
@@ -77,29 +77,37 @@ const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
 
 export default OwnedPokemonList;
 
-const Container = mainTheme.styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  height: '380px',
-  width: '100%',
+const Container = styled('div', {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '380px',
+    width: '100%',
+  },
 });
 
-const Center = mainTheme.styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
+const Center = styled('div', {
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 });
 
-const AutoSizerContainer = mainTheme.styled('div', {
-  height: '100%',
-  width: '100%',
-  padding: '0px ${paddingX}px',
+const AutoSizerContainer = styled('div', {
+  base: {
+    height: '100%',
+    width: '100%',
+    padding: '0px 0px',
+  },
 });
 
-const EmptyContainer = mainTheme.styled('div', {
-  display: 'flex',
-  width: '100%',
-  height: '100%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '4px 0px',
+const EmptyContainer = styled('div', {
+  base: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '4px 0px',
+  },
 });

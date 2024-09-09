@@ -13,7 +13,7 @@ import { GetPokemonDetailByIdQuery } from '@/__generated__/pokeapi/gql/graphql';
 import { Flex } from '@/presentational/components/Layout';
 import { ModalOverlay } from '@/presentational/components/ModalOverlay';
 import Text from '@/presentational/components/Text';
-import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 import Tab from './Tab';
 
 const cards = [
@@ -160,12 +160,14 @@ const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
 
 export default InformationCards;
 
-const Icon = mainTheme.styled(motion.div, {
-  width: 50,
-  height: 50,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: '$neutral100',
-  borderRadius: 10,
+const Icon = styled(motion.div, {
+  base: {
+    width: '50px',
+    height: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'neutral.100',
+    borderRadius: '10px',
+  },
 });

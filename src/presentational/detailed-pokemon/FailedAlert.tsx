@@ -2,13 +2,16 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 
 import Alert from '@/presentational/components/Alert';
 import { mainTheme } from '@/presentational/theme';
+import { styled } from '../panda-css/jsx';
 
-const AlertContainer = mainTheme.styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  minHeight: '300px',
+const AlertContainer = styled('div', {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '300px',
+  },
 });
 
 type FailedAlertProps = {

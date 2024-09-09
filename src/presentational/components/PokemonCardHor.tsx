@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { FunctionComponent } from 'react';
 
 import { PokemonType } from '@/domains/pokemonType/pokemonTypeEntity';
-import { createPokemonTypeBgColor } from '@/presentational/colorTheme';
-import { mainTheme } from '@/presentational/theme';
+import { css, cva } from '../panda-css/css';
+import { styled } from '../panda-css/jsx';
 import PokeImage from './PokeImage';
 import PokemonTag from './Tags/PokemonTypeTag';
 import Text from './Text';
@@ -28,7 +28,15 @@ const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
       }}
       transition={{ duration: 1 }}
     >
-      <Card pokemonType={props.pokemonTypes[0]}>
+      <div
+        className={css({
+          pokeType100: props.pokemonTypes[0],
+        })}
+      >
+        ashuu
+      </div>
+      <styled.div pokeType100={props.pokemonTypes[0]}>asd</styled.div>
+      <Card>
         <Attribute>
           <NameText variant="h4">{`#${id} ${name}`}</NameText>
           {props.pokemonTypes.map((type, idx) => (
@@ -54,30 +62,35 @@ const PokemonCardHor: FunctionComponent<PokemonCardHorProps> = (props) => {
 
 export default PokemonCardHor;
 
-const NameText = mainTheme.styled(Text, {
-  textTransform: 'capitalize',
-  marginBlockEnd: '$3',
-});
-
-const Attribute = mainTheme.styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-});
-
-const Card = mainTheme.styled('div', {
-  minWidth: '250px',
-  maxWidth: '300px',
-  height: '170px',
-  color: 'white',
-  padding: '20px 22px',
-  margin: '10px 0px',
-  borderRadius: '24px',
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  gap: '24px',
-  boxShadow:
-    'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
-  variants: {
-    pokemonType: createPokemonTypeBgColor(0.8),
+const NameText = styled(Text, {
+  base: {
+    textTransform: 'capitalize',
+    marginBlockEnd: '3x',
   },
 });
+
+const Attribute = styled('div', {
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+});
+
+const cardStyles = cva({
+  base: {
+    minWidth: '250px',
+    maxWidth: '300px',
+    height: '170px',
+    color: 'white',
+    padding: '20px 22px',
+    margin: '10px 0px',
+    borderRadius: '24px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    gap: '24px',
+    boxShadow:
+      'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
+  },
+});
+
+const Card = styled(styled.div, cardStyles);
