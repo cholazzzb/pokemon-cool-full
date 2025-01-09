@@ -28,6 +28,7 @@ const TabMoves: FunctionComponent<TabMoveProps> = ({ moves }) => {
       <MoveContainer>
         <AutoSizer>
           {({ height, width }) => (
+            // @ts-ignore Type error with List component from react-window
             <List
               height={height}
               width={width}

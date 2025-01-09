@@ -94,6 +94,7 @@ const CollectionList: FunctionComponent<CollectionListProps> = (props) => {
     <AutoSizerContainer>
       <AutoSizer>
         {({ height, width }) => (
+          // @ts-ignore Type error with List component from react-window
           <List
             height={height}
             width={width}
@@ -105,7 +106,7 @@ const CollectionList: FunctionComponent<CollectionListProps> = (props) => {
               onClickRelease,
             }}
           >
-            {Row}
+            {(props) => <Row {...props} />}
           </List>
         )}
       </AutoSizer>

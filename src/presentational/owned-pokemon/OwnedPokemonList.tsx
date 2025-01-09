@@ -53,6 +53,7 @@ const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
       <AutoSizerContainer>
         <AutoSizer>
           {({ height, width }) => (
+            // @ts-ignore Type error with List component from react-window
             <List
               height={height}
               width={width - 2 * paddingX}
@@ -63,7 +64,7 @@ const OwnedPokemonList: FunctionComponent<OwnedPokemonListProps> = ({
                 selectPokemon: selectPokemon,
               }}
             >
-              {Row}
+              {(props) => <Row {...props} />}
             </List>
           )}
         </AutoSizer>

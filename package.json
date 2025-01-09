@@ -38,7 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6",
+    "react-window": "^1.8.8",
     "react-window-infinite-loader": "^1.0.8",
     "url-loader": "^4.1.1",
     "zustand": "^3.6.5"
@@ -67,7 +67,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/react": "^18.0.28",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
-    "@types/react-window": "^1.8.5",
+    "@types/react-window": "^1.8.8",
     "@types/react-window-infinite-loader": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",

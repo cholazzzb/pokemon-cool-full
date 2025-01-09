@@ -52,6 +52,7 @@ const InformationCards: FunctionComponent<InformationCardsProps> = (props) => {
       <Flex style={{ width: '100%', height: 140 }}>
         <AutoSizer>
           {({ height, width }) => (
+            // @ts-ignore Type error with List component from react-window
             <List
               height={height}
               width={width - 2 * 10}

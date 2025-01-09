@@ -76,6 +76,7 @@ const PokemonList: FunctionComponent<PokemonList> = (props) => {
     <AutoSizer>
       {({ height, width }) => {
         return (
+          // @ts-ignore Type error with List component from react-window
           <InfiniteLoader
             isItemLoaded={(index) => index < pokemonQuery.flattenData.length}
             itemCount={pokemonQuery.flattenData.length + 1}
@@ -95,6 +96,7 @@ const PokemonList: FunctionComponent<PokemonList> = (props) => {
             }}
           >
             {({ onItemsRendered, ref }) => (
+              // @ts-ignore Type error with List component from react-window
               <List
                 ref={ref}
                 onItemsRendered={onItemsRendered}
@@ -106,7 +108,7 @@ const PokemonList: FunctionComponent<PokemonList> = (props) => {
                   pokemons: pokemonQuery.flattenData,
                 }}
               >
-                {Row}
+                {(props) => <Row {...props} />}
               </List>
             )}
           </InfiniteLoader>
