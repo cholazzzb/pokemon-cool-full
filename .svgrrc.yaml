@@ -1,0 +1,5 @@
+jsxRuntime: automatic
+outDir: src/__generated__/icons
+prettierConfig: .prettierrc
+ref: true
+typescript: true

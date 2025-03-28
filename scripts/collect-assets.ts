@@ -5,28 +5,18 @@ type Extension = string;
 type PathFiles = Record<string, string>;
 
 // Helper Function
-const pathFilesToString = (pathFiles: PathFiles): string => {
-  let result = '';
-
-  for (const key of Object.keys(pathFiles)) {
-    const keys = key.split('/');
-
-    result += `export { default as ${snakeCaseToTitleCase(
-      keys[keys.length - 1],
-    )} } from '${pathFiles[key]}';\n`;
-  }
-
-  return result;
-};
-
-export const snakeCaseToCamelCase = (str: string) =>
-  str.replace(/^(.)|-+(.)/g, (_, p1, p2) =>
-    p1 ? p1.toLowerCase() : `${p2.toUpperCase()}`,
+export const snakeCaseToCamelCase = (str: string): string =>
+  str.replace(
+    /^(.)|-+(.)/g,
+    (_, p1: string | undefined, p2: string | undefined) =>
+      p1 ? p1.toLowerCase() : p2 ? p2.toUpperCase() : '',
   );
 
-export const snakeCaseToTitleCase = (str: string) =>
-  str.replace(/^(.)|-+(.)/g, (_, p1, p2) =>
-    p1 ? p1.toUpperCase() : `${p2.toUpperCase()}`,
+export const snakeCaseToTitleCase = (str: string): string =>
+  str.replace(
+    /^(.)|-+(.)/g,
+    (_, p1: string | undefined, p2: string | undefined) =>
+      p1 ? p1.toUpperCase() : `${p2?.toUpperCase() ?? ''}`,
   );
 
 const getExtension = (filename: string): Extension => {
@@ -34,7 +24,7 @@ const getExtension = (filename: string): Extension => {
   return fileNameSplit[fileNameSplit.length - 1];
 };
 
-const isSVG = (ext: Extension) => ext === 'svg';
+const isSVG = (ext: Extension): boolean => ext === 'svg';
 
 // Script Start Here
 const whiteList = new Set([
@@ -52,7 +42,7 @@ const whiteList = new Set([
 const pathFiles: PathFiles = {};
 const svgPathFiles: PathFiles = {};
 
-const fillPathFiles = (filePath = '') => {
+const fillPathFiles = (filePath: string = '') => {
   // use filepath.split with path.sep to support windows
   const paths = filePath.split(sep);
   const fileName = paths[paths.length - 1];
@@ -67,7 +57,7 @@ const fillPathFiles = (filePath = '') => {
   pathFiles[key] = ['', ...paths.slice(1)].join('/');
 };
 
-const fillSVGPathFiles = (filePath = '') => {
+const fillSVGPathFiles = (filePath: string = '') => {
   // use filepath.split with path.sep to support windows
   const paths = filePath.split(sep);
   const fileName = paths[paths.length - 1];
@@ -103,12 +93,7 @@ function walkDir(dir: string) {
 
 walkDir(join('public', 'assets'));
 
-outputFile(
+void outputFile(
   join('src', '__generated__', 'assets.json'),
   JSON.stringify(pathFiles, null, 2),
-);
-
-outputFile(
-  join('src', '__generated__', 'assetsSVG.ts'),
-  pathFilesToString(svgPathFiles),
 );

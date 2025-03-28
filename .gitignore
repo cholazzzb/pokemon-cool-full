@@ -6,6 +6,7 @@
 
 # Generated files
 src/__generated__
+src/shared-ui/panda-css
 
 # Logs
 logs
@@ -111,3 +112,5 @@ dist
 
 # TernJS port file
 .tern-port
+## Panda
+styled-system-studio

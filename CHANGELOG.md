@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.0 (March 2025)
+- Revamp to new fresh UI
+- Upgrade to React 19, Next.js 15
+- (CSS in JS) fully remove Stitches and change to pandaCSS
+- move from react-window to react-virtuoso
+- move from runtypes to valibot
+- move from framer-motion to motion
+- remove apollo client
+- remove storybook
+- move from zustand to jotai
+
+
 ## 1.1.0 (23 March 2023)
 
 - Add Pokemon Filter by Types and Generation for mobile
