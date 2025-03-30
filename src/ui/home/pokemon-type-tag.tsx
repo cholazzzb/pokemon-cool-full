@@ -1,14 +1,21 @@
 import { PokemonType } from '@/logic/pokemon/entity';
 import Text from '@/shared-ui/component/text';
+import { css, cx } from '@/shared-ui/panda-css/css';
 import { Box } from '@/shared-ui/panda-css/jsx';
 import { homePokemonTypeTag } from '@/shared-ui/panda-css/recipes';
 
 type Props = {
   pokemonType: PokemonType;
+  css?: ReturnType<typeof css>;
 };
 export function PokemonTypeTag(props: Props) {
   return (
-    <Box className={homePokemonTypeTag({ pokemonType: props.pokemonType })}>
+    <Box
+      className={cx(
+        homePokemonTypeTag({ pokemonType: props.pokemonType }),
+        props.css,
+      )}
+    >
       <Text textTransform="capitalize" variant="b5">
         {props.pokemonType}
       </Text>

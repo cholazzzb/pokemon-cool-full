@@ -18,7 +18,7 @@
     "test:e2e-debug": "PWDEBUG=1 playwright test",
     "script:compile": "tsc scripts/collect-assets.ts --outDir .temp",
     "script:exec": "node .temp/collect-assets.js",
-    "gen:icon": "rm -rf src/__generated__/icons && svgr public/assets/icons --config-file .svgrrc.yaml && eslint ./src/__generated__/icons --fix",
+    "gen:icon": "rm -rf src/__generated__/icons && svgr public/assets/icons --config-file .svgrrc.yaml",
     "gql:codegen": "graphql-codegen --config graphql-codegen.ts"
   },
   "lint-staged": {

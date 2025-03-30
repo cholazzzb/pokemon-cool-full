@@ -18,6 +18,7 @@ import { Flex } from '@/shared-ui/panda-css/jsx';
 import { PokemonCard } from './pokemon-card';
 import { SkeletonPokemonList } from './skeleton-pokemon-list';
 
+const limit = 20; // each page size limit
 export function PokemonInfinityList() {
   const { typeIds, genIds } = useSafeParams<HomeQueryParams>({
     // All Pokemons Type is 1,2,3,...18
@@ -36,11 +37,12 @@ export function PokemonInfinityList() {
       getPokemonsByGensAndTypes({
         typeIds: typeIds.map((ti) => Number(ti)),
         genIds: genIds.map((gi) => Number(gi)),
-        limit: 20,
-        offset: pageParam * 20,
+        limit,
+        offset: pageParam * limit,
       }),
     initialPageParam: 0,
-    getNextPageParam: (_, pages) => {
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.pokemons.length < limit) return;
       return pages.length;
     },
   });
@@ -110,8 +112,16 @@ export function PokemonInfinityList() {
         );
       }}
       components={{
-        Footer: SkeletonPokemonList,
+        Footer: () => <Footer show={infiniteQuery.hasNextPage} />,
       }}
     />
+  );
+}
+
+function Footer(props: { show: boolean }) {
+  return (
+    <Show when={props.show}>
+      <SkeletonPokemonList />
+    </Show>
   );
 }

@@ -177,6 +177,27 @@ const circleButtonStyle = cva({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    lg: {
+      fontSize: '16px',
+      width: '56px',
+      height: '56px',
+      padding: '16px',
+      borderRadius: '28px',
+    },
+    md: {
+      fontSize: '14px',
+      width: '48px',
+      height: '48px',
+      padding: '14px',
+      borderRadius: '24px',
+    },
+    sm: {
+      fontSize: '12px',
+      width: '44px',
+      height: '44px',
+      padding: '12px',
+      borderRadius: '22px',
+    },
   },
   variants: {
     color: {
@@ -205,35 +226,6 @@ const circleButtonStyle = cva({
         _hover: {
           color: 'white',
           backgroundColor: 'tertiary.400',
-        },
-      },
-    },
-    size: {
-      lg: {
-        fontSize: '16px',
-        padding: '16px 24px',
-        borderRadius: '8px',
-        md: {
-          fontSize: '18px',
-          padding: '20px 32px',
-        },
-      },
-      md: {
-        fontSize: '14px',
-        padding: '12px 20px',
-        borderRadius: '6px',
-        md: {
-          fontSize: '16px',
-          padding: '16px 24px',
-        },
-      },
-      sm: {
-        fontSize: '12px',
-        padding: '8px 16px',
-        borderRadius: '4px',
-        md: {
-          fontSize: '14px',
-          padding: '10px 20px',
         },
       },
     },

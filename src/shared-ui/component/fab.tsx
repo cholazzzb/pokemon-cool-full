@@ -1,8 +1,8 @@
 import { ComponentProps, PropsWithChildren } from 'react';
 
+import { BoxStyles } from '../panda-css/patterns/box';
 import { CircleButton } from './button';
 import { Portal } from './portal';
-import { BoxStyles } from '../panda-css/patterns/box';
 
 type Props = PropsWithChildren<
   ComponentProps<typeof CircleButton> & {
@@ -16,7 +16,7 @@ export function FAB({ bottom = 0, onClick, children, ...props }: Props) {
     <Portal>
       <CircleButton
         {...props}
-        display={{ base: 'flex', md: 'none' }}
+        display={{ base: 'flex' }}
         zIndex="floatingActionButton"
         position="absolute"
         bottom={bottom}
