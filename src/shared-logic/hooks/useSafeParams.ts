@@ -1,10 +1,12 @@
 import { Params } from 'next/dist/server/request/params';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import qs from 'query-string';
 
-import { objFallback } from '../fallback';
+import { queryStringFallback } from '../fallback';
 
 export function useSafeParams<T extends Params>(fallback: T) {
-  const params = useParams<T>();
+  const searchParams = useSearchParams();
+  const params = qs.parse(searchParams.toString());
 
-  return objFallback(params, fallback);
+  return queryStringFallback(params, fallback);
 }

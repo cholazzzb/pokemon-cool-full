@@ -21,11 +21,13 @@ import { SkeletonPokemonList } from './skeleton-pokemon-list';
 const limit = 20; // each page size limit
 export function PokemonInfinityList() {
   const { typeIds, genIds } = useSafeParams<HomeQueryParams>({
-    // All Pokemons Type is 1,2,3,...18
+    // All Pokemons Type is 1,2,3,...18, All generation is 1,2,3,...9
     typeIds: Array(18)
       .fill(0)
       .map((_, idx) => `${idx + 1}`),
-    genIds: ['1', '2'],
+    genIds: Array(9)
+      .fill(0)
+      .map((_, idx) => `${idx + 1}`),
   });
 
   const infiniteQuery = useInfiniteQuery({
